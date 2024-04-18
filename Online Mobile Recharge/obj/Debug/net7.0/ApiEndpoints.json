@@ -1,0 +1,802 @@
+[
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
+    "Method": "CreateFeedback",
+    "RelativePath": "api/Feedback/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newFeedback",
+        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
+    "Method": "DeleteFeedback",
+    "RelativePath": "api/Feedback/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
+    "Method": "GetFeedback",
+    "RelativePath": "api/Feedback/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
+    "Method": "UpdateFeedback",
+    "RelativePath": "api/Feedback/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
+    "Method": "GetAllFeedback",
+    "RelativePath": "api/Feedback/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.OperatorController",
+    "Method": "CreateOperator",
+    "RelativePath": "api/Operator/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newOperator",
+        "Type": "Online_Mobile_Recharge.DTO.Request.OperatorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.OperatorController",
+    "Method": "DeleteOperator",
+    "RelativePath": "api/Operator/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.OperatorController",
+    "Method": "GetOperator",
+    "RelativePath": "api/Operator/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.OperatorController",
+    "Method": "UpdateOperator",
+    "RelativePath": "api/Operator/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.OperatorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.OperatorController",
+    "Method": "GetAllOperator",
+    "RelativePath": "api/Operator/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.PaymentMethodController",
+    "Method": "CreatePaymentMethod",
+    "RelativePath": "api/PaymentMethod/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPaymentMethod",
+        "Type": "Online_Mobile_Recharge.DTO.Request.PaymentMethodRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.PaymentMethodController",
+    "Method": "DeletePaymentMethod",
+    "RelativePath": "api/PaymentMethod/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.PaymentMethodController",
+    "Method": "GetPaymentMethod",
+    "RelativePath": "api/PaymentMethod/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.PaymentMethodController",
+    "Method": "UpdatePaymentMethod",
+    "RelativePath": "api/PaymentMethod/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.PaymentMethodRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.PaymentMethodController",
+    "Method": "GetAllPaymentMethod",
+    "RelativePath": "api/PaymentMethod/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanController",
+    "Method": "CreateRechargePlan",
+    "RelativePath": "api/RechargePlan/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newRechargePlan",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanController",
+    "Method": "DeleteRechargePlan",
+    "RelativePath": "api/RechargePlan/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanController",
+    "Method": "GetRechargePlan",
+    "RelativePath": "api/RechargePlan/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanController",
+    "Method": "UpdateRechargePlan",
+    "RelativePath": "api/RechargePlan/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanController",
+    "Method": "GetAllRechargePlan",
+    "RelativePath": "api/RechargePlan/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanTypeController",
+    "Method": "CreateRechargePlanType",
+    "RelativePath": "api/RechargePlanType/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newRechargePlanType",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanTypeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanTypeController",
+    "Method": "DeleteRechargePlanType",
+    "RelativePath": "api/RechargePlanType/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanTypeController",
+    "Method": "GetRechargePlanType",
+    "RelativePath": "api/RechargePlanType/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanTypeController",
+    "Method": "UpdateRechargePlanType",
+    "RelativePath": "api/RechargePlanType/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanTypeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.RechargePlanTypeController",
+    "Method": "GetAllRechargePlanType",
+    "RelativePath": "api/RechargePlanType/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.ServiceController",
+    "Method": "CreateService",
+    "RelativePath": "api/Service/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newService",
+        "Type": "Online_Mobile_Recharge.DTO.Request.ServiceRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.ServiceController",
+    "Method": "DeleteService",
+    "RelativePath": "api/Service/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.ServiceController",
+    "Method": "GetService",
+    "RelativePath": "api/Service/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.ServiceController",
+    "Method": "UpdateService",
+    "RelativePath": "api/Service/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.ServiceRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.ServiceController",
+    "Method": "GetAllService",
+    "RelativePath": "api/Service/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "CreateTransaction",
+    "RelativePath": "api/Transaction/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newTransaction",
+        "Type": "Online_Mobile_Recharge.DTO.Request.TransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "DeleteTransaction",
+    "RelativePath": "api/Transaction/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "GetTransaction",
+    "RelativePath": "api/Transaction/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "UpdateTransaction",
+    "RelativePath": "api/Transaction/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.TransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "GetAllTransaction",
+    "RelativePath": "api/Transaction/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "PostUser",
+    "RelativePath": "api/User/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "DeleteUserById",
+    "RelativePath": "api/User/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "GetUserById",
+    "RelativePath": "api/User/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/User/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "GetUsersDetails",
+    "RelativePath": "api/User/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserPaymentInfoController",
+    "Method": "CreateUserPaymentInfo",
+    "RelativePath": "api/UserPaymentInfo/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUserPaymentInfo",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserPaymentInfoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserPaymentInfoController",
+    "Method": "DeleteUserPaymentInfo",
+    "RelativePath": "api/UserPaymentInfo/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserPaymentInfoController",
+    "Method": "GetUserPaymentInfo",
+    "RelativePath": "api/UserPaymentInfo/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserPaymentInfoController",
+    "Method": "UpdateUserPaymentInfo",
+    "RelativePath": "api/UserPaymentInfo/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserPaymentInfoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserPaymentInfoController",
+    "Method": "GetAllUserPaymentInfo",
+    "RelativePath": "api/UserPaymentInfo/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserServiceController",
+    "Method": "CreateUserService",
+    "RelativePath": "api/UserService/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUserService",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserServiceRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserServiceController",
+    "Method": "DeleteUserService",
+    "RelativePath": "api/UserService/delete/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserServiceController",
+    "Method": "GetUserService",
+    "RelativePath": "api/UserService/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserServiceController",
+    "Method": "UpdateUserService",
+    "RelativePath": "api/UserService/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "e",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserServiceRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserServiceController",
+    "Method": "GetAllUserService",
+    "RelativePath": "api/UserService/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
