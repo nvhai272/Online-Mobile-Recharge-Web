@@ -5,8 +5,6 @@ namespace Online_Mobile_Recharge.DTO.Response
 {
 	public class ServiceResponse
 	{
-		[Required]
-		[MaxLength(100)]
 		public string Name { get; set; }
 
 		[MaxLength(255)]

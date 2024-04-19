@@ -22,7 +22,10 @@ namespace Online_Mobile_Recharge.Models
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
-
+		
+		// khoa ngoai
+		public int ServiceId { get; set; }
 		public virtual Service Service { get; set; }
+
 	}
 }

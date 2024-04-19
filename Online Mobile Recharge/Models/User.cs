@@ -17,8 +17,8 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(40)]
 		public string Password { get; set; }
 
-		[Required]
-		[MaxLength(10)]
+		//[Required(ErrorMessage = "Phone is required.")]
+		//[RegularExpression(@"^\d{10}$", ErrorMessage = "Phone must have 10 digits.")]
 		public string Phone { get; set; }
 
 		[Required]
@@ -30,7 +30,7 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(150)]
 		public string? Address { get; set; }
 
-		public bool? Gender { get; set; }
+		public int Gender { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 

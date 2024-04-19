@@ -22,7 +22,7 @@ namespace Online_Mobile_Recharge.Models
 
 		public bool IsDeleted { get; set; } = false;
 
-		// Mot kieu lại nap tien co nhieu goi nap tien
+	
 		public virtual ICollection<RechargePlan> RechargePlans { get; set; }
 	}
 }

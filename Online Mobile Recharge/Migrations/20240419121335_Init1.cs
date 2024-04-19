@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Online_Mobile_Recharge.Migrations
 {
     /// <inheritdoc />
-    public partial class init1 : Migration
+    public partial class Init1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,11 +86,11 @@ namespace Online_Mobile_Recharge.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    Gender = table.Column<bool>(type: "bit", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -106,8 +106,6 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RechargePlanTypeId = table.Column<int>(type: "int", nullable: false),
-                    OperatorId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TalkTime = table.Column<int>(type: "int", maxLength: 11, nullable: false),
                     TextMessageNumber = table.Column<int>(type: "int", maxLength: 11, nullable: true),
@@ -118,7 +116,9 @@ namespace Online_Mobile_Recharge.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RechargePlanTypeId = table.Column<int>(type: "int", nullable: false),
+                    OperatorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,7 +127,8 @@ namespace Online_Mobile_Recharge.Migrations
                         name: "FK_recharge_plans_operators_OperatorId",
                         column: x => x.OperatorId,
                         principalTable: "operators",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_recharge_plans_recharge_plan_types_RechargePlanTypeId",
                         column: x => x.RechargePlanTypeId,
@@ -233,9 +234,9 @@ namespace Online_Mobile_Recharge.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: true),
-                    RechargePlanId = table.Column<int>(type: "int", nullable: true),
-                    PaymentMethodId = table.Column<int>(type: "int", nullable: true)
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    RechargePlanId = table.Column<int>(type: "int", nullable: false),
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -244,17 +245,20 @@ namespace Online_Mobile_Recharge.Migrations
                         name: "FK_transactions_payment_methods_PaymentMethodId",
                         column: x => x.PaymentMethodId,
                         principalTable: "payment_methods",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_transactions_recharge_plans_RechargePlanId",
                         column: x => x.RechargePlanId,
                         principalTable: "recharge_plans",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_transactions_services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "services",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_transactions_users_UserId",
                         column: x => x.UserId,

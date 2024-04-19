@@ -10,8 +10,12 @@ namespace Online_Mobile_Recharge.Models
 		[Key]
 		public int Id { get; set; }
 
+		//khoa ngoai
+		public int UserId { get; set; }
 		public virtual User User { get; set; }
 
+		//khoa ngoai
+		public int ServiceId { get; set; }
 		public virtual Service Service { get; set; }
 
 		public DateTime CreatedAt { get; set; } = DateTime.Now;

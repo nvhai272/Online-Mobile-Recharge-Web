@@ -19,8 +19,12 @@ namespace Online_Mobile_Recharge.Models
 
 		public bool IsDeleted { get; set; } = false;
 
+		// khoa ngoai
+		public int PaymentMethodId { get; set; }
 		public virtual PaymentMethod PaymentMethod { get; set; }
 
+		//khoa ngoai
+		public int UserId { get; set; }
 		public virtual User User { get; set; }
 
 	}

@@ -9,10 +9,6 @@ namespace Online_Mobile_Recharge.Models
 		[Key]
 		public int Id { get; set; }
 
-		public virtual RechargePlanType RechargePlanType { get; set; }
-
-		public virtual Operator? Operator { get; set; }
-
 		[Required]
 		[MaxLength(100)]
 		public string Name { get; set; }
@@ -43,6 +39,14 @@ namespace Online_Mobile_Recharge.Models
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
+
+		//khoa ngoai
+		public int RechargePlanTypeId { get; set; }
+		public virtual RechargePlanType RechargePlanType { get; set; }
+
+		//khoa ngoai
+		public int OperatorId { get; set; }
+		public virtual Operator? Operator { get; set; }
 
 		public virtual ICollection<Transaction> Transactions { get; set; }
 

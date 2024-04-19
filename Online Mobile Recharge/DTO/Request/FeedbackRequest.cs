@@ -3,22 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Online_Mobile_Recharge.DTO.Request
 {
-    public class FeedbackRequest
+	public class FeedbackRequest
 	{
-		[Required]
-		[MaxLength(10)]
+		public int ServiceId { get; set; }
 		public string Phone { get; set; }
-
-		[Required]
-		[MaxLength(255)]
 		public string Content { get; set; }
 
-		//public bool IsDeleted { get; set; } 
-
-		//public DateTime CreatedAt { get; set; } 
-
-		//public DateTime ModifiedAt { get; set; } 
-
-		public Service Service { get; set; }
 	}
 }

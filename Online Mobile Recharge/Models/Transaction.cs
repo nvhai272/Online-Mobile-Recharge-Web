@@ -27,12 +27,20 @@ namespace Online_Mobile_Recharge.Models
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
 
+		//khoa ngoai
+		public int UserId { get; set; }
 		public virtual User User { get; set; }
 
+		//khoa ngoai
+		public int ServiceId { get; set; }
 		public virtual Service? Service { get; set; }
 
+		//khoa ngoai
+		public int RechargePlanId { get; set; }
 		public virtual RechargePlan? RechargePlan { get; set; }
 
+		//khoa ngoai
+		public int PaymentMethodId { get; set; }
 		public virtual PaymentMethod? PaymentMethod { get; set; }
 
 	}

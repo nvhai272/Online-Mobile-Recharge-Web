@@ -2,6 +2,7 @@
 using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
+using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
 {
@@ -29,17 +30,15 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] User entity)
 		{
-			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || entity.Dob == null || string.IsNullOrEmpty(entity.Address))
+			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || entity.Dob == null || string.IsNullOrEmpty(entity.Address) || string.IsNullOrEmpty(entity.Phone))
 			{
 				throw new ArgumentException("Điền đầy đủ thông tin!");
 			}
-
-			if (entity.Phone == null || entity.Phone.ToString().Length != 10)
+			else if (!IsValidPhoneNumber(entity.Phone))
 			{
 				throw new ArgumentException("Số điện thoại không hợp lệ!");
 			}
-
-			if (_context.Users.Any(x => x.Phone == entity.Phone))
+			else if (_context.Users.Any(x => x.Phone == entity.Phone))
 			{
 				throw new InvalidOperationException("Phone number already exists!");
 			}
@@ -59,16 +58,24 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
+		public bool IsValidPhoneNumber(string phoneNumber)
+		{
+			// Số điện thooại có đúng 10 chữ số => trả về true
+			return Regex.IsMatch(phoneNumber, @"^\d{10}$");
+		}
+
+
 		public bool Update(int id, User entity)
 		{
-			// chõ này phải check id tồn tại không nhỉ?
-			if (IsExisted(id))
+			try
 			{
+				var existedUser = GetItemById(id);
+
 				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
 				{
 					throw new CustomStatusException("Không để trống thông tin!");
 				}
-				else if (entity.Phone == null || entity.Phone.ToString().Length != 10)
+				else if (!IsValidPhoneNumber(entity.Phone))
 				{
 					throw new CustomStatusException("Số điện thoại không hợp lệ!");
 				}
@@ -76,7 +83,6 @@ namespace Online_Mobile_Recharge.Repository
 				{
 					if (!IsPhoneNumberExistExceptCurrent(id, entity.Phone))
 					{
-						var existedUser = GetItemById(id);
 						existedUser.Name = entity.Name;
 						existedUser.Email = entity.Email;
 						existedUser.Phone = entity.Phone;
@@ -85,9 +91,8 @@ namespace Online_Mobile_Recharge.Repository
 						existedUser.Password = entity.Password;
 						existedUser.Gender = entity.Gender;
 
-						existedUser.CreatedAt = DateTime.Now;
 						existedUser.ModifiedAt = DateTime.Now;
-						
+
 						_context.Users.Update(existedUser);
 						return Save();
 					}
@@ -97,17 +102,24 @@ namespace Online_Mobile_Recharge.Repository
 					}
 				}
 			}
-			else
+			catch (CustomStatusException)
 			{
-				throw new CustomStatusException("User does not exist");
+				throw; // Ném lại ngoại lệ để xử lý ở lớp gọi
+			}
+			catch (Exception)
+			{
+				throw new CustomStatusException("Có lỗi xảy ra trong quá trình cập nhật");
 			}
 		}
+
+
+		//check tồn tại với cột IsDeleted == false
 		public bool IsExisted(int id)
 		{
 			return _context.Users.Any(e => e.Id == id && e.IsDeleted == false);
 		}
 
-		//xóa nhưng vẫn còn trong DB, chỉ là cập nhật thay đổi field trong bảng
+		//xóa nhưng vẫn còn trong DB, chỉ là cập nhật thay đổi field trong bảng thôi
 		public bool Delete(int id)
 		{
 			if (IsExisted(id))
@@ -131,5 +143,13 @@ namespace Online_Mobile_Recharge.Repository
 			return _context.Users.Any(u => u.Id != id && u.Phone == phoneNumber);
 		}
 
+		public bool IsValidEmail(string email)
+		{
+			// Biểu thức chính quy để kiểm tra địa chỉ email
+			string pattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+
+			// so sánh đầu vào có đúng với biểu thức chính quy hay khum?
+			return Regex.IsMatch(email, pattern);
+		}
 	}
 }

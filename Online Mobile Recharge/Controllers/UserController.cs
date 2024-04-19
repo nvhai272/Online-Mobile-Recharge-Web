@@ -33,11 +33,11 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpGet]
 		[Route("detail/{id}")]
-		public IActionResult GetUserById(int userId)
+		public IActionResult GetUserById(int id)
 		{
 			try
 			{
-				var user = _crud.GetItemById(userId);
+				var user = _crud.GetItemById(id);
 				//var userDto = _mapper.Map<UserResponse>(user);
 				return Ok(user);
 			}
@@ -72,12 +72,12 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("edit/{id}")]
-		public IActionResult UpdateUser(UserRequest user)
+		public IActionResult UpdateUser(int id,UserRequest user)
 		{
 			try
 			{
 				var u = _mapper.Map<User>(user);
-				bool updatedUser = _crud.Update(u.Id, u);
+				bool updatedUser = _crud.Update(id, u);
 				return Ok("Updated successfully");
 			}
 			catch (CustomStatusException ex)

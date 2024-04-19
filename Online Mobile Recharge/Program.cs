@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge;
+using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using Online_Mobile_Recharge.Repository;
@@ -31,7 +32,7 @@ builder.Services.AddScoped<ICrud<RechargePlan>, RechargePlanRepository>();
 
 builder.Services.AddScoped<ICrud<RechargePlanType>, RechargePlanTypeRepository>();
 
-builder.Services.AddScoped<ICrud<PaymentMethod>, PaymentMethodRepository>();
+builder.Services.AddScoped<ICrud<Feedback>, FeedbackRepository>();
 
 builder.Services.AddScoped<ICrud<Service>, ServiceRepository>();
 

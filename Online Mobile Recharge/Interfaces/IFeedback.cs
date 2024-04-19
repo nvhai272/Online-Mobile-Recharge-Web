@@ -2,7 +2,7 @@
 
 namespace Online_Mobile_Recharge.Interfaces
 {
-    public interface IFeedback
+    public interface IFeedback 
     {
 
 

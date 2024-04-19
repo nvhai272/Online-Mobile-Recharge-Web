@@ -598,13 +598,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
         "Name": "id",
-        "Type": "",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -619,13 +614,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "id",
-        "Type": "",
+        "Name": "user",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
         "IsRequired": true
       }
     ],

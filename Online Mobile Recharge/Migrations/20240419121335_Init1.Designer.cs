@@ -12,8 +12,8 @@ using Online_Mobile_Recharge;
 namespace Online_Mobile_Recharge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240418073542_init1")]
-    partial class init1
+    [Migration("20240419121335_Init1")]
+    partial class Init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,7 +157,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("OperatorId")
+                    b.Property<int>("OperatorId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -269,7 +269,7 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PaymentMethodId")
+                    b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
@@ -277,10 +277,10 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int?>("RechargePlanId")
+                    b.Property<int>("RechargePlanId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ServiceId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TransactionAmount")
@@ -325,8 +325,8 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<bool?>("Gender")
-                        .HasColumnType("bit");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -346,8 +346,7 @@ namespace Online_Mobile_Recharge.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -440,7 +439,9 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     b.HasOne("Online_Mobile_Recharge.Models.Operator", "Operator")
                         .WithMany("RechargePlans")
-                        .HasForeignKey("OperatorId");
+                        .HasForeignKey("OperatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Online_Mobile_Recharge.Models.RechargePlanType", "RechargePlanType")
                         .WithMany("RechargePlans")
@@ -457,15 +458,21 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     b.HasOne("Online_Mobile_Recharge.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Transactions")
-                        .HasForeignKey("PaymentMethodId");
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Online_Mobile_Recharge.Models.RechargePlan", "RechargePlan")
                         .WithMany("Transactions")
-                        .HasForeignKey("RechargePlanId");
+                        .HasForeignKey("RechargePlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Online_Mobile_Recharge.Models.Service", "Service")
                         .WithMany("Transactions")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Online_Mobile_Recharge.Models.User", "User")
                         .WithMany("Transactions")
