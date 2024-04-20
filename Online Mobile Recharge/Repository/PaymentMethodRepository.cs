@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class PaymentMethodRepository : ICrud<PaymentMethod>
+	public class PaymentMethodRepository : ICrud<PaymentMethod,PaymentMethodResponse>
 	{
 		private readonly DataContext _context;
-		public PaymentMethodRepository(DataContext context)
+		private readonly IMapper _mapper;
+		public PaymentMethodRepository(DataContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
 		public bool Create([FromBody] PaymentMethod newMethod)
@@ -27,7 +31,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedMethod = GetItemById(id);
+				var existedMethod = GetItem(id);
 				existedMethod.IsDeleted = true;
 
 				_context.PaymentMethods.Update(existedMethod);
@@ -41,7 +45,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		public PaymentMethod GetItemById(int id)
+		public PaymentMethod GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -50,12 +54,18 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("PaymentMethod does not existed.");
 		}
 
-		public ICollection<PaymentMethod> GetListItems()
+		public PaymentMethodResponse GetItemById(int id)
 		{
-			return _context.Set<PaymentMethod>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				return _mapper.Map<PaymentMethodResponse>(_context.Set<PaymentMethod>().FirstOrDefault(e => e.Id == id));
+			}
+			throw new InvalidOperationException("PaymentMethod does not existed.");
+		}
 
-			// trả về tất cả danh sách 
-			//return _context.Set<PaymentMethod>().OrderBy(p => p.Id).ToList();
+		public ICollection<PaymentMethodResponse> GetListItems()
+		{
+			return _mapper.Map<List<PaymentMethodResponse>>(_context.Set<PaymentMethod>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
 		}
 
 		public bool IsExisted(int id)
@@ -73,7 +83,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var updateE = GetItemById(id);
+				var updateE = GetItem(id);
 				updateE.Name = entity.Name;
 				updateE.Description = entity.Description;
 

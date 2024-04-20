@@ -2,10 +2,10 @@
 
 namespace Online_Mobile_Recharge.Interfaces
 {
-	public interface ICrud<E>
+	public interface ICrud<E,R>
 	{
-		ICollection<E> GetListItems();
-		E GetItemById(int id);
+		ICollection<R> GetListItems();
+		R GetItemById(int id);
 		bool Create([FromBody] E entity);
 		bool Update(int id, E entity);
 		bool IsExisted(int id);

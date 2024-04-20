@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class RechargePlanTypeRepository : ICrud<RechargePlanType>
+	public class RechargePlanTypeRepository : ICrud<RechargePlanType, RechargePlanTypeResponse>
 	{
 		private readonly DataContext _context;
-		public RechargePlanTypeRepository(DataContext context)
+		private readonly IMapper _mapper;
+		public RechargePlanTypeRepository(DataContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
 		public bool Create([FromBody] RechargePlanType entity)
@@ -28,7 +32,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedEntity = GetItemById(id);
+				var existedEntity = GetItem(id);
 				existedEntity.IsDeleted = true;
 
 				_context.RechargePlanTypes.Update(existedEntity);
@@ -40,7 +44,16 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		public RechargePlanType GetItemById(int id)
+		public RechargePlanTypeResponse GetItemById(int id)
+		{
+			if (IsExisted(id))
+			{
+				return _mapper.Map<RechargePlanTypeResponse>(_context.Set<RechargePlanType>().FirstOrDefault(e => e.Id == id));
+			}
+			throw new InvalidOperationException("RechargePlanType does not existed.");
+		}
+
+		public RechargePlanType GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -49,13 +62,9 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("RechargePlanType does not existed.");
 		}
 
-		public ICollection<RechargePlanType> GetListItems()
+		public ICollection<RechargePlanTypeResponse> GetListItems()
 		{
-
-			return _context.Set<RechargePlanType>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
-
-			// trả về tất cả danh sách 
-			//return _context.Set<RechargePlanType>().OrderBy(p => p.Id).ToList();
+			return _mapper.Map<List<RechargePlanTypeResponse>>(_context.Set<RechargePlanType>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
 		}
 
 		public bool IsExisted(int id)
@@ -73,7 +82,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedE = GetItemById(id);
+				var existedE = GetItem(id);
 				existedE.Name = entity.Name;
 				existedE.Description = entity.Description;
 				existedE.RechargePlans = entity.RechargePlans;
@@ -89,5 +98,7 @@ namespace Online_Mobile_Recharge.Repository
 				throw ex;
 			}
 		}
+
+
 	}
 }

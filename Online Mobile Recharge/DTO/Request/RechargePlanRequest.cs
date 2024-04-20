@@ -6,6 +6,8 @@ namespace Online_Mobile_Recharge.DTO.Request
 {
 	public class RechargePlanRequest
 	{
+
+
 		public RechargePlanType RechargePlanType { get; set; }
 
 		public Operator? Operator { get; set; }
@@ -26,7 +28,7 @@ namespace Online_Mobile_Recharge.DTO.Request
 
 		public string? Description { get; set; }
 
-		public ICollection<Transaction> Transactions { get; set; }
+		//public ICollection<Transaction> Transactions { get; set; }
 
 
 	}

@@ -6,7 +6,6 @@ namespace Online_Mobile_Recharge.DTO.Response
 {
 	public class UserPaymentInfoResponse
 	{
-		public int Id { get; set; }
 		public int CardNumber { get; set; }
 
 		public PaymentMethod PaymentMethod { get; set; }

@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class UserServiceRepository :ICrud<UserService>
+	public class UserServiceRepository : ICrud<UserService, UserServiceResponse>
 	{
 		private readonly DataContext _dataContext;
-		public UserServiceRepository(DataContext dataContext)
+		private readonly IMapper _mapper;
+		public UserServiceRepository(DataContext dataContext, IMapper mapper)
 		{
 			_dataContext = dataContext;
+			_mapper = mapper;
 		}
 		public bool Create([FromBody] UserService entity)
 		{
@@ -28,7 +32,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedUserService = GetItemById(id);
+				var existedUserService = GetItem(id);
 				existedUserService.IsDeleted = true;
 
 				_dataContext.User_Service.Update(existedUserService);
@@ -36,12 +40,11 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-				
 				throw ex;
 			}
 		}
 
-		public UserService GetItemById(int id)
+		public UserService GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -50,9 +53,18 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("UserService does not existed.");
 		}
 
-		public ICollection<UserService> GetListItems()
+		public UserServiceResponse GetItemById(int id)
 		{
-			return _dataContext.Set<UserService>().OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				return _mapper.Map<UserServiceResponse>(_dataContext.Set<UserService>().FirstOrDefault(x => x.Id == id));
+			}
+			throw new InvalidOperationException("UserService does not existed.");
+		}
+
+		public ICollection<UserServiceResponse> GetListItems()
+		{
+			return _mapper.Map<List<UserServiceResponse>>(_dataContext.Set<UserService>().OrderBy(p => p.Id).ToList());
 			//return _context.Set<UserService>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
 
 		}
@@ -72,7 +84,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existingUserService = GetItemById(id);
+				var existingUserService = GetItem(id);
 				existingUserService.Service = entity.Service;
 				existingUserService.User = entity.User;
 				existingUserService.Status = entity.Status;
@@ -83,11 +95,9 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-				
+
 				throw ex;
 			}
-
-
 		}
 	}
 }

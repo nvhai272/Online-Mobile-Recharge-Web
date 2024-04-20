@@ -11,11 +11,11 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public Service Service { get; set; }
 
-		public DateTime CreatedAt { get; set; } 
+		public DateTime CreatedAt { get; set; }
 
-		public DateTime ModifiedAt { get; set; } 
+		public DateTime ModifiedAt { get; set; }
 
-		public bool IsDeleted { get; set; } 
+		public bool IsDeleted { get; set; }
 
 		public bool Status { get; set; } = false;
 	}

@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class TransactionRepository : ICrud<Transaction>
+	public class TransactionRepository : ICrud<Transaction, TransactionResponse>
 	{
 		private readonly DataContext _context;
-		public TransactionRepository(DataContext context)
+		private readonly IMapper _mapper;
+		public TransactionRepository(DataContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
 		public bool Create([FromBody] Transaction entity)
@@ -33,7 +37,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedEntity = GetItemById(id);
+				var existedEntity = GetItem(id);
 				existedEntity.IsDeleted = true;
 
 				_context.Transactions.Update(existedEntity);
@@ -46,8 +50,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-
-		public Transaction GetItemById(int id)
+		public Transaction GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -56,21 +59,24 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("Transaction does not existed.");
 		}
 
-		public ICollection<Transaction> GetListItems()
+		public TransactionResponse GetItemById(int id)
 		{
-
-			return _context.Set<Transaction>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
-
-			// trả về tất cả danh sách 
-			//return _context.Set<Transaction>().OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				return _mapper.Map<TransactionResponse>(_context.Transactions.Find(id));
+			}
+			throw new InvalidOperationException("Transaction does not existed.");
 		}
 
+		public ICollection<TransactionResponse> GetListItems()
+		{
+			return _mapper.Map<List<TransactionResponse>>(_context.Set<Transaction>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
+		}
 
 		public bool IsExisted(int id)
 		{
 			return _context.Transactions.Any(e => e.Id == id && e.IsDeleted == false);
 		}
-
 
 		public bool Save()
 		{
@@ -82,7 +88,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedE = GetItemById(id);
+				var existedE = GetItem(id);
 				existedE.Phone = entity.Phone;
 				existedE.User = entity.User;
 				existedE.Service = entity.Service;

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
@@ -6,24 +8,37 @@ using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class UserRepository : ICrud<User>
+	public class UserRepository : ICrud<User, UserResponse>
 	{
 		private readonly DataContext _context;
-		public UserRepository(DataContext context)
+		private readonly IMapper _mapper;
+		public UserRepository(DataContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
-		public ICollection<User> GetListItems()
+		public ICollection<UserResponse> GetListItems()
 		{
-			return _context.Set<User>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			return _mapper.Map<List<UserResponse>>(_context.Set<User>()
+				.Where(p => p.IsDeleted == false)
+				.OrderBy(p => p.Id).ToList());
 		}
 
-		public User GetItemById(int id)
+		public User GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
 				return _context.Users.FirstOrDefault(e => e.Id == id);
+			}
+			throw new CustomStatusException("User does not existed.");
+		}
+
+		public UserResponse GetItemById(int id)
+		{
+			if (IsExisted(id))
+			{
+				return _mapper.Map<UserResponse>(_context.Users.FirstOrDefault(e => e.Id == id));
 			}
 			throw new CustomStatusException("User does not existed.");
 		}
@@ -50,7 +65,6 @@ namespace Online_Mobile_Recharge.Repository
 				Password = entity.Password,
 				Address = entity.Address,
 				Dob = entity.Dob,
-				Gender = entity.Gender,
 				Phone = entity.Phone
 			};
 
@@ -64,12 +78,11 @@ namespace Online_Mobile_Recharge.Repository
 			return Regex.IsMatch(phoneNumber, @"^\d{10}$");
 		}
 
-
 		public bool Update(int id, User entity)
 		{
 			try
 			{
-				var existedUser = GetItemById(id);
+				var existedUser = GetItem(id);
 
 				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
 				{
@@ -89,7 +102,6 @@ namespace Online_Mobile_Recharge.Repository
 						existedUser.Address = entity.Address;
 						existedUser.Dob = entity.Dob;
 						existedUser.Password = entity.Password;
-						existedUser.Gender = entity.Gender;
 
 						existedUser.ModifiedAt = DateTime.Now;
 
@@ -124,7 +136,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (IsExisted(id))
 			{
-				var existedUser = GetItemById(id);
+				var existedUser = GetItem(id);
 				existedUser.IsDeleted = true;
 
 				_context.Users.Update(existedUser);

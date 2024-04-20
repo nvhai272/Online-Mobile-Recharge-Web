@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class UserPaymentInfoReposity : ICrud<UserPaymentInfo>
+	public class UserPaymentInfoReposity : ICrud<UserPaymentInfo, UserPaymentInfoResponse>
 	{
 		private readonly DataContext _dataContext;
-		public UserPaymentInfoReposity(DataContext dataContext)
+		private readonly IMapper _mapper;
+
+		public UserPaymentInfoReposity(DataContext dataContext, IMapper mapper)
 		{
 			_dataContext = dataContext;
+			_mapper = mapper;
 		}
 
 		public bool Create([FromBody] UserPaymentInfo entity)
@@ -31,7 +35,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (IsExisted(id))
 			{
-				var existed = GetItemById(id);
+				var existed = GetItem(id);
 				existed.IsDeleted = true;
 
 				_dataContext.UserPaymentInfos.Update(existed);
@@ -40,7 +44,7 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("User Payment Info does not existed.");
 		}
 
-		public UserPaymentInfo GetItemById(int id)
+		public UserPaymentInfo GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -49,9 +53,18 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("User Payment Info does not existed.");
 		}
 
-		public ICollection<UserPaymentInfo> GetListItems()
+		public UserPaymentInfoResponse GetItemById(int id)
 		{
-			return _dataContext.UserPaymentInfos.Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				return _mapper.Map<UserPaymentInfoResponse>(_dataContext.Set<UserPaymentInfo>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
+			}
+			throw new InvalidOperationException("User Payment Info does not existed.");
+		}
+
+		public ICollection<UserPaymentInfoResponse> GetListItems()
+		{
+			return _mapper.Map<List<UserPaymentInfoResponse>>(_dataContext.UserPaymentInfos.Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
 		}
 
 		public bool IsExisted(int id)
@@ -73,7 +86,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			else
 			{
-				var existed = GetItemById(id);
+				var existed = GetItem(id);
 				existed.CardNumber = entity.CardNumber;
 				existed.ModifiedAt = DateTime.Now;
 				_dataContext.UserPaymentInfos.Update(existed);

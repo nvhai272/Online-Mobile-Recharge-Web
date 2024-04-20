@@ -12,11 +12,11 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		private readonly ICrud<User> _crud;
+		private readonly ICrud<User, UserResponse> _crud;
 
 		private readonly IMapper _mapper;
 
-		public UserController(ICrud<User> crud, IMapper mapper)
+		public UserController(ICrud<User,UserResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,7 @@ namespace Online_Mobile_Recharge.Controllers
 		public IActionResult GetUsersDetails()
 		{
 			var users = _crud.GetListItems();
-			var usersRes = _mapper.Map<List<UserResponse>>( _crud.GetListItems());
-			return Ok(usersRes);
+			return Ok(users);
 		}
 
 		[HttpGet]
@@ -38,8 +37,8 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				var userItem = _crud.GetItemById(id);
-				var userRes = _mapper.Map<UserResponse>(userItem);
-				return Ok(userRes);
+				//var userRes = _mapper.Map<UserResponse>(userItem);
+				return Ok(userItem);
 			}
 			catch (CustomStatusException ex)
 			{
@@ -49,7 +48,7 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPost]
 		[Route("create")]
-		public IActionResult PostUser(UserRequest user)
+		public IActionResult CreateUser(UserRequest user)
 		{
 			try
 			{

@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class RechargePlanTypeController : ControllerBase
 	{
-		private readonly ICrud<RechargePlanType> _crud;
+		private readonly ICrud<RechargePlanType,RechargePlanTypeResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public RechargePlanTypeController(ICrud<RechargePlanType> crud, IMapper mapper)
+		public RechargePlanTypeController(ICrud<RechargePlanType, RechargePlanTypeResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				//var RechargePlanTypeList = _crud.GetListItems();
-				var RechargePlanTypeList = _mapper.Map<List<RechargePlanTypeResponse>>(_crud.GetListItems());
+				var RechargePlanTypeList = _crud.GetListItems();
 				return Ok(RechargePlanTypeList);
 			}
 			catch (Exception ex)
@@ -43,7 +42,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var RechargePlanType = _mapper.Map<RechargePlanTypeResponse>(_crud.GetItemById(id));
+				var RechargePlanType = _crud.GetItemById(id);
 				return Ok(RechargePlanType);
 			}
 			catch (Exception ex)

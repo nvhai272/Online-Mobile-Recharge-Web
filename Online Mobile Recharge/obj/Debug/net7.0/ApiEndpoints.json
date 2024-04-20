@@ -554,7 +554,7 @@
   },
   {
     "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
-    "Method": "PostUser",
+    "Method": "CreateUser",
     "RelativePath": "api/User/create",
     "HttpMethod": "POST",
     "IsController": true,

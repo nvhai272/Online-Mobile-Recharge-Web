@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class UserPaymentInfoController : ControllerBase
 	{
-		private readonly ICrud<UserPaymentInfo> _crud;
+		private readonly ICrud<UserPaymentInfo, UserPaymentInfoResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public UserPaymentInfoController(ICrud<UserPaymentInfo> crud, IMapper mapper)
+		public UserPaymentInfoController(ICrud<UserPaymentInfo, UserPaymentInfoResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,8 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				//var UserPaymentInfoList = _crud.GetListItems();
-				var UserPaymentInfoList = _mapper.Map<List<UserPaymentInfoResponse>>(_crud.GetListItems());
+				var UserPaymentInfoList = _crud.GetListItems();
+				//var UserPaymentInfoList = _mapper.Map<List<UserPaymentInfoResponse>>(_crud.GetListItems());
 				return Ok(UserPaymentInfoList);
 			}
 			catch (Exception ex)
@@ -43,7 +43,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var UserPaymentInfo = _mapper.Map<UserPaymentInfoResponse>(_crud.GetItemById(id));
+				var UserPaymentInfo = _crud.GetItemById(id);
 				return Ok(UserPaymentInfo);
 			}
 			catch (Exception ex)

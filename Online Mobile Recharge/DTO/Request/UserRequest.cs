@@ -11,7 +11,6 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public string? Email { get; set; }
 		public DateTime? Dob { get; set; }
 		public string? Address { get; set; }
-		public bool Gender { get; set; }
 
 	}
 }

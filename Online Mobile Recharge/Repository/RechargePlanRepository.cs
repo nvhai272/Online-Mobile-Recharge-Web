@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class RechargePlanRepository : ICrud<RechargePlan>
+	public class RechargePlanRepository : ICrud<RechargePlan, RechargePlanResponse>
 	{
 		private readonly DataContext _context;
-		public RechargePlanRepository(DataContext context)
+		private readonly IMapper _mapper;
+		public RechargePlanRepository(DataContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
 		public bool Create([FromBody] RechargePlan entity)
@@ -39,7 +43,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedEntity = GetItemById(id);
+				var existedEntity = GetItem(id);
 				existedEntity.IsDeleted = true;
 
 				_context.RechargePlans.Update(existedEntity);
@@ -51,7 +55,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		public RechargePlan GetItemById(int id)
+		public RechargePlan GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -60,12 +64,18 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("RechargePlan does not existed.");
 		}
 
-		public ICollection<RechargePlan> GetListItems()
+		public RechargePlanResponse GetItemById(int id)
 		{
-			return _context.Set<RechargePlan>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				return _mapper.Map<RechargePlanResponse>(_context.Set<RechargePlan>().FirstOrDefault(e => e.Id == id));
+			}
+			throw new InvalidOperationException("RechargePlan does not existed.");
+		}
 
-			// trả về tất cả danh sách 
-			//return _context.Set<RechargePlan>().OrderBy(p => p.Id).ToList();
+		public ICollection<RechargePlanResponse> GetListItems()
+		{
+			return _mapper.Map<List<RechargePlanResponse>>(_context.Set<RechargePlan>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
 		}
 
 		public bool IsExisted(int id)
@@ -83,7 +93,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedE = GetItemById(id);
+				var existedE = GetItem(id);
 				existedE.Name = entity.Name;
 				existedE.Operator = entity.Operator;
 				existedE.Description = entity.Description;

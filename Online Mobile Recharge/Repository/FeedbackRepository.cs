@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class FeedbackRepository : ICrud<Feedback>
+	public class FeedbackRepository : ICrud<Feedback, FeedbackResponse>
 	{
 		private readonly DataContext _dataContext;
 		public FeedbackRepository(DataContext dataContext)
@@ -14,8 +15,19 @@ namespace Online_Mobile_Recharge.Repository
 		}
 		public bool IsValidPhoneNumber(string phoneNumber)
 		{
-			// số điện thoại không rỗng và có đúng 10 chữ số => trả về đúng 
 			return !string.IsNullOrEmpty(phoneNumber) && Regex.IsMatch(phoneNumber, @"^\d{10}$");
+		}
+
+		public FeedbackResponse Convert(Feedback feedback)
+		{
+			var nameService = _dataContext.Services.Find(feedback.ServiceId).Name;
+			var res = new FeedbackResponse()
+			{
+				Content = feedback.Content,
+				Phone = feedback.Phone,
+				NameService = nameService
+			};
+			return res;
 		}
 
 		public bool Create([FromBody] Feedback entity)
@@ -23,8 +35,6 @@ namespace Online_Mobile_Recharge.Repository
 			if (!string.IsNullOrEmpty(entity.Content) && IsValidPhoneNumber(entity.Phone))
 			{
 				var existedService = _dataContext.Services.Find(entity.ServiceId);
-				
-
 				if (existedService != null)
 				{
 					Feedback feedback = new()
@@ -53,7 +63,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedFeedback = GetItemById(id);
+				var existedFeedback = GetItem(id);
 				existedFeedback.IsDeleted = true;
 
 				_dataContext.Feedbacks.Update(existedFeedback);
@@ -61,25 +71,42 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-								throw ex;
+				throw ex;
 			}
 		}
 
-		public Feedback GetItemById(int id)
+		public Feedback GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
-				//return _dataContext.Set<Feedback>().FirstOrDefault(x => x.Id == id);
-				return _dataContext.Find<Feedback>(id);
+				return _dataContext.Set<Feedback>().FirstOrDefault(x => x.Id == id);
 			}
 			throw new InvalidOperationException("Feedback does not existed");
 		}
 
-		public ICollection<Feedback> GetListItems()
+		public FeedbackResponse GetItemById(int id)
 		{
-			return _dataContext.Set<Feedback>().OrderBy(p => p.Id).ToList();
+			if (IsExisted(id))
+			{
+				var res = Convert(_dataContext.Find<Feedback>(id));
+				return res;
+			}
+			throw new InvalidOperationException("Feedback does not existed");
+		}
+
+		public ICollection<FeedbackResponse> GetListItems()
+		{
+			//return _dataContext.Set<Feedback>().OrderBy(p => p.Id).ToList();
 			//return _context.Set<Feedback>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
 
+			var feedbacks = _dataContext.Set<Feedback>().ToList();
+			var responses = new List<FeedbackResponse>();
+
+			foreach (var feedback in feedbacks)
+			{
+				responses.Add(Convert(feedback));
+			}
+			return responses;
 		}
 
 		public bool IsExisted(int id)
@@ -98,7 +125,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existingFeedback = GetItemById(id);
+				var existingFeedback = GetItem(id);
 				var existedService = _dataContext.Find<Service>(entity.Service.Id);
 
 				if (IsValidPhoneNumber(entity.Phone) && !string.IsNullOrEmpty(entity.Content) && existedService != null)
@@ -116,7 +143,6 @@ namespace Online_Mobile_Recharge.Repository
 				{
 					return false;
 				}
-
 			}
 			catch (InvalidOperationException ex)
 			{

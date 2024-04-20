@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class ServiceController : ControllerBase
 	{
-		private readonly ICrud<Service> _crud;
+		private readonly ICrud<Service, ServiceResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public ServiceController(ICrud<Service> crud, IMapper mapper)
+		public ServiceController(ICrud<Service, ServiceResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				//var ServiceList = _crud.GetListItems();
-				var ServiceList = _mapper.Map<List<ServiceResponse>>(_crud.GetListItems());
+				var ServiceList = _crud.GetListItems();
 				return Ok(ServiceList);
 			}
 			catch (Exception ex)
@@ -43,7 +42,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var Service = _mapper.Map<ServiceResponse>(_crud.GetItemById(id));
+				var Service = _crud.GetItemById(id);
 				return Ok(Service);
 			}
 			catch (Exception ex)

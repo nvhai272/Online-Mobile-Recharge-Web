@@ -10,6 +10,8 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public string Content { get; set; }
 
-		public Service Service { get; set; }
+		public string NameService { get; set; }
+
+		//public Service Service { get; set; }
 	}
 }

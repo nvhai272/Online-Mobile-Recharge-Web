@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class FeedbackController : ControllerBase
 	{
-		private readonly ICrud<Feedback> _crud;
+		private readonly ICrud<Feedback, FeedbackResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public FeedbackController(ICrud<Feedback> crud, IMapper mapper)
+		public FeedbackController(ICrud<Feedback, FeedbackResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,8 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				//var feedbackList = _crud.GetListItems();
-				var feedbackList = _mapper.Map<List<FeedbackResponse>>(_crud.GetListItems());
+				var feedbackList = _crud.GetListItems();
+				//var feedbackList = _mapper.Map<List<FeedbackResponse>>(_crud.GetListItems());
 				return Ok(feedbackList);
 			}
 			catch (Exception ex)
@@ -43,7 +43,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var feedback = _mapper.Map<FeedbackResponse>(_crud.GetItemById(id));
+				var feedback = _crud.GetItemById(id);
 				return Ok(feedback);
 			}
 			catch (Exception ex)

@@ -1,27 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Online_Mobile_Recharge.DTO.Response;
+using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class OperatorRepository : ICrud<Operator>
+	public class OperatorRepository : ICrud<Operator, OperatorResponse>
 	{
 		private readonly DataContext _dataContext;
-		public OperatorRepository(DataContext dataContext)
+		private readonly IMapper _mapper;
+		public OperatorRepository(DataContext dataContext, IMapper mapper)
 		{
 			_dataContext = dataContext;
+			_mapper = mapper;
 		}
+
 		public bool Create([FromBody] Operator entity)
 		{
-			Operator hehe = new Operator() { Name = entity.Name };
-			_dataContext.Operators.Add(hehe);
-			return Save();
+			var check = _dataContext.Operators.Find(entity.Name);
+			if (check == null)
+			{
+				Operator hehe = new Operator() { Name = entity.Name };
+				_dataContext.Operators.Add(hehe);
+				return Save();
+			}
+			else
+			{
+				throw new CustomStatusException("Da ton tai");
+			}
 		}
 
 		public bool Delete(int id)
 		{
-			var existed = GetItemById(id);
+			var existed = GetItem(id);
 			if (existed != null)
 			{
 				_dataContext.Operators.Remove(existed);
@@ -44,7 +58,16 @@ namespace Online_Mobile_Recharge.Repository
 			//}
 		}
 
-		public Operator GetItemById(int id)
+		OperatorResponse ICrud<Operator, OperatorResponse>.GetItemById(int id)
+		{
+			if (IsExisted(id))
+			{
+				return _mapper.Map<OperatorResponse>(_dataContext.Operators.FirstOrDefault(e => e.Id == id));
+			}
+			throw new InvalidOperationException("Operator does not existed");
+		}
+
+		public Operator GetItem(int id)
 		{
 			if (IsExisted(id))
 			{
@@ -53,10 +76,14 @@ namespace Online_Mobile_Recharge.Repository
 			throw new InvalidOperationException("Operator does not existed");
 		}
 
-		public ICollection<Operator> GetListItems()
+		public ICollection<OperatorResponse> GetListItems()
 		{
-			//return _dataContext.Set<Operator>().OrderBy(p => p.Id).ToList();
-			return _dataContext.Set<Operator>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			return _mapper.Map<List<OperatorResponse>>(
+				_dataContext.Set<Operator>()
+					.Where(p => !p.IsDeleted)
+					.OrderBy(p => p.Id)
+					.ToList()
+			);
 
 		}
 
@@ -75,7 +102,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedOperator = GetItemById(id);
+				var existedOperator = GetItem(id);
 				existedOperator.Name = entity.Name;
 
 				existedOperator.ModifiedAt = DateTime.Now;
@@ -87,5 +114,7 @@ namespace Online_Mobile_Recharge.Repository
 				throw ex;
 			}
 		}
+
+		
 	}
 }

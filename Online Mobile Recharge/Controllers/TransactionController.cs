@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class TransactionController : ControllerBase
 	{
-		private readonly ICrud<Transaction> _crud;
+		private readonly ICrud<Transaction, TransactionResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public TransactionController(ICrud<Transaction> crud, IMapper mapper)
+		public TransactionController(ICrud<Transaction, TransactionResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -27,8 +27,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				//var TransactionList = _crud.GetListItems();
-				var TransactionList = _mapper.Map<List<TransactionResponse>>(_crud.GetListItems());
+				var TransactionList = _crud.GetListItems();
 				return Ok(TransactionList);
 			}
 			catch (Exception ex)
@@ -43,7 +42,7 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var Transaction = _mapper.Map<TransactionResponse>(_crud.GetItemById(id));
+				var Transaction = _crud.GetItemById(id);
 				return Ok(Transaction);
 			}
 			catch (Exception ex)

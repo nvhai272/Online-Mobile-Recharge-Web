@@ -11,9 +11,8 @@ namespace Online_Mobile_Recharge.DTO.Response
 		public string? Email { get; set; }
 		public DateTime? Dob { get; set; }
 		public string? Address { get; set; }
-		public bool Gender { get; set; }
-		public ICollection<Transaction> Transactions { get; set; }
-		public ICollection<UserService> User_Service { get; set; }
-		public ICollection<UserPaymentInfo> User_Payment_Infos { get; set; }
+		//public ICollection<Transaction> Transactions { get; set; }
+		//public ICollection<UserService> User_Service { get; set; }
+		//public ICollection<UserPaymentInfo> User_Payment_Infos { get; set; }
 	}
 }

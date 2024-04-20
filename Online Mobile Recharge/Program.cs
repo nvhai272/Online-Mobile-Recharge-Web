@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge;
 using Online_Mobile_Recharge.DTO.Request;
+using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using Online_Mobile_Recharge.Repository;
@@ -18,25 +19,25 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(op => op.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
-builder.Services.AddScoped<ICrud<User>, UserRepository>();
+builder.Services.AddScoped<ICrud<User,UserResponse>, UserRepository>();
 
-builder.Services.AddScoped<ICrud<UserPaymentInfo>, UserPaymentInfoReposity>();
+builder.Services.AddScoped<ICrud<UserPaymentInfo,UserPaymentInfoResponse>, UserPaymentInfoReposity>();
 
-builder.Services.AddScoped<ICrud<PaymentMethod>, PaymentMethodRepository>();
+builder.Services.AddScoped<ICrud<PaymentMethod,PaymentMethodResponse>, PaymentMethodRepository>();
 
-builder.Services.AddScoped<ICrud<Transaction>, TransactionRepository>();
+builder.Services.AddScoped<ICrud<Transaction,TransactionResponse>, TransactionRepository>();
 
-builder.Services.AddScoped<ICrud<Operator>, OperatorRepository>();
+builder.Services.AddScoped<ICrud<Operator,OperatorResponse>, OperatorRepository>();
 
-builder.Services.AddScoped<ICrud<RechargePlan>, RechargePlanRepository>();
+builder.Services.AddScoped<ICrud<RechargePlan,RechargePlanResponse>, RechargePlanRepository>();
 
-builder.Services.AddScoped<ICrud<RechargePlanType>, RechargePlanTypeRepository>();
+builder.Services.AddScoped<ICrud<RechargePlanType,RechargePlanTypeResponse>, RechargePlanTypeRepository>();
 
-builder.Services.AddScoped<ICrud<Feedback>, FeedbackRepository>();
+builder.Services.AddScoped<ICrud<Feedback,FeedbackResponse>, FeedbackRepository>();
 
-builder.Services.AddScoped<ICrud<Service>, ServiceRepository>();
+builder.Services.AddScoped<ICrud<Service,ServiceResponse>, ServiceRepository>();
 
-builder.Services.AddScoped<ICrud<UserService>, UserServiceRepository>();
+builder.Services.AddScoped<ICrud<UserService,UserServiceResponse>, UserServiceRepository>();
 
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(Program));
