@@ -12,8 +12,8 @@ using Online_Mobile_Recharge;
 namespace Online_Mobile_Recharge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240419121335_Init1")]
-    partial class Init1
+    [Migration("20240420002117_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -325,8 +325,8 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

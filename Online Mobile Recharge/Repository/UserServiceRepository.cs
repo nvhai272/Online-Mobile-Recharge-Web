@@ -36,8 +36,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-				// Nếu không tìm thấy mục cần xóa, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				// Bạn có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
+				
 				throw ex;
 			}
 		}
@@ -84,8 +83,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-				// Nếu không tìm thấy mục cần cập nhật, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				// Bạn có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
+				
 				throw ex;
 			}
 

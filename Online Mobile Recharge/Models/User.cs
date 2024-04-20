@@ -30,7 +30,7 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(150)]
 		public string? Address { get; set; }
 
-		public int Gender { get; set; }
+		public bool Gender { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 

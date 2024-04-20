@@ -17,7 +17,6 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public bool IsDeleted { get; set; } 
 
-		[Required]
 		public bool Status { get; set; } = false;
 	}
 }

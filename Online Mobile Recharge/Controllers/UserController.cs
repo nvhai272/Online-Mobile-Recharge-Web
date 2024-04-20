@@ -27,8 +27,8 @@ namespace Online_Mobile_Recharge.Controllers
 		public IActionResult GetUsersDetails()
 		{
 			var users = _crud.GetListItems();
-			//var users = _mapper.Map<List<UserResponse>>( _crud.GetListItems());
-			return Ok(users);
+			var usersRes = _mapper.Map<List<UserResponse>>( _crud.GetListItems());
+			return Ok(usersRes);
 		}
 
 		[HttpGet]
@@ -37,9 +37,9 @@ namespace Online_Mobile_Recharge.Controllers
 		{
 			try
 			{
-				var user = _crud.GetItemById(id);
-				//var userDto = _mapper.Map<UserResponse>(user);
-				return Ok(user);
+				var userItem = _crud.GetItemById(id);
+				var userRes = _mapper.Map<UserResponse>(userItem);
+				return Ok(userRes);
 			}
 			catch (CustomStatusException ex)
 			{

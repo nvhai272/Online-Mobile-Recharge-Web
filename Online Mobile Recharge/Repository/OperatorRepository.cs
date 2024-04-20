@@ -50,7 +50,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _dataContext.Operators.FirstOrDefault(e => e.Id == id);
 			}
-			throw new InvalidOperationException("Operator does not existed.");
+			throw new InvalidOperationException("Operator does not existed");
 		}
 
 		public ICollection<Operator> GetListItems()
