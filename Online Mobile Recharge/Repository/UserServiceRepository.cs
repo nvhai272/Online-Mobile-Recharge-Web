@@ -15,6 +15,20 @@ namespace Online_Mobile_Recharge.Repository
 			_dataContext = dataContext;
 			_mapper = mapper;
 		}
+
+		public UserServiceResponse Convert(UserService e)
+		{
+			var getUser = _dataContext.Users.Find(e.UserId).Name;
+			var getService = _dataContext.Services.Find(e.ServiceId).Name;
+
+			var res = new UserServiceResponse()
+			{
+				UserName = getUser,
+				ServiceName = getService
+			};
+			return res;
+		}
+
 		public bool Create([FromBody] UserService entity)
 		{
 			UserService userService = new UserService()
@@ -85,8 +99,16 @@ namespace Online_Mobile_Recharge.Repository
 			try
 			{
 				var existingUserService = GetItem(id);
-				existingUserService.Service = entity.Service;
-				existingUserService.User = entity.User;
+				var findUser = _dataContext.Users.Find(entity.UserId);
+				var findServicee = _dataContext.Services.Find(entity.ServiceId);
+
+
+				existingUserService.Service = findServicee;
+				existingUserService.ServiceId = entity.ServiceId;
+
+				existingUserService.User = findUser;
+				existingUserService.UserId = entity.UserId;
+
 				existingUserService.Status = entity.Status;
 
 				existingUserService.ModifiedAt = DateTime.Now;

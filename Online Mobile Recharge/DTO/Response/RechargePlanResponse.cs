@@ -6,9 +6,11 @@ namespace Online_Mobile_Recharge.DTO.Response
 {
     public class RechargePlanResponse
     {
-		public RechargePlanType RechargePlanType { get; set; }
+		//public RechargePlanType RechargePlanType { get; set; }
+		public string RechargePlanTypeName { get; set; }
 
-		public Operator? Operator { get; set; }
+		//public Operator? Operator { get; set; }
+		public string OperatorName { get; set; }
 
 		public string Name { get; set; }
 

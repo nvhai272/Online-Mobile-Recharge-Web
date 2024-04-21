@@ -20,7 +20,7 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] Operator entity)
 		{
-			var check = _dataContext.Operators.Find(entity.Name);
+			var check = _dataContext.Operators.FirstOrDefault(e => e.Name == entity.Name);
 			if (check == null)
 			{
 				Operator hehe = new Operator() { Name = entity.Name };
@@ -115,6 +115,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		
+
 	}
 }

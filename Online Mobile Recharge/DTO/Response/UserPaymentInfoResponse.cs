@@ -8,8 +8,10 @@ namespace Online_Mobile_Recharge.DTO.Response
 	{
 		public int CardNumber { get; set; }
 
-		public PaymentMethod PaymentMethod { get; set; }
+		//public PaymentMethod PaymentMethod { get; set; }
+		public string PaymentMethodName { get; set; }
 
-		public User User { get; set; }
+		//public User User { get; set; }
+		public string UserName { get; set; }
 	}
 }

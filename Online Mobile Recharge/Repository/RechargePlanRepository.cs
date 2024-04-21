@@ -16,16 +16,41 @@ namespace Online_Mobile_Recharge.Repository
 			_mapper = mapper;
 		}
 
+		public RechargePlanResponse Convert(RechargePlan rechargePlan)
+		{
+			var getNameOperator = _context.Services.Find(rechargePlan.OperatorId).Name;
+			var getNameRechargePlanType = _context.Services.Find(rechargePlan.RechargePlanTypeId).Name;
+			var res = new RechargePlanResponse()
+			{
+				Name = rechargePlan.Name,
+				OperatorName = getNameOperator,
+				Description = rechargePlan.Description,
+				Price = rechargePlan.Price,
+				RechargePlanTypeName = getNameRechargePlanType,
+				TalkTime = rechargePlan.TalkTime,
+				DataNumberPerDay = rechargePlan.DataNumberPerDay,
+				DataNumberTotal = rechargePlan.DataNumberTotal,
+				TextMessageNumber = rechargePlan.TextMessageNumber,
+				Validity = rechargePlan.Validity
+				
+			};
+			return res;
+		}
+
+
 		public bool Create([FromBody] RechargePlan entity)
 		{
-
+			var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
+			var existedOperator = _context.Operators.Find(entity.OperatorId);
 			RechargePlan newRechargePlan = new RechargePlan()
 			{
 				Name = entity.Name,
-				Operator = entity.Operator,
+				OperatorId= entity.OperatorId,
+				Operator = existedOperator,
 				Description = entity.Description,
 				Price = entity.Price,
-				RechargePlanType = entity.RechargePlanType,
+				RechargePlanTypeId = entity.RechargePlanTypeId,
+				RechargePlanType = existedRechargePlanType,
 				TalkTime = entity.TalkTime,
 				DataNumberPerDay = entity.DataNumberPerDay,
 				DataNumberTotal = entity.DataNumberTotal,
@@ -93,12 +118,20 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			try
 			{
-				var existedE = GetItem(id);
+				var existedE = _context.RechargePlans.Find(id);
+				var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
+				var existedOperator = _context.Operators.Find(entity.OperatorId);
+
 				existedE.Name = entity.Name;
-				existedE.Operator = entity.Operator;
+
+				existedE.OperatorId = entity.OperatorId;
+				existedE.Operator = existedOperator;
+				
+				existedE.RechargePlanTypeId = entity.RechargePlanTypeId; 
+				existedE.RechargePlanType = existedRechargePlanType;
+
 				existedE.Description = entity.Description;
 				existedE.Price = entity.Price;
-				existedE.RechargePlanType = entity.RechargePlanType;
 				existedE.TalkTime = entity.TalkTime;
 				existedE.DataNumberPerDay = entity.DataNumberPerDay;
 				existedE.DataNumberTotal = entity.DataNumberTotal;

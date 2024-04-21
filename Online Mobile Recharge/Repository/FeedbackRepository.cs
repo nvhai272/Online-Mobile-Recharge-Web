@@ -126,14 +126,14 @@ namespace Online_Mobile_Recharge.Repository
 			try
 			{
 				var existingFeedback = GetItem(id);
-				var existedService = _dataContext.Find<Service>(entity.Service.Id);
+				var existedService = _dataContext.Find<Service>(entity.ServiceId);
 
 				if (IsValidPhoneNumber(entity.Phone) && !string.IsNullOrEmpty(entity.Content) && existedService != null)
 				{
-					existingFeedback.Service = entity.Service;
+					existingFeedback.Service = existedService;
 					existingFeedback.Content = entity.Content;
 					existingFeedback.Phone = entity.Phone;
-					existingFeedback.ServiceId = entity.Id;
+					existingFeedback.ServiceId = entity.ServiceId;
 					existingFeedback.ModifiedAt = DateTime.Now;
 
 					_dataContext.Feedbacks.Update(existingFeedback);

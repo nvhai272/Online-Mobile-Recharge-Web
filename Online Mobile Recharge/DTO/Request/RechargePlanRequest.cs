@@ -6,12 +6,11 @@ namespace Online_Mobile_Recharge.DTO.Request
 {
 	public class RechargePlanRequest
 	{
+		public int RechargePlanTypeId { get; set; }
+		//public RechargePlanType RechargePlanType { get; set; }
 
-
-		public RechargePlanType RechargePlanType { get; set; }
-
-		public Operator? Operator { get; set; }
-
+		//public Operator? Operator { get; set; }
+		public int OperatorId { get; set; }
 		public string Name { get; set; }
 
 		public int TalkTime { get; set; }

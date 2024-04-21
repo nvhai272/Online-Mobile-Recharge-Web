@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
@@ -15,6 +16,20 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			_dataContext = dataContext;
 			_mapper = mapper;
+		}
+
+		public UserPaymentInfoResponse Convert(UserPaymentInfo e)
+		{
+			var getUser = _dataContext.Users.Find(e.UserId).Name;
+			var getPaymentMethod = _dataContext.PaymentMethods.Find(e.PaymentMethodId).Name;
+
+			var res = new UserPaymentInfoResponse()
+			{
+				CardNumber = e.CardNumber,
+				UserName = getUser,
+				PaymentMethodName = getUser
+			};
+			return res;
 		}
 
 		public bool Create([FromBody] UserPaymentInfo entity)
@@ -87,7 +102,16 @@ namespace Online_Mobile_Recharge.Repository
 			else
 			{
 				var existed = GetItem(id);
+				var findUser = _dataContext.Users.Find(entity.UserId);
+				var findPaymentMethod = _dataContext.PaymentMethods.Find(entity.PaymentMethodId);
+
+				existed.PaymentMethodId = entity.PaymentMethodId;
+				existed.PaymentMethod = findPaymentMethod;
+				existed.UserId = entity.UserId;
+				existed.User = findUser;
+
 				existed.CardNumber = entity.CardNumber;
+
 				existed.ModifiedAt = DateTime.Now;
 				_dataContext.UserPaymentInfos.Update(existed);
 				return Save();

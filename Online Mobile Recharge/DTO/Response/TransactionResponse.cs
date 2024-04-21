@@ -12,13 +12,16 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public bool IsSucceeded { get; set; }
 
-		public User User { get; set; }
+		//public User User { get; set; }
+		public string UserName { get; set; }
 
-		public Service? Service { get; set; }
+		//public Service? Service { get; set; }
+		public string ServiceName { get; set; } 
 
-		public RechargePlan? RechargePlan { get; set; }
+		//public RechargePlan? RechargePlan { get; set; }
+		public string RechargePlanName { get; set; }
 
-		public PaymentMethod? PaymentMethod { get; set; }
-
+		//public PaymentMethod? PaymentMethod { get; set; }
+		public string PaymentMethodName { get; set; }
 	}
 }

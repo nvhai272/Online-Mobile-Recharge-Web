@@ -16,6 +16,25 @@ namespace Online_Mobile_Recharge.Repository
 			_mapper = mapper;
 		}
 
+		public TransactionResponse Convert(Transaction transaction)
+		{
+			var nameService = _context.Services.Find(transaction.ServiceId).Name;
+			var nameUser = _context.Users.Find(transaction.UserId).Name;
+			var nameMethod = _context.PaymentMethods.Find(transaction.PaymentMethodId).Name;
+			var nameRecharge = _context.RechargePlans.Find(transaction.RechargePlanId).Name;
+			var res = new TransactionResponse()
+			{
+				ServiceName = nameService,
+				UserName = nameUser,
+				RechargePlanName = nameRecharge,
+				PaymentMethodName = nameMethod,
+				Phone = transaction.Phone,
+				TransactionAmount = transaction.TransactionAmount,
+				IsSucceeded = transaction.IsSucceeded
+			};
+			return res;
+		}
+
 		public bool Create([FromBody] Transaction entity)
 		{
 			Transaction newTransaction = new Transaction()
@@ -45,7 +64,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-
 				throw ex;
 			}
 		}
@@ -89,11 +107,22 @@ namespace Online_Mobile_Recharge.Repository
 			try
 			{
 				var existedE = GetItem(id);
+				var findService = _context.Services.Find(entity.ServiceId);
+				var findUSer = _context.Users.Find(entity.UserId);
+				var findPaymentMethod = _context.PaymentMethods.Find(entity.PaymentMethodId);
+				var findRechargePlan = _context.RechargePlans.Find(entity.RechargePlanId);
+
+				existedE.UserId = entity.UserId;
+				existedE.ServiceId = entity.ServiceId;
+				existedE.PaymentMethodId = entity.PaymentMethodId;
+				existedE.RechargePlanId = entity.RechargePlanId;
+
+				existedE.User = findUSer;
+				existedE.Service = findService;
+				existedE.RechargePlan = findRechargePlan;
+				existedE.PaymentMethod = findPaymentMethod;
+
 				existedE.Phone = entity.Phone;
-				existedE.User = entity.User;
-				existedE.Service = entity.Service;
-				existedE.RechargePlan = entity.RechargePlan;
-				existedE.PaymentMethod = entity.PaymentMethod;
 				existedE.IsSucceeded = entity.IsSucceeded;
 				existedE.TransactionAmount = entity.TransactionAmount;
 

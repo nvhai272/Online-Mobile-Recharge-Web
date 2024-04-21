@@ -7,10 +7,11 @@ namespace Online_Mobile_Recharge.DTO.Response
 	{
 		public int Id { get; set; }
 
-		public User User { get; set; }
+		//public User User { get; set; }
+		public string UserName { get; set; }
 
-		public Service Service { get; set; }
-
+		//public Service Service { get; set; }
+		public string ServiceName { get; set; }
 		public DateTime CreatedAt { get; set; }
 
 		public DateTime ModifiedAt { get; set; }
