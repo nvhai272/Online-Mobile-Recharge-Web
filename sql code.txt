@@ -1,0 +1,139 @@
+CREATE TABLE [users] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [name] nvarchar(100),
+    [password] nvarchar(40),
+    [phone] int NOT NULL,
+    [email] nvarchar(100),
+    [dob] datetime,
+    [address] nvarchar(100),
+    [is_deleted] bit NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [operators] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [name] nvarchar(100) NOT NULL,
+    [is_deleted] bit NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [recharge_plan_types] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [name] nvarchar(100) NOT NULL,
+    [description] nvarchar(255),
+    [create_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    [id_deleted] bit NOT NULL,
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [user_service] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [user_id] int NOT NULL,
+    [service_id] int NOT NULL,
+    [create_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    [id_deleted] bit NOT NULL,
+    [status] bit NOT NULL,
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [payment_methods] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [name] nvarchar(100) NOT NULL,
+    [create_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    [id_deleted] bit NOT NULL,
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [recharge_plans] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [recharge_plan_type_id] int NOT NULL,
+    [operator_id] int,
+    [name] nvarchar(100) NOT NULL,
+    [talk_time] int NOT NULL DEFAULT 0,
+    [text_msg_num] int DEFAULT 0,
+    [data_num_total] nvarchar(50) DEFAULT '0',
+    [data_num_per_day] nvarchar(50) DEFAULT '0',
+    [validity] int NOT NULL,
+    [price] decimal(9) NOT NULL,
+    [description] nvarchar(255),
+    [is_deleted] bit NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [transactions] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [user_id] int,
+    [phone] int,
+    [service_id] int,
+    [recharge_plan_id] int,
+    [payment_method_id] int,
+    [transaction_amount] decimal(9) NOT NULL DEFAULT 0,
+    [is_succeeded] int NOT NULL DEFAULT 0,
+    [is_deleted] bit NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [services] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [name] nvarchar(100) NOT NULL,
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    [description] nvarchar(255),
+    [is_deleted] int NOT NULL DEFAULT 0,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [payment_details] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [card_number] nvarchar(100) NOT NULL,
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    [is_deleted] bit NOT NULL,
+    [payment_method_id] int NOT NULL,
+    [user_id] int NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+CREATE TABLE [feedbacks] (
+    [id] int IDENTITY(1,1) NOT NULL UNIQUE,
+    [phone] int NOT NULL,
+    [service_id] int NOT NULL,
+    [content] nvarchar(255) NOT NULL,
+    [is_deleted] bit NOT NULL,
+    [created_at] datetime NOT NULL DEFAULT GETDATE(),
+    [modified_at] datetime NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY ([id])
+);
+
+ALTER TABLE [user_service] ADD CONSTRAINT [user_service_fk1] FOREIGN KEY ([user_id]) REFERENCES [users]([id]);
+
+ALTER TABLE [user_service] ADD CONSTRAINT [user_service_fk2] FOREIGN KEY ([service_id]) REFERENCES [services]([id]);
+
+ALTER TABLE [recharge_plans] ADD CONSTRAINT [recharge_plans_fk1] FOREIGN KEY ([recharge_plan_type_id]) REFERENCES [recharge_plan_types]([id]);
+
+ALTER TABLE [recharge_plans] ADD CONSTRAINT [recharge_plans_fk2] FOREIGN KEY ([operator_id]) REFERENCES [operators]([id]);
+
+ALTER TABLE [transactions] ADD CONSTRAINT [transactions_fk1] FOREIGN KEY ([user_id]) REFERENCES [users]([id]);
+
+ALTER TABLE [transactions] ADD CONSTRAINT [transactions_fk3] FOREIGN KEY ([service_id]) REFERENCES [services]([id]);
+
+ALTER TABLE [transactions] ADD CONSTRAINT [transactions_fk4] FOREIGN KEY ([recharge_plan_id]) REFERENCES [recharge_plans]([id]);
+
+ALTER TABLE [transactions] ADD CONSTRAINT [transactions_fk5] FOREIGN KEY ([payment_method_id]) REFERENCES [payment_methods]([id]);
+
+ALTER TABLE [payment_details] ADD CONSTRAINT [payment_details_fk1] FOREIGN KEY ([payment_method_id]) REFERENCES [payment_methods]([id]);
+
+ALTER TABLE [payment_details] ADD CONSTRAINT [payment_details_fk2] FOREIGN KEY ([user_id]) REFERENCES [users]([id]);
+
+ALTER TABLE [feedbacks] ADD CONSTRAINT [feedbacks_fk1] FOREIGN KEY ([service_id]) REFERENCES [services]([id]);
