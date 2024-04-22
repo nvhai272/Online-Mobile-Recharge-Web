@@ -23,12 +23,13 @@ namespace Online_Mobile_Recharge.Repository
 			var nameService = _dataContext.Services.Find(feedback.ServiceId).Name;
 			var res = new FeedbackResponse()
 			{
+				Id = feedback.Id,
 				Content = feedback.Content,
 				Phone = feedback.Phone,
 				NameService = nameService
 			};
 			return res;
-		}
+		}   
 
 		public bool Create([FromBody] Feedback entity)
 		{

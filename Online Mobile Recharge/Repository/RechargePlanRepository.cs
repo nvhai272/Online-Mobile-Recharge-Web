@@ -22,6 +22,7 @@ namespace Online_Mobile_Recharge.Repository
 			var getNameRechargePlanType = _context.Services.Find(rechargePlan.RechargePlanTypeId).Name;
 			var res = new RechargePlanResponse()
 			{
+				Id = rechargePlan.Id,
 				Name = rechargePlan.Name,
 				OperatorName = getNameOperator,
 				Description = rechargePlan.Description,

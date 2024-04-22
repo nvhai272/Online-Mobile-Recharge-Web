@@ -20,6 +20,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			RechargePlanType newRechargePlanType = new RechargePlanType()
 			{
+				Id = entity.Id,
 				Name = entity.Name,
 				Description = entity.Description,
 				RechargePlans = entity.RechargePlans

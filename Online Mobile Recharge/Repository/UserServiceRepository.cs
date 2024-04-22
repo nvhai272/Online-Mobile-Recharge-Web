@@ -23,6 +23,7 @@ namespace Online_Mobile_Recharge.Repository
 
 			var res = new UserServiceResponse()
 			{
+				Id = e.Id,
 				UserName = getUser,
 				ServiceName = getService
 			};
@@ -64,7 +65,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _dataContext.Set<UserService>().FirstOrDefault(x => x.Id == id);
 			}
-			throw new InvalidOperationException("UserService does not existed.");
+			throw new InvalidOperationException("UserService does not existed");
 		}
 
 		public UserServiceResponse GetItemById(int id)
@@ -73,7 +74,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _mapper.Map<UserServiceResponse>(_dataContext.Set<UserService>().FirstOrDefault(x => x.Id == id));
 			}
-			throw new InvalidOperationException("UserService does not existed.");
+			throw new InvalidOperationException("UserService does not existed");
 		}
 
 		public ICollection<UserServiceResponse> GetListItems()

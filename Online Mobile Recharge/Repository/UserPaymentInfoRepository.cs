@@ -25,9 +25,10 @@ namespace Online_Mobile_Recharge.Repository
 
 			var res = new UserPaymentInfoResponse()
 			{
+				Id = e.Id,
 				CardNumber = e.CardNumber,
 				UserName = getUser,
-				PaymentMethodName = getUser
+				PaymentMethodName = getPaymentMethod
 			};
 			return res;
 		}

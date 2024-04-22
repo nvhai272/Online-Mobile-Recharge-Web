@@ -24,6 +24,7 @@ namespace Online_Mobile_Recharge.Repository
 			var nameRecharge = _context.RechargePlans.Find(transaction.RechargePlanId).Name;
 			var res = new TransactionResponse()
 			{
+				Id = transaction.Id,
 				ServiceName = nameService,
 				UserName = nameUser,
 				RechargePlanName = nameRecharge,

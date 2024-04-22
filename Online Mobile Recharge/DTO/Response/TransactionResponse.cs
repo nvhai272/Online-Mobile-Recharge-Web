@@ -6,6 +6,8 @@ namespace Online_Mobile_Recharge.DTO.Response
 {
     public class TransactionResponse
     {
+		public int Id { get; set; }
+
 		public string? Phone { get; set; }
 
 		public decimal TransactionAmount { get; set; }
