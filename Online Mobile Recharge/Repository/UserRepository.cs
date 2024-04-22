@@ -4,6 +4,9 @@ using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
+using System.ComponentModel;
+using System.Net;
+using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
@@ -16,6 +19,24 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			_context = context;
 			_mapper = mapper;
+		}
+
+		public UserResponse Convert(User e)
+		{
+			DateTime dateTime = e.Dob;
+			string dateString = dateTime.ToString("yyyy-MM-dd"); 
+
+			UserResponse res = new UserResponse()
+			{
+				Name = e.Name,
+				Email = e.Email,
+				Password = e.Password,
+				Address = e.Address,
+				Dob = dateString,
+				Phone = e.Phone
+			};
+
+			return res;
 		}
 
 		public ICollection<UserResponse> GetListItems()
@@ -34,11 +55,13 @@ namespace Online_Mobile_Recharge.Repository
 			throw new CustomStatusException("User does not existed.");
 		}
 
+
 		public UserResponse GetItemById(int id)
 		{
 			if (IsExisted(id))
 			{
-				return _mapper.Map<UserResponse>(_context.Users.FirstOrDefault(e => e.Id == id));
+				var getUser = Convert(_context.Users.FirstOrDefault(e => e.Id == id));
+				return getUser;
 			}
 			throw new CustomStatusException("User does not existed.");
 		}
@@ -84,7 +107,8 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				var existedUser = GetItem(id);
 
-				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
+				// bo check password
+				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
 				{
 					throw new CustomStatusException("Không để trống thông tin!");
 				}
@@ -101,7 +125,7 @@ namespace Online_Mobile_Recharge.Repository
 						existedUser.Phone = entity.Phone;
 						existedUser.Address = entity.Address;
 						existedUser.Dob = entity.Dob;
-						existedUser.Password = entity.Password;
+						//existedUser.Password = entity.Password;
 
 						existedUser.ModifiedAt = DateTime.Now;
 
@@ -116,7 +140,8 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (CustomStatusException)
 			{
-				throw; // Ném lại ngoại lệ để xử lý ở lớp gọi
+				throw;
+				// Ném lại ngoại lệ để xử lý ở lớp gọi
 			}
 			catch (Exception)
 			{

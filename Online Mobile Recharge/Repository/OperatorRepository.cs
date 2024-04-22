@@ -23,7 +23,7 @@ namespace Online_Mobile_Recharge.Repository
 			var check = _dataContext.Operators.FirstOrDefault(e => e.Name == entity.Name);
 			if (check == null)
 			{
-				Operator hehe = new Operator() { Name = entity.Name };
+				Operator hehe = new Operator() { Name = entity.Name ,Description=entity.Description};
 				_dataContext.Operators.Add(hehe);
 				return Save();
 			}
@@ -104,6 +104,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				var existedOperator = GetItem(id);
 				existedOperator.Name = entity.Name;
+				existedOperator.Description = entity.Description;
 
 				existedOperator.ModifiedAt = DateTime.Now;
 				_dataContext.Operators.Update(existedOperator);

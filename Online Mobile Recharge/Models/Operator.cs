@@ -15,6 +15,8 @@ namespace Online_Mobile_Recharge.Models
 
 		public bool IsDeleted { get; set; } = false;
 
+		public string? Description { get; set; }
+
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;

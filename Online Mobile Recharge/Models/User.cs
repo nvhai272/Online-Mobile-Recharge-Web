@@ -25,7 +25,7 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(100)]
 		public string? Email { get; set; }
 
-		public DateTime? Dob { get; set; } 
+		public DateTime Dob { get; set; }
 
 		[MaxLength(150)]
 		public string? Address { get; set; }

@@ -21,15 +21,17 @@ namespace Online_Mobile_Recharge.Repository
 		public FeedbackResponse Convert(Feedback feedback)
 		{
 			var nameService = _dataContext.Services.Find(feedback.ServiceId).Name;
+			string createAt = feedback.CreatedAt.ToString("yyyy-MM-dd");
 			var res = new FeedbackResponse()
 			{
+				CreatedAt = createAt,
 				Id = feedback.Id,
 				Content = feedback.Content,
 				Phone = feedback.Phone,
 				NameService = nameService
 			};
 			return res;
-		}   
+		}
 
 		public bool Create([FromBody] Feedback entity)
 		{
