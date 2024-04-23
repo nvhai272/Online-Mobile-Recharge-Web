@@ -204,5 +204,18 @@ namespace Online_Mobile_Recharge.Repository
 			int countUser = listUser.Count();
 			return countUser;
 		}
+
+		public bool ChangePassword(int userId, string newPassword)
+		{
+			if (IsExisted(userId))
+			{
+				var findUserChangePassword = _context.Users.Find(userId);
+				findUserChangePassword.Password = newPassword;
+				_context.Users.Update(findUserChangePassword);
+				return Save();
+			}
+			throw new CustomStatusException("Mat khau cap nhat ko thanh cong");
+			
+		}
 	}
 }

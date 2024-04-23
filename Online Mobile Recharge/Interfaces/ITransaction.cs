@@ -9,5 +9,7 @@ namespace Online_Mobile_Recharge.Interfaces
 		int CountUniqueTransactionUsersOfTheDay();
 		int CountTransactionsOfTheDay();
 		string TotalAmount();
+
+		List<TransactionResponse> GetTransactionByUserId(int userId);
 	}
 }

@@ -112,7 +112,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			var getList = _context.Set<Transaction>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
 			var list = new List<TransactionResponse>();
-			foreach(var item in getList)
+			foreach (var item in getList)
 			{
 				list.Add(Convert(item));
 			}
@@ -203,6 +203,18 @@ namespace Online_Mobile_Recharge.Repository
 			decimal totalAmount = _context.Transactions.Sum(t => t.TransactionAmount);
 			string formattedtotalAmount = totalAmount.ToString("N0") + " VND";
 			return formattedtotalAmount;
+		}
+
+
+		public List<TransactionResponse> GetTransactionByUserId(int userId)
+		{
+			var transactionList = _context.Transactions.Where(t => t.UserId == userId).ToList();
+			var transactionListResponse = new List<TransactionResponse>();
+			foreach (var transaction in transactionList)
+			{
+				transactionListResponse.Add(Convert(transaction));
+			}
+			return transactionListResponse;
 		}
 	}
 }

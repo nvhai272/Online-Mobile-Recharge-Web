@@ -116,8 +116,33 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("countNewUsersForToday")]
 		public IActionResult CountNewUser()
 		{
-			int count = _crud.CountNewUsersOfTheDay();
-			return Ok(count);
+			try
+			{
+				int count = _crud.CountNewUsersOfTheDay();
+				return Ok(count);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+		}
+
+		[HttpPut]
+		[Route("changePassword/{userId}")]
+		public IActionResult UpdatePassword(int userId, string newPassword)
+		{
+			try
+			{
+				var changePass = _crud.ChangePassword(userId, newPassword);
+				return Ok("Thanh cong");
+			}
+
+			catch (CustomStatusException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+
 		}
 	}
 }

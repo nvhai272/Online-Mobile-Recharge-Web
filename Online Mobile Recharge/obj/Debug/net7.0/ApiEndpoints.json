@@ -593,6 +593,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "listTransactionOfUser",
+    "RelativePath": "api/Transaction/transactionOfUser/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "UpdatePassword",
+    "RelativePath": "api/User/changePassword/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
     "Method": "CountNewUser",
     "RelativePath": "api/User/countNewUsersForToday",

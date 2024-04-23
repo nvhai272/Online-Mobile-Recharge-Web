@@ -133,5 +133,14 @@ namespace Online_Mobile_Recharge.Controllers
 
 			return Ok(totalAmount);
 		}
+
+		[HttpGet]
+		[Route("transactionOfUser/{userId}")]
+		public IActionResult listTransactionOfUser(int userId)
+		{
+			var getList = _crud.GetTransactionByUserId(userId);
+			return Ok(getList);
+		}
+
 	}
 }
