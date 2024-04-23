@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class TransactionController : ControllerBase
 	{
-		private readonly ICrud<Transaction, TransactionResponse> _crud;
+		private readonly ITransaction _crud;
 		private readonly IMapper _mapper;
 
-		public TransactionController(ICrud<Transaction, TransactionResponse> crud, IMapper mapper)
+		public TransactionController(ITransaction crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -95,6 +95,43 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				return BadRequest(ex.Message);
 			}
+		}
+
+		[HttpGet]
+		[Route("totalAmountForToday")]
+		public IActionResult GetAmountOfTheDay()
+		{
+			string totalAmount = _crud.AmountOfTheDay();
+
+			return Ok(totalAmount);
+		}
+
+		[HttpGet]
+		[Route("countTransactionsOfTheDay")]
+		public IActionResult CountTransactionOfTheDay()
+		{
+			int count = _crud.CountTransactionsOfTheDay();
+
+			return Ok(count);
+		}
+
+
+		[HttpGet]
+		[Route("countUniqueTransactionUsersForToday")]
+		public IActionResult CountUniqueTransactionUsers()
+		{
+			int count = _crud.CountUniqueTransactionUsersOfTheDay();
+
+			return Ok(count);
+		}
+
+		[HttpGet]
+		[Route("totalTransactionAmount")]
+		public IActionResult totalTransactionAmount()
+		{
+			string totalAmount = _crud.TotalAmount();
+
+			return Ok(totalAmount);
 		}
 	}
 }

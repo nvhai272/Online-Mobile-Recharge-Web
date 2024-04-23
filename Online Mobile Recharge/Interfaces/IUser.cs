@@ -1,9 +1,11 @@
-﻿using Online_Mobile_Recharge.Models;
+﻿using Online_Mobile_Recharge.DTO.Response;
+using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Interfaces
 {
-	public interface IUser
+	public interface IUser : ICrud<User, UserResponse>
 	{
+		int CountNewUsersOfTheDay();
 
 	}
 }

@@ -10,7 +10,7 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public string? Phone { get; set; }
 
-		public decimal TransactionAmount { get; set; }
+		public string TransactionAmount { get; set; }
 
 		public bool IsSucceeded { get; set; }
 

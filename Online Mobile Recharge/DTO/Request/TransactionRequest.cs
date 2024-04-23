@@ -7,7 +7,8 @@ namespace Online_Mobile_Recharge.DTO.Request
 	public class TransactionRequest
 	{
 		public string? Phone { get; set; }
-		public decimal TransactionAmount { get; set; }
+
+		//public decimal TransactionAmount { get; set; }
 		public bool IsSucceeded { get; set; } = false;
 		public int UserId { get; set; }
 		public int ServiceId { get; set; }

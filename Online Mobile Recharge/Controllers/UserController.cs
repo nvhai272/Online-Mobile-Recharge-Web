@@ -12,11 +12,11 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		private readonly ICrud<User, UserResponse> _crud;
+		private readonly IUser _crud;
 
 		private readonly IMapper _mapper;
 
-		public UserController(ICrud<User,UserResponse> crud, IMapper mapper)
+		public UserController(IUser crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -71,7 +71,7 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("edit/{id}")]
-		public IActionResult UpdateUser(int id,UserRequest user)
+		public IActionResult UpdateUser(int id, UserRequest user)
 		{
 			try
 			{
@@ -110,6 +110,14 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				return StatusCode(500, "An error occurred while deleting the user: " + ex.Message);
 			}
+		}
+
+		[HttpGet]
+		[Route("countNewUsersForToday")]
+		public IActionResult CountNewUser()
+		{
+			int count = _crud.CountNewUsersOfTheDay();
+			return Ok(count);
 		}
 	}
 }

@@ -18,6 +18,7 @@ namespace Online_Mobile_Recharge.Repository
 
 		public RechargePlanResponse Convert(RechargePlan rechargePlan)
 		{
+
 			var getNameOperator = _context.Services.Find(rechargePlan.OperatorId).Name;
 			var getNameRechargePlanType = _context.Services.Find(rechargePlan.RechargePlanTypeId).Name;
 			var res = new RechargePlanResponse()
@@ -33,11 +34,10 @@ namespace Online_Mobile_Recharge.Repository
 				DataNumberTotal = rechargePlan.DataNumberTotal,
 				TextMessageNumber = rechargePlan.TextMessageNumber,
 				Validity = rechargePlan.Validity
-				
+
 			};
 			return res;
 		}
-
 
 		public bool Create([FromBody] RechargePlan entity)
 		{
@@ -46,7 +46,7 @@ namespace Online_Mobile_Recharge.Repository
 			RechargePlan newRechargePlan = new RechargePlan()
 			{
 				Name = entity.Name,
-				OperatorId= entity.OperatorId,
+				OperatorId = entity.OperatorId,
 				Operator = existedOperator,
 				Description = entity.Description,
 				Price = entity.Price,
@@ -127,8 +127,8 @@ namespace Online_Mobile_Recharge.Repository
 
 				existedE.OperatorId = entity.OperatorId;
 				existedE.Operator = existedOperator;
-				
-				existedE.RechargePlanTypeId = entity.RechargePlanTypeId; 
+
+				existedE.RechargePlanTypeId = entity.RechargePlanTypeId;
 				existedE.RechargePlanType = existedRechargePlanType;
 
 				existedE.Description = entity.Description;

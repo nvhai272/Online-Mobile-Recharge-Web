@@ -475,6 +475,26 @@
   },
   {
     "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "CountTransactionOfTheDay",
+    "RelativePath": "api/Transaction/countTransactionsOfTheDay",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "CountUniqueTransactionUsers",
+    "RelativePath": "api/Transaction/countUniqueTransactionUsersForToday",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
     "Method": "CreateTransaction",
     "RelativePath": "api/Transaction/create",
     "HttpMethod": "POST",
@@ -546,6 +566,36 @@
     "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
     "Method": "GetAllTransaction",
     "RelativePath": "api/Transaction/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "GetAmountOfTheDay",
+    "RelativePath": "api/Transaction/totalAmountForToday",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
+    "Method": "totalTransactionAmount",
+    "RelativePath": "api/Transaction/totalTransactionAmount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
+    "Method": "CountNewUser",
+    "RelativePath": "api/User/countNewUsersForToday",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

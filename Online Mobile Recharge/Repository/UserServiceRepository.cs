@@ -32,10 +32,15 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] UserService entity)
 		{
+			var findUser = _dataContext.Users.Find(entity.UserId);
+			var findService = _dataContext.Services.Find(entity.ServiceId);
 			UserService userService = new UserService()
 			{
-				Service = entity.Service,
-				User = entity.User,
+				UserId = entity.UserId,
+				ServiceId = entity.ServiceId,
+
+				Service = findService,
+				User = findUser,
 				Status = entity.Status
 			};
 

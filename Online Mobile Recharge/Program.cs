@@ -19,13 +19,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(op => op.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
-builder.Services.AddScoped<ICrud<User,UserResponse>, UserRepository>();
+builder.Services.AddScoped<IUser, UserRepository>();
 
 builder.Services.AddScoped<ICrud<UserPaymentInfo,UserPaymentInfoResponse>, UserPaymentInfoReposity>();
 
 builder.Services.AddScoped<ICrud<PaymentMethod,PaymentMethodResponse>, PaymentMethodRepository>();
 
-builder.Services.AddScoped<ICrud<Transaction,TransactionResponse>, TransactionRepository>();
+builder.Services.AddScoped<ITransaction, TransactionRepository>();
 
 builder.Services.AddScoped<ICrud<Operator,OperatorResponse>, OperatorRepository>();
 

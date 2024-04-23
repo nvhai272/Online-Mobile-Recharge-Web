@@ -35,11 +35,18 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] UserPaymentInfo entity)
 		{
+			var findUser = _dataContext.Users.Find(entity.UserId);
+			var findPaymentMethod = _dataContext.PaymentMethods.Find(entity.PaymentMethodId);
+
+
 			UserPaymentInfo userPaymentInfo = new UserPaymentInfo()
 			{
+				UserId = entity.UserId,
+				PaymentMethodId = entity.PaymentMethodId,
+
 				CardNumber = entity.CardNumber,
-				User = entity.User,
-				PaymentMethod = entity.PaymentMethod
+				User = findUser,
+				PaymentMethod = findPaymentMethod
 
 			};
 
@@ -73,14 +80,23 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (IsExisted(id))
 			{
-				return _mapper.Map<UserPaymentInfoResponse>(_dataContext.Set<UserPaymentInfo>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
+				var getUserPaymentInfo = _dataContext.UserPaymentInfos.Find(id);
+				var res = Convert(getUserPaymentInfo);
+				return res;
 			}
 			throw new InvalidOperationException("User Payment Info does not existed.");
 		}
 
 		public ICollection<UserPaymentInfoResponse> GetListItems()
 		{
-			return _mapper.Map<List<UserPaymentInfoResponse>>(_dataContext.UserPaymentInfos.Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
+			var listUserPaymentInfo = _dataContext.UserPaymentInfos.Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			var listRes = new List<UserPaymentInfoResponse>();
+
+			foreach (var item in listUserPaymentInfo)
+			{
+				listRes.Add(Convert(item));
+			}
+			return listRes;
 		}
 
 		public bool IsExisted(int id)
@@ -108,6 +124,7 @@ namespace Online_Mobile_Recharge.Repository
 
 				existed.PaymentMethodId = entity.PaymentMethodId;
 				existed.PaymentMethod = findPaymentMethod;
+
 				existed.UserId = entity.UserId;
 				existed.User = findUser;
 

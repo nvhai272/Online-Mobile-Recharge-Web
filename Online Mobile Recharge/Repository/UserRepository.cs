@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class UserRepository : ICrud<User, UserResponse>
+	public class UserRepository : IUser
 	{
 		private readonly DataContext _context;
 		private readonly IMapper _mapper;
@@ -24,10 +24,11 @@ namespace Online_Mobile_Recharge.Repository
 		public UserResponse Convert(User e)
 		{
 			DateTime dateTime = e.Dob;
-			string dateString = dateTime.ToString("yyyy-MM-dd"); 
+			string dateString = dateTime.ToString("yyyy-MM-dd");
 
 			UserResponse res = new UserResponse()
 			{
+				Id = e.Id,
 				Name = e.Name,
 				Email = e.Email,
 				Password = e.Password,
@@ -41,9 +42,16 @@ namespace Online_Mobile_Recharge.Repository
 
 		public ICollection<UserResponse> GetListItems()
 		{
-			return _mapper.Map<List<UserResponse>>(_context.Set<User>()
+			var userRes = _context.Set<User>()
 				.Where(p => p.IsDeleted == false)
-				.OrderBy(p => p.Id).ToList());
+				.OrderBy(p => p.Id).ToList();
+			var responses = new List<UserResponse>();
+
+			foreach (var item in userRes)
+			{
+				responses.Add(Convert(item));
+			}
+			return responses;
 		}
 
 		public User GetItem(int id)
@@ -63,7 +71,7 @@ namespace Online_Mobile_Recharge.Repository
 				var getUser = Convert(_context.Users.FirstOrDefault(e => e.Id == id));
 				return getUser;
 			}
-			throw new CustomStatusException("User does not existed.");
+			throw new CustomStatusException("Người dùng không tồn tại");
 		}
 
 		public bool Create([FromBody] User entity)
@@ -78,7 +86,7 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			else if (_context.Users.Any(x => x.Phone == entity.Phone))
 			{
-				throw new InvalidOperationException("Phone number already exists!");
+				throw new InvalidOperationException("Số điện thoại đã được đăngg ký");
 			}
 
 			var user = new User
@@ -187,6 +195,14 @@ namespace Online_Mobile_Recharge.Repository
 
 			// so sánh đầu vào có đúng với biểu thức chính quy hay khum?
 			return Regex.IsMatch(email, pattern);
+		}
+
+		// đếm số users mới tạo tài khoản trong ngày
+		public int CountNewUsersOfTheDay()
+		{
+			var listUser = _context.Users.Where(u => u.CreatedAt.Date == DateTime.Today).ToList();
+			int countUser = listUser.Count();
+			return countUser;
 		}
 	}
 }

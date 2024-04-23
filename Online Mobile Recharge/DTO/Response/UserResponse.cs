@@ -6,7 +6,6 @@ namespace Online_Mobile_Recharge.DTO.Response
 	public class UserResponse
 	{
 		public int Id { get; set; }
-
 		public string? Name { get; set; }
 		public string? Password { get; set; }
 		public string Phone { get; set; }

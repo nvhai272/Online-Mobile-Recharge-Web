@@ -12,8 +12,8 @@ using Online_Mobile_Recharge;
 namespace Online_Mobile_Recharge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240422163811_hihi1")]
-    partial class hihi1
+    [Migration("20240423124646_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
