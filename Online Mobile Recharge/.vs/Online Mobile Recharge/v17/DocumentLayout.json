@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\interfaces\\iauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:interfaces\\iauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\dto\\response\\resgisterresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:dto\\response\\resgisterresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\dto\\request\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:dto\\request\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\dto\\response\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:dto\\response\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\repository\\authenticationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:repository\\authenticationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|c:\\users\\nvhai272\\source\\repos\\online mobile recharge\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07CCDEA3-5B2D-4552-837C-A27F8D7BC5EB}|Online Mobile Recharge.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -266,11 +286,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 245,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ResgisterResponse.cs",
+              "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\ResgisterResponse.cs",
+              "RelativeDocumentMoniker": "DTO\\Response\\ResgisterResponse.cs",
+              "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\ResgisterResponse.cs",
+              "RelativeToolTip": "DTO\\Response\\ResgisterResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:16:34.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\UserDto.cs",
+              "RelativeDocumentMoniker": "DTO\\Request\\UserDto.cs",
+              "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\UserDto.cs",
+              "RelativeToolTip": "DTO\\Request\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:12:39.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginResponse.cs",
+              "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\LoginResponse.cs",
+              "RelativeDocumentMoniker": "DTO\\Response\\LoginResponse.cs",
+              "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\LoginResponse.cs",
+              "RelativeToolTip": "DTO\\Response\\LoginResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:11:18.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthenticationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\AuthenticationRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\AuthenticationRepository.cs",
+              "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\AuthenticationRepository.cs",
+              "RelativeToolTip": "Repository\\AuthenticationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:00:47.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IAuthentication.cs",
+              "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IAuthentication.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IAuthentication.cs",
+              "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IAuthentication.cs",
+              "RelativeToolTip": "Interfaces\\IAuthentication.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T20:00:32.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
@@ -278,12 +363,11 @@
               "RelativeToolTip": "Repository\\UserRepository.cs",
               "ViewState": "AQIAAMEAAAAAAAAAAAAUwNkAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T09:36:53.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-23T09:36:53.345Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "TransactionRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\TransactionRepository.cs",
               "RelativeDocumentMoniker": "Repository\\TransactionRepository.cs",
@@ -291,12 +375,11 @@
               "RelativeToolTip": "Repository\\TransactionRepository.cs",
               "ViewState": "AQIAALsAAAAAAAAAAAAmwNwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T09:37:49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-23T09:37:49Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "UserPaymentInfoResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\UserPaymentInfoResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\UserPaymentInfoResponse.cs",
@@ -308,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "TransactionRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\TransactionRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\TransactionRequest.cs",
@@ -320,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "FeedbackRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\FeedbackRepository.cs",
               "RelativeDocumentMoniker": "Repository\\FeedbackRepository.cs",
@@ -332,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "UserPaymentInfoController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\UserPaymentInfoController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserPaymentInfoController.cs",
@@ -344,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "TransactionResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\TransactionResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\TransactionResponse.cs",
@@ -356,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "RechargePlan.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\RechargePlan.cs",
               "RelativeDocumentMoniker": "Models\\RechargePlan.cs",
@@ -368,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "ITransaction.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\ITransaction.cs",
               "RelativeDocumentMoniker": "Interfaces\\ITransaction.cs",
@@ -376,12 +459,11 @@
               "RelativeToolTip": "Interfaces\\ITransaction.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T10:44:23.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T10:44:23.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "TransactionController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\TransactionController.cs",
               "RelativeDocumentMoniker": "Controllers\\TransactionController.cs",
@@ -389,25 +471,24 @@
               "RelativeToolTip": "Controllers\\TransactionController.cs",
               "ViewState": "AQIAAHEAAAAAAAAAAAAAwIsAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T07:23:55.765Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T07:23:55.765Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAmwH8AAAAAAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAIwIkAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-17T16:16:29.593Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "IUser.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IUser.cs",
               "RelativeDocumentMoniker": "Interfaces\\IUser.cs",
@@ -415,12 +496,11 @@
               "RelativeToolTip": "Interfaces\\IUser.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T10:47:40.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T10:47:40.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "UserPaymentInfoRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\UserPaymentInfoRepository.cs",
               "RelativeDocumentMoniker": "Repository\\UserPaymentInfoRepository.cs",
@@ -428,12 +508,11 @@
               "RelativeToolTip": "Repository\\UserPaymentInfoRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAHwAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T08:45:04.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T08:45:04.252Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "UserResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\UserResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\UserResponse.cs",
@@ -445,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Transaction.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\Transaction.cs",
               "RelativeDocumentMoniker": "Models\\Transaction.cs",
@@ -457,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "IFeedback.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IFeedback.cs",
               "RelativeDocumentMoniker": "Interfaces\\IFeedback.cs",
@@ -469,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "FeedbackController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\FeedbackController.cs",
               "RelativeDocumentMoniker": "Controllers\\FeedbackController.cs",
@@ -481,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "UserServiceController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\UserServiceController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserServiceController.cs",
@@ -493,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "ServiceRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\ServiceRepository.cs",
               "RelativeDocumentMoniker": "Repository\\ServiceRepository.cs",
@@ -505,7 +584,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "UserPaymentInfoRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\UserPaymentInfoRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\UserPaymentInfoRequest.cs",
@@ -517,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "ICrud.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\ICrud.cs",
               "RelativeDocumentMoniker": "Interfaces\\ICrud.cs",
@@ -529,7 +608,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -541,7 +620,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "UserServiceRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\UserServiceRepository.cs",
               "RelativeDocumentMoniker": "Repository\\UserServiceRepository.cs",
@@ -553,7 +632,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "IPaymentDetail.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IPaymentDetail.cs",
               "RelativeDocumentMoniker": "Interfaces\\IPaymentDetail.cs",
@@ -565,7 +644,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "IOperator.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IOperator.cs",
               "RelativeDocumentMoniker": "Interfaces\\IOperator.cs",
@@ -577,7 +656,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "IRechargePlanType.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IRechargePlanType.cs",
               "RelativeDocumentMoniker": "Interfaces\\IRechargePlanType.cs",
@@ -589,7 +668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "IRechargePlan.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IRechargePlan.cs",
               "RelativeDocumentMoniker": "Interfaces\\IRechargePlan.cs",
@@ -601,7 +680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "OperatorRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\OperatorRepository.cs",
               "RelativeDocumentMoniker": "Repository\\OperatorRepository.cs",
@@ -613,7 +692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "OperatorResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\OperatorResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\OperatorResponse.cs",
@@ -625,7 +704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "OperatorRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\OperatorRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\OperatorRequest.cs",
@@ -637,7 +716,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 35,
               "Title": "Operator.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\Operator.cs",
               "RelativeDocumentMoniker": "Models\\Operator.cs",
@@ -649,7 +728,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 41,
               "Title": "RechargePlanRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\RechargePlanRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\RechargePlanRequest.cs",
@@ -661,7 +740,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 40,
               "Title": "RechargePlanResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\RechargePlanResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\RechargePlanResponse.cs",
@@ -673,7 +752,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 39,
               "Title": "RechargePlanTypeResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\RechargePlanTypeResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\RechargePlanTypeResponse.cs",
@@ -685,7 +764,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 38,
               "Title": "RechargePlanRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\RechargePlanRepository.cs",
               "RelativeDocumentMoniker": "Repository\\RechargePlanRepository.cs",
@@ -697,7 +776,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 36,
               "Title": "RechargePlanController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\RechargePlanController.cs",
               "RelativeDocumentMoniker": "Controllers\\RechargePlanController.cs",
@@ -709,7 +788,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 37,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
@@ -721,7 +800,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 42,
               "Title": "RechargePlanTypeRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\RechargePlanTypeRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\RechargePlanTypeRequest.cs",
@@ -733,7 +812,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 43,
               "Title": "PaymentMethodResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\PaymentMethodResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\PaymentMethodResponse.cs",
@@ -745,7 +824,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 44,
               "Title": "PaymentMethod.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\PaymentMethod.cs",
               "RelativeDocumentMoniker": "Models\\PaymentMethod.cs",
@@ -757,7 +836,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 45,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -769,7 +848,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 48,
               "Title": "PaymentMethodRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\PaymentMethodRepository.cs",
               "RelativeDocumentMoniker": "Repository\\PaymentMethodRepository.cs",
@@ -781,7 +860,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 47,
               "Title": "Feedback.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\Feedback.cs",
               "RelativeDocumentMoniker": "Models\\Feedback.cs",
@@ -793,7 +872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 49,
               "Title": "FeedbackResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\FeedbackResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\FeedbackResponse.cs",
@@ -805,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 50,
               "Title": "UserRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\UserRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\UserRequest.cs",
@@ -817,7 +896,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 46,
               "Title": "FeedbackRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\FeedbackRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\FeedbackRequest.cs",
@@ -829,7 +908,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 52,
               "Title": "UserServiceResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\UserServiceResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\UserServiceResponse.cs",
@@ -841,7 +920,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 51,
               "Title": "RechargePlanTypeRepository.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Repository\\RechargePlanTypeRepository.cs",
               "RelativeDocumentMoniker": "Repository\\RechargePlanTypeRepository.cs",
@@ -853,7 +932,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 53,
               "Title": "ServiceResponse.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Response\\ServiceResponse.cs",
               "RelativeDocumentMoniker": "DTO\\Response\\ServiceResponse.cs",
@@ -865,7 +944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 54,
               "Title": "UserServiceRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\UserServiceRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\UserServiceRequest.cs",
@@ -877,7 +956,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 55,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\UserService.cs",
               "RelativeDocumentMoniker": "Models\\UserService.cs",
@@ -889,7 +968,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 57,
               "Title": "RechargePlanTypeController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\RechargePlanTypeController.cs",
               "RelativeDocumentMoniker": "Controllers\\RechargePlanTypeController.cs",
@@ -901,7 +980,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 56,
               "Title": "ServiceController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\ServiceController.cs",
               "RelativeDocumentMoniker": "Controllers\\ServiceController.cs",
@@ -913,7 +992,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 58,
               "Title": "RechargePlanType.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Models\\RechargePlanType.cs",
               "RelativeDocumentMoniker": "Models\\RechargePlanType.cs",
@@ -925,7 +1004,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 59,
               "Title": "PaymentMethodController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\PaymentMethodController.cs",
               "RelativeDocumentMoniker": "Controllers\\PaymentMethodController.cs",
@@ -937,7 +1016,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 60,
               "Title": "PaymentMethodRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\PaymentMethodRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\PaymentMethodRequest.cs",
@@ -949,7 +1028,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 61,
               "Title": "ServiceRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DTO\\Request\\ServiceRequest.cs",
               "RelativeDocumentMoniker": "DTO\\Request\\ServiceRequest.cs",
@@ -961,7 +1040,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 62,
               "Title": "OperatorController.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Controllers\\OperatorController.cs",
               "RelativeDocumentMoniker": "Controllers\\OperatorController.cs",
@@ -973,7 +1052,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 63,
               "Title": "dbo.services [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_0845D8A_HAI/online_mobile_recharge/sa/SqlTable/dbo.services.sql",
               "ToolTip": "dbo.services [Data]",
@@ -982,7 +1061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 64,
               "Title": "CategoryServices.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\E_Project_3_API\\E_Project_3_API\\Services\\CategoryServices.cs",
               "RelativeDocumentMoniker": "..\\E_Project_3_API\\E_Project_3_API\\Services\\CategoryServices.cs",
@@ -994,7 +1073,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 65,
               "Title": "dbo.users [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_0845D8A_HAI/online_mobile_recharge/sa/SqlTable/dbo.users.sql",
               "ToolTip": "dbo.users [Data]",
@@ -1003,7 +1082,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 66,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -1015,7 +1094,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 67,
               "Title": "DataContext.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\DataContext.cs",
               "RelativeDocumentMoniker": "DataContext.cs",
@@ -1027,7 +1106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 68,
               "Title": "CategoryRequest.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\E_Project_3_API\\E_Project_3_API\\DTO\\Request\\CategoryRequest.cs",
               "RelativeDocumentMoniker": "..\\E_Project_3_API\\E_Project_3_API\\DTO\\Request\\CategoryRequest.cs",
@@ -1039,7 +1118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 69,
               "Title": "IPaymentMethod.cs",
               "DocumentMoniker": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Interfaces\\IPaymentMethod.cs",
               "RelativeDocumentMoniker": "Interfaces\\IPaymentMethod.cs",

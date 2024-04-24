@@ -54,17 +54,12 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
+		public bool Delete(int id, UserPaymentInfo entity)
 		{
-			if (IsExisted(id))
-			{
-				var existed = GetItem(id);
-				existed.IsDeleted = true;
-
-				_dataContext.UserPaymentInfos.Update(existed);
-				return Save();
-			}
-			throw new InvalidOperationException("User Payment Info does not existed.");
+			var updateDelete = _dataContext.UserPaymentInfos.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_dataContext.UserPaymentInfos.Update(updateDelete);
+			return Save();
 		}
 
 		public UserPaymentInfo GetItem(int id)

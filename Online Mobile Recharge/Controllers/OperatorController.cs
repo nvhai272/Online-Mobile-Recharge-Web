@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class OperatorController : ControllerBase
 	{
-		private readonly ICrud<Operator,OperatorResponse> _crud;
+		private readonly ICrud<Operator, OperatorResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public OperatorController(ICrud<Operator,OperatorResponse> crud, IMapper mapper)
+		public OperatorController(ICrud<Operator, OperatorResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -85,11 +85,12 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteOperator(int id)
+		public IActionResult DeleteOperator(int id, OperatorRequest entity)
 		{
 			try
 			{
-				_crud.Delete(id);
+				var change = _mapper.Map<Operator>(entity);
+				_crud.Delete(id, change);
 				return Ok("Thanh cong");
 			}
 			catch (Exception ex)

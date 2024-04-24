@@ -6,7 +6,7 @@ using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Repository
 {
-	public class PaymentMethodRepository : ICrud<PaymentMethod,PaymentMethodResponse>
+	public class PaymentMethodRepository : ICrud<PaymentMethod, PaymentMethodResponse>
 	{
 		private readonly DataContext _context;
 		private readonly IMapper _mapper;
@@ -27,22 +27,12 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
+		public bool Delete(int id, PaymentMethod entity)
 		{
-			try
-			{
-				var existedMethod = GetItem(id);
-				existedMethod.IsDeleted = true;
-
-				_context.PaymentMethods.Update(existedMethod);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				//  không tìm thấy mục cần xóa, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				//  có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
-				throw ex;
-			}
+			var updateDelete = _context.PaymentMethods.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.PaymentMethods.Update(updateDelete);
+			return Save();
 		}
 
 		public PaymentMethod GetItem(int id)

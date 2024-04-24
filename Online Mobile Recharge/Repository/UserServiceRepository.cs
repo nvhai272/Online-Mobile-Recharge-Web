@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
@@ -48,20 +49,13 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
+		public bool Delete(int id, UserService entity)
 		{
-			try
-			{
-				var existedUserService = GetItem(id);
-				existedUserService.IsDeleted = true;
+			var updateDelete = _dataContext.User_Service.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_dataContext.User_Service.Update(updateDelete);
+			return Save();
 
-				_dataContext.User_Service.Update(existedUserService);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
 		}
 
 		public UserService GetItem(int id)
@@ -123,7 +117,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-
 				throw ex;
 			}
 		}

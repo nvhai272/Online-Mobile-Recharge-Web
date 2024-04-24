@@ -9,7 +9,7 @@ namespace Online_Mobile_Recharge.Interfaces
 		bool Create([FromBody] E entity);
 		bool Update(int id, E entity);
 		bool IsExisted(int id);
-		bool Delete(int id);
+		bool Delete(int id,E entity);
 		bool Save();
 	}
 }

@@ -8,6 +8,7 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public int ServiceId { get; set; }
 		public string Phone { get; set; }
 		public string Content { get; set; }
+		public bool IsDeleted { get; set; }
 
 	}
 }

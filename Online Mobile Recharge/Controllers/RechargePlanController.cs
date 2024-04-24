@@ -84,11 +84,12 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteRechargePlan(int id)
+		public IActionResult DeleteRechargePlan(int id, RechargePlanRequest entity)
 		{
 			try
 			{
-				_crud.Delete(id);
+				var change = _mapper.Map<RechargePlan>(entity);
+				_crud.Delete(id, change);
 				return Ok("Thanh cong");
 			}
 			catch (Exception ex)

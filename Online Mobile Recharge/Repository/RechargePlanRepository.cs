@@ -65,20 +65,12 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
+		public bool Delete(int id, RechargePlan entity)
 		{
-			try
-			{
-				var existedEntity = GetItem(id);
-				existedEntity.IsDeleted = true;
-
-				_context.RechargePlans.Update(existedEntity);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
+			var updateDelete = _context.RechargePlans.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.RechargePlans.Update(updateDelete);
+			return Save();
 		}
 
 		public RechargePlan GetItem(int id)

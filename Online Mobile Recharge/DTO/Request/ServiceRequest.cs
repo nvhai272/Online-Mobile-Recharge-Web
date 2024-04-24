@@ -8,6 +8,8 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public string Name { get; set; }
 
 		public string? Description { get; set; }
+		public bool IsDeleted { get; set; }
+
 
 		//	public ICollection<UserService> User_Service { get; set; }
 

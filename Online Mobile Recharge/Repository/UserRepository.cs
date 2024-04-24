@@ -4,9 +4,6 @@ using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
-using System.ComponentModel;
-using System.Net;
-using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
@@ -164,19 +161,6 @@ namespace Online_Mobile_Recharge.Repository
 			return _context.Users.Any(e => e.Id == id && e.IsDeleted == false);
 		}
 
-		//xóa nhưng vẫn còn trong DB, chỉ là cập nhật thay đổi field trong bảng thôi
-		public bool Delete(int id)
-		{
-			if (IsExisted(id))
-			{
-				var existedUser = GetItem(id);
-				existedUser.IsDeleted = true;
-
-				_context.Users.Update(existedUser);
-				return Save();
-			}
-			throw new CustomStatusException("User does not existed");
-		}
 		public bool Save()
 		{
 			var saved = _context.SaveChanges();
@@ -205,6 +189,7 @@ namespace Online_Mobile_Recharge.Repository
 			return countUser;
 		}
 
+		// chỗ này chưa có mã hóa phải sửa
 		public bool ChangePassword(int userId, string newPassword)
 		{
 			if (IsExisted(userId))
@@ -215,7 +200,15 @@ namespace Online_Mobile_Recharge.Repository
 				return Save();
 			}
 			throw new CustomStatusException("Mat khau cap nhat ko thanh cong");
-			
+
+		}
+
+		public bool Delete(int id, User entity)
+		{
+			var updateDelete = _context.Users.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.Users.Update(updateDelete);
+			return Save();
 		}
 	}
 }

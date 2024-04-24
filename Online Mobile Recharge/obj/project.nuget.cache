@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "pfkPr/3UiGPIDhdXd9tjyiEuycL4ZDvKxrAvz7fwcv3cJMEgwqsyiEBMEYcLeuMpxnNheSxJ5iDS8AgFllA4Og==",
+  "dgSpecHash": "SOxe4eIdeRHG09o/0QMZu8mt/kT5dw6IRyYzokw/1UZILWc3n057z0EPM8V1EHXXGSXbfZ1EtiWa8bNI5nt2mg==",
   "success": true,
   "projectFilePath": "C:\\Users\\nvhai272\\source\\repos\\Online Mobile Recharge\\Online Mobile Recharge.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nvhai272\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\nvhai272\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\nvhai272\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\nvhai272\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\nvhai272\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\nvhai272\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nvhai272\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.15\\microsoft.aspnetcore.openapi.7.0.15.nupkg.sha512",

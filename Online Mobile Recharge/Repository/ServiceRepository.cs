@@ -29,22 +29,12 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
+		public bool Delete(int id, Service entity)
 		{
-			try
-			{
-				var existedEntity = GetItem(id);
-				existedEntity.IsDeleted = true;
-
-				_context.Services.Update(existedEntity);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				//  không tìm thấy mục cần xóa, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				//  có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
-				throw ex;
-			}
+			var updateDelete = _context.Services.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.Services.Update(updateDelete);
+			return Save();
 		}
 
 		public Service GetItem(int id)

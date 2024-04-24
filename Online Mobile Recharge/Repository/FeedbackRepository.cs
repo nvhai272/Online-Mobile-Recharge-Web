@@ -62,22 +62,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		public bool Delete(int id)
-		{
-			try
-			{
-				var existedFeedback = GetItem(id);
-				existedFeedback.IsDeleted = true;
-
-				_dataContext.Feedbacks.Update(existedFeedback);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
-		}
-
 		public Feedback GetItem(int id)
 		{
 			if (IsExisted(id))
@@ -155,5 +139,12 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
+		public bool Delete(int id, Feedback entity)
+		{
+			var updateDelete = _dataContext.Feedbacks.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_dataContext.Feedbacks.Update(updateDelete);
+			return Save();
+		}
 	}
 }

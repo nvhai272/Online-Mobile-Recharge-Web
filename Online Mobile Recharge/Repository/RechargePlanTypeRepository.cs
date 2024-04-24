@@ -29,22 +29,6 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		public bool Delete(int id)
-		{
-			try
-			{
-				var existedEntity = GetItem(id);
-				existedEntity.IsDeleted = true;
-
-				_context.RechargePlanTypes.Update(existedEntity);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
-		}
-
 		public RechargePlanTypeResponse GetItemById(int id)
 		{
 			if (IsExisted(id))
@@ -100,6 +84,12 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-
+		public bool Delete(int id, RechargePlanType entity)
+		{
+			var updateDelete = _context.RechargePlanTypes.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.RechargePlanTypes.Update(updateDelete);
+			return Save();
+		}
 	}
 }

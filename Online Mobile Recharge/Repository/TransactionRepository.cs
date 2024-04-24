@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Online_Mobile_Recharge.Repository
 {
@@ -72,22 +70,6 @@ namespace Online_Mobile_Recharge.Repository
 			return Save();
 		}
 
-		// cập nhật field IsDeleted, chứ không xóa hẳn trong DB
-		public bool Delete(int id)
-		{
-			try
-			{
-				var existedEntity = GetItem(id);
-				existedEntity.IsDeleted = true;
-
-				_context.Transactions.Update(existedEntity);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
-		}
 
 		public Transaction GetItem(int id)
 		{
@@ -215,6 +197,14 @@ namespace Online_Mobile_Recharge.Repository
 				transactionListResponse.Add(Convert(transaction));
 			}
 			return transactionListResponse;
+		}
+
+		public bool Delete(int id, Transaction entity)
+		{
+			var updateDelete = _context.Transactions.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_context.Transactions.Update(updateDelete);
+			return Save();
 		}
 	}
 }

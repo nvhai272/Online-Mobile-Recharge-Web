@@ -17,8 +17,6 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(40)]
 		public string Password { get; set; }
 
-		//[Required(ErrorMessage = "Phone is required.")]
-		//[RegularExpression(@"^\d{10}$", ErrorMessage = "Phone must have 10 digits.")]
 		public string Phone { get; set; }
 
 		[Required]

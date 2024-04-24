@@ -92,23 +92,17 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteUserById(int userId)
+		public IActionResult DeleteUserById(int id, UserRequest entity)
 		{
 			try
 			{
-				var isDeleted = _crud.Delete(userId);
-				if (isDeleted)
-				{
-					return Ok("User deleted successfully");
-				}
-				else
-				{
-					return NotFound("User not found");
-				}
+				var change = _mapper.Map<User>(entity);
+				_crud.Delete(id, change);
+				return Ok("Thanh cong");
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(500, "An error occurred while deleting the user: " + ex.Message);
+				return BadRequest(ex.Message);
 			}
 		}
 

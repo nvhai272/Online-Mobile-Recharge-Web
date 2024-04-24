@@ -23,7 +23,7 @@ namespace Online_Mobile_Recharge.Repository
 			var check = _dataContext.Operators.FirstOrDefault(e => e.Name == entity.Name);
 			if (check == null)
 			{
-				Operator hehe = new Operator() { Name = entity.Name ,Description=entity.Description};
+				Operator hehe = new Operator() { Name = entity.Name, Description = entity.Description };
 				_dataContext.Operators.Add(hehe);
 				return Save();
 			}
@@ -31,31 +31,6 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				throw new CustomStatusException("Da ton tai");
 			}
-		}
-
-		public bool Delete(int id)
-		{
-			var existed = GetItem(id);
-			if (existed != null)
-			{
-				_dataContext.Operators.Remove(existed);
-				return Save();
-			}
-			return false;
-
-
-			//try
-			//{
-			//	var existed = GetItemById(id);
-			//	existed.IsDeleted = true;
-
-			//	_dataContext.Operators.Update(existed);
-			//	return Save();
-			//}
-			//catch (InvalidOperationException ex)
-			//{
-			//	throw ex;
-			//}
 		}
 
 		OperatorResponse ICrud<Operator, OperatorResponse>.GetItemById(int id)
@@ -116,6 +91,12 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-
+		public bool Delete(int id, Operator entity)
+		{
+			var updateDelete = _dataContext.Operators.Find(id);
+			updateDelete.IsDeleted = entity.IsDeleted;
+			_dataContext.Operators.Update(updateDelete);
+			return Save();
+		}
 	}
 }

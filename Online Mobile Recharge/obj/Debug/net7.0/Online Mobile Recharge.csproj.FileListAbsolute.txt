@@ -77,3 +77,4 @@ C:\Users\nvhai272\source\repos\Online Mobile Recharge\obj\Debug\net7.0\refint\On
 C:\Users\nvhai272\source\repos\Online Mobile Recharge\obj\Debug\net7.0\Online Mobile Recharge.pdb
 C:\Users\nvhai272\source\repos\Online Mobile Recharge\obj\Debug\net7.0\Online Mobile Recharge.genruntimeconfig.cache
 C:\Users\nvhai272\source\repos\Online Mobile Recharge\obj\Debug\net7.0\ref\Online Mobile Recharge.dll
+C:\Users\nvhai272\source\repos\Online Mobile Recharge\bin\Debug\net7.0\BCrypt.Net-Next.dll

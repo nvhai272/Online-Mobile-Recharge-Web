@@ -27,6 +27,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -105,6 +110,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.OperatorRequest",
         "IsRequired": true
       }
     ],
@@ -185,6 +195,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.PaymentMethodRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -263,6 +278,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanRequest",
         "IsRequired": true
       }
     ],
@@ -343,6 +363,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.RechargePlanTypeRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -421,6 +446,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.ServiceRequest",
         "IsRequired": true
       }
     ],
@@ -520,6 +550,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.TransactionRequest",
         "IsRequired": true
       }
     ],
@@ -664,13 +699,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
+        "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
-        "Name": "id",
-        "Type": "",
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
         "IsRequired": true
       }
     ],
@@ -751,6 +786,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserPaymentInfoRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -829,6 +869,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserServiceRequest",
         "IsRequired": true
       }
     ],
