@@ -5,11 +5,11 @@ namespace Online_Mobile_Recharge.Interfaces
 {
 	public interface ITransaction : ICrud<Transaction, TransactionResponse>
 	{
-		string AmountOfTheDay();
+		int AmountOfTheDay();
 		int CountUniqueTransactionUsersOfTheDay();
 		int CountTransactionsOfTheDay();
-		string TotalAmount();
-
+		int TotalAmount();
+		// lấy danh sách giao dịch của 1 user
 		List<TransactionResponse> GetTransactionByUserId(int userId);
 	}
 }

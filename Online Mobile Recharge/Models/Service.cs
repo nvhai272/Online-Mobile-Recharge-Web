@@ -14,8 +14,9 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(100)]
 		public string Name { get; set; }
 
+		[Required]
 		[MaxLength(255)]
-		public string? Description { get; set; }
+		public string Description { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 

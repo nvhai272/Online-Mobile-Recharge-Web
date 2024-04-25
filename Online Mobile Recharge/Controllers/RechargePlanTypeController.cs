@@ -89,7 +89,7 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				var change = _mapper.Map<RechargePlanType>(entity);
-				_crud.Delete(id, change);
+				bool dele = _crud.Delete(id, change);
 				return Ok("Thanh cong");
 			}
 			catch (Exception ex)

@@ -12,4 +12,9 @@ namespace Online_Mobile_Recharge.DTO.Request
 
 		//public ICollection<RechargePlan> RechargePlans { get; set; }
 	}
+
+	public class RechargePlanRequestDel
+	{
+		public bool IsDeleted { get; set; }
+	}
 }

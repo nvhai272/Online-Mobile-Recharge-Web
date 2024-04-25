@@ -12,7 +12,7 @@ namespace Online_Mobile_Recharge.Models
 
 		[Required]
 		[StringLength(10)]
-		public string? Phone { get; set; }
+		public string Phone { get; set; }
 
 		[Column(TypeName = "decimal(9, 2)")]
 		public decimal TransactionAmount { get; set; }
@@ -33,11 +33,11 @@ namespace Online_Mobile_Recharge.Models
 
 		//khoa ngoai
 		public int ServiceId { get; set; }
-		public virtual Service? Service { get; set; }
+		public virtual Service Service { get; set; }
 
 		//khoa ngoai
 		public int RechargePlanId { get; set; }
-		public virtual RechargePlan? RechargePlan { get; set; }
+		public virtual RechargePlan RechargePlan { get; set; }
 
 		//khoa ngoai
 		public int PaymentMethodId { get; set; }

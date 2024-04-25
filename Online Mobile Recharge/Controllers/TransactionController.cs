@@ -89,7 +89,7 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				var change = _mapper.Map<Transaction>(entity);
-				_crud.Delete(id, change);
+				bool dele = _crud.Delete(id, change);
 				return Ok("Thanh cong");
 			}
 			catch (Exception ex)
@@ -102,7 +102,7 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("totalAmountForToday")]
 		public IActionResult GetAmountOfTheDay()
 		{
-			string totalAmount = _crud.AmountOfTheDay();
+			int totalAmount = _crud.AmountOfTheDay();
 
 			return Ok(totalAmount);
 		}
@@ -130,16 +130,16 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("totalTransactionAmount")]
 		public IActionResult totalTransactionAmount()
 		{
-			string totalAmount = _crud.TotalAmount();
+			int totalAmount = _crud.TotalAmount();
 
 			return Ok(totalAmount);
 		}
 
 		[HttpGet]
-		[Route("transactionOfUser/{userId}")]
-		public IActionResult listTransactionOfUser(int userId)
+		[Route("transactionOfUser/{id}")]
+		public IActionResult listTransactionOfUser(int id)
 		{
-			var getList = _crud.GetTransactionByUserId(userId);
+			var getList = _crud.GetTransactionByUserId(id);
 			return Ok(getList);
 		}
 

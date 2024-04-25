@@ -2,5 +2,8 @@
 {
 	public class LoginResponse
 	{
+		public string Token { get; set; } = "";
+
+		public bool isLogin { get; set; } = false;
 	}
 }

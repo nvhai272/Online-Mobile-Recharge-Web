@@ -14,14 +14,16 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(100)]
 		public string Name { get; set; }
 
-		[MaxLength(40)]
+		[Required]
+		[MaxLength(50)]
 		public string Password { get; set; }
 
+		[Required]
 		public string Phone { get; set; }
 
 		[Required]
 		[MaxLength(100)]
-		public string? Email { get; set; }
+		public string Email { get; set; }
 
 		public DateTime Dob { get; set; }
 

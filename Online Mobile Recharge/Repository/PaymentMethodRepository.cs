@@ -19,10 +19,8 @@ namespace Online_Mobile_Recharge.Repository
 		public bool Create([FromBody] PaymentMethod newMethod)
 		{
 			PaymentMethod method = new PaymentMethod();
-
 			method.Name = newMethod.Name;
 			method.Description = newMethod.Description;
-
 			_context.PaymentMethods.Add(method);
 			return Save();
 		}
@@ -76,7 +74,6 @@ namespace Online_Mobile_Recharge.Repository
 				var updateE = GetItem(id);
 				updateE.Name = entity.Name;
 				updateE.Description = entity.Description;
-
 				updateE.ModifiedAt = DateTime.Now;
 				_context.PaymentMethods.Update(updateE);
 				return Save();

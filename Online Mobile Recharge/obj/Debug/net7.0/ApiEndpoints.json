@@ -54,27 +54,6 @@
   },
   {
     "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
-    "Method": "UpdateFeedback",
-    "RelativePath": "api/Feedback/edit/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "e",
-        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Online_Mobile_Recharge.Controllers.FeedbackController",
     "Method": "GetAllFeedback",
     "RelativePath": "api/Feedback/list",
     "HttpMethod": "GET",
@@ -694,18 +673,13 @@
     "ContainingType": "Online_Mobile_Recharge.Controllers.UserController",
     "Method": "DeleteUserById",
     "RelativePath": "api/User/delete/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "entity",
-        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequest",
         "IsRequired": true
       }
     ],

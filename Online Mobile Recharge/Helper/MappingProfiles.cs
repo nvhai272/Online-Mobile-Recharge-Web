@@ -8,8 +8,6 @@ namespace Online_Mobile_Recharge.MappingProfiles
 	{
 		public MappingProfiles()
 		{
-			// thằng userService là bảng trung gian 
-
 			CreateMap<User, UserRequest>().ReverseMap();
 			CreateMap<PaymentMethod, PaymentMethodRequest>().ReverseMap();
 			CreateMap<Transaction, TransactionRequest>().ReverseMap();
@@ -21,7 +19,6 @@ namespace Online_Mobile_Recharge.MappingProfiles
 			CreateMap<RechargePlanType, RechargePlanTypeRequest>().ReverseMap();
 			CreateMap<UserService, UserServiceRequest>().ReverseMap();
 
-
 			CreateMap<User, UserResponse>().ReverseMap();
 			CreateMap<PaymentMethod, PaymentMethodResponse>().ReverseMap();
 			CreateMap<Service, ServiceResponse>().ReverseMap();
@@ -32,7 +29,6 @@ namespace Online_Mobile_Recharge.MappingProfiles
 			CreateMap<RechargePlan, RechargePlanResponse>().ReverseMap();
 			CreateMap<RechargePlanType, RechargePlanTypeResponse>().ReverseMap();
 			CreateMap<UserService, UserServiceResponse>().ReverseMap();
-
 
 		}
 	}

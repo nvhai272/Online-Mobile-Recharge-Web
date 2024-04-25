@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Response;
+using Online_Mobile_Recharge.Exceptions;
+using Online_Mobile_Recharge.Helper;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using System.Text.RegularExpressions;
@@ -13,29 +15,25 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			_dataContext = dataContext;
 		}
-		public bool IsValidPhoneNumber(string phoneNumber)
-		{
-			return !string.IsNullOrEmpty(phoneNumber) && Regex.IsMatch(phoneNumber, @"^\d{10}$");
-		}
 
 		public FeedbackResponse Convert(Feedback feedback)
 		{
-			var nameService = _dataContext.Services.Find(feedback.ServiceId).Name;
-			string createAt = feedback.CreatedAt.ToString("yyyy-MM-dd");
+			var nameServiceOfFeedback = _dataContext.Services.Find(feedback.ServiceId).Name;
+			string responseCreateAt = feedback.CreatedAt.ToString("yyyy-MM-dd");
 			var res = new FeedbackResponse()
 			{
-				CreatedAt = createAt,
+				CreatedAt = responseCreateAt,
 				Id = feedback.Id,
 				Content = feedback.Content,
 				Phone = feedback.Phone,
-				NameService = nameService
+				NameService = nameServiceOfFeedback
 			};
 			return res;
 		}
 
 		public bool Create([FromBody] Feedback entity)
 		{
-			if (!string.IsNullOrEmpty(entity.Content) && IsValidPhoneNumber(entity.Phone))
+			if (!string.IsNullOrEmpty(entity.Content) && RegexManagement.IsValidPhoneNumber(entity.Phone))
 			{
 				var existedService = _dataContext.Services.Find(entity.ServiceId);
 				if (existedService != null)
@@ -53,12 +51,12 @@ namespace Online_Mobile_Recharge.Repository
 				}
 				else
 				{
-					throw new Exception("Không tìm thấy dịch vụ");
+					throw new CustomStatusException("Không tìm thấy dịch vụ");
 				}
 			}
 			else
 			{
-				throw new Exception("Vui lòng điền đầy đủ thông tin phản hồi bao gồm số điện thoại 10 chữ số");
+				throw new CustomStatusException("Vui lòng điền đầy đủ thông tin và kiểm tra số điện thoại của bạn");
 			}
 		}
 
@@ -107,7 +105,6 @@ namespace Online_Mobile_Recharge.Repository
 			return save > 0 ? true : false;
 		}
 
-		// feedback có cho update không?
 		public bool Update(int id, Feedback entity)
 		{
 			try
@@ -115,7 +112,7 @@ namespace Online_Mobile_Recharge.Repository
 				var existingFeedback = GetItem(id);
 				var existedService = _dataContext.Find<Service>(entity.ServiceId);
 
-				if (IsValidPhoneNumber(entity.Phone) && !string.IsNullOrEmpty(entity.Content) && existedService != null)
+				if (RegexManagement.IsValidEmail(entity.Phone) && !string.IsNullOrEmpty(entity.Content) && existedService != null)
 				{
 					existingFeedback.Service = existedService;
 					existingFeedback.Content = entity.Content;
@@ -133,8 +130,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 			catch (InvalidOperationException ex)
 			{
-				// Nếu không tìm thấy mục cần cập nhật, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				// Bạn có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
 				throw ex;
 			}
 		}

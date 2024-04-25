@@ -17,13 +17,13 @@ namespace Online_Mobile_Recharge.Models
 		public int TalkTime { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int? TextMessageNumber { get; set; } = 0;
+		public int TextMessageNumber { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int? DataNumberTotal { get; set; } = 0;
+		public int DataNumberTotal { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int? DataNumberPerDay { get; set; } = 0;
+		public int DataNumberPerDay { get; set; } = 0;
 
 		[MaxLength(3)]
 		public int Validity { get; set; }
@@ -32,7 +32,7 @@ namespace Online_Mobile_Recharge.Models
 		public decimal Price { get; set; }= 0;
 
 		[MaxLength(255)]
-		public string? Description { get; set; }
+		public string Description { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 
@@ -46,7 +46,7 @@ namespace Online_Mobile_Recharge.Models
 
 		//khoa ngoai
 		public int OperatorId { get; set; }
-		public virtual Operator? Operator { get; set; }
+		public virtual Operator Operator { get; set; }
 
 		public virtual ICollection<Transaction> Transactions { get; set; }
 

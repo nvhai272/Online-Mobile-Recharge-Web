@@ -71,7 +71,6 @@ namespace Online_Mobile_Recharge.Repository
 				existedE.Name = entity.Name;
 				existedE.Description = entity.Description;
 				existedE.RechargePlans = entity.RechargePlans;
-
 				existedE.ModifiedAt = DateTime.Now;
 				_context.RechargePlanTypes.Update(existedE);
 				return Save();

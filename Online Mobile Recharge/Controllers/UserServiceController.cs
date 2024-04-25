@@ -12,10 +12,10 @@ namespace Online_Mobile_Recharge.Controllers
 	[ApiController]
 	public class UserServiceController : ControllerBase
 	{
-		private readonly ICrud<UserService,UserServiceResponse> _crud;
+		private readonly ICrud<UserService, UserServiceResponse> _crud;
 		private readonly IMapper _mapper;
 
-		public UserServiceController(ICrud<UserService,UserServiceResponse> crud, IMapper mapper)
+		public UserServiceController(ICrud<UserService, UserServiceResponse> crud, IMapper mapper)
 		{
 			_crud = crud;
 			_mapper = mapper;
@@ -85,12 +85,12 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteUserService(int id,UserServiceRequest entity)
+		public IActionResult DeleteUserService(int id, UserServiceRequest entity)
 		{
 			try
 			{
 				var change = _mapper.Map<UserService>(entity);
-				_crud.Delete(id, change);
+				bool del = _crud.Delete(id, change);
 				return Ok("Thanh cong");
 			}
 			catch (Exception ex)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Exceptions;
+using Online_Mobile_Recharge.Helper;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using System.Text.RegularExpressions;
@@ -33,7 +34,6 @@ namespace Online_Mobile_Recharge.Repository
 				Dob = dateString,
 				Phone = e.Phone
 			};
-
 			return res;
 		}
 
@@ -43,7 +43,6 @@ namespace Online_Mobile_Recharge.Repository
 				.Where(p => p.IsDeleted == false)
 				.OrderBy(p => p.Id).ToList();
 			var responses = new List<UserResponse>();
-
 			foreach (var item in userRes)
 			{
 				responses.Add(Convert(item));
@@ -73,19 +72,6 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] User entity)
 		{
-			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Password) || entity.Dob == null || string.IsNullOrEmpty(entity.Address) || string.IsNullOrEmpty(entity.Phone))
-			{
-				throw new ArgumentException("Điền đầy đủ thông tin!");
-			}
-			else if (!IsValidPhoneNumber(entity.Phone))
-			{
-				throw new ArgumentException("Số điện thoại không hợp lệ!");
-			}
-			else if (_context.Users.Any(x => x.Phone == entity.Phone))
-			{
-				throw new InvalidOperationException("Số điện thoại đã được đăngg ký");
-			}
-
 			var user = new User
 			{
 				Name = entity.Name,
@@ -93,17 +79,10 @@ namespace Online_Mobile_Recharge.Repository
 				Password = entity.Password,
 				Address = entity.Address,
 				Dob = entity.Dob,
-				Phone = entity.Phone
+				Phone = entity.Phone,
 			};
-
 			_context.Users.Add(user);
 			return Save();
-		}
-
-		public bool IsValidPhoneNumber(string phoneNumber)
-		{
-			// Số điện thooại có đúng 10 chữ số => trả về true
-			return Regex.IsMatch(phoneNumber, @"^\d{10}$");
 		}
 
 		public bool Update(int id, User entity)
@@ -112,12 +91,11 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				var existedUser = GetItem(id);
 
-				// bo check password
 				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
 				{
 					throw new CustomStatusException("Không để trống thông tin!");
 				}
-				else if (!IsValidPhoneNumber(entity.Phone))
+				else if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
 				{
 					throw new CustomStatusException("Số điện thoại không hợp lệ!");
 				}
@@ -130,10 +108,7 @@ namespace Online_Mobile_Recharge.Repository
 						existedUser.Phone = entity.Phone;
 						existedUser.Address = entity.Address;
 						existedUser.Dob = entity.Dob;
-						//existedUser.Password = entity.Password;
-
 						existedUser.ModifiedAt = DateTime.Now;
-
 						_context.Users.Update(existedUser);
 						return Save();
 					}
@@ -154,7 +129,6 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-
 		//check tồn tại với cột IsDeleted == false
 		public bool IsExisted(int id)
 		{
@@ -170,15 +144,6 @@ namespace Online_Mobile_Recharge.Repository
 		public bool IsPhoneNumberExistExceptCurrent(int id, string phoneNumber)
 		{
 			return _context.Users.Any(u => u.Id != id && u.Phone == phoneNumber);
-		}
-
-		public bool IsValidEmail(string email)
-		{
-			// Biểu thức chính quy để kiểm tra địa chỉ email
-			string pattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
-
-			// so sánh đầu vào có đúng với biểu thức chính quy hay khum?
-			return Regex.IsMatch(email, pattern);
 		}
 
 		// đếm số users mới tạo tài khoản trong ngày
@@ -200,7 +165,6 @@ namespace Online_Mobile_Recharge.Repository
 				return Save();
 			}
 			throw new CustomStatusException("Mat khau cap nhat ko thanh cong");
-
 		}
 
 		public bool Delete(int id, User entity)

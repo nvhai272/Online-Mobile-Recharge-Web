@@ -34,7 +34,6 @@ namespace Online_Mobile_Recharge.Repository
 				DataNumberTotal = rechargePlan.DataNumberTotal,
 				TextMessageNumber = rechargePlan.TextMessageNumber,
 				Validity = rechargePlan.Validity
-
 			};
 			return res;
 		}
@@ -58,8 +57,6 @@ namespace Online_Mobile_Recharge.Repository
 				TextMessageNumber = entity.TextMessageNumber,
 				Validity = entity.Validity,
 				Transactions = entity.Transactions
-
-
 			};
 			_context.RechargePlans.Add(newRechargePlan);
 			return Save();
@@ -114,15 +111,11 @@ namespace Online_Mobile_Recharge.Repository
 				var existedE = _context.RechargePlans.Find(id);
 				var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
 				var existedOperator = _context.Operators.Find(entity.OperatorId);
-
 				existedE.Name = entity.Name;
-
 				existedE.OperatorId = entity.OperatorId;
 				existedE.Operator = existedOperator;
-
 				existedE.RechargePlanTypeId = entity.RechargePlanTypeId;
 				existedE.RechargePlanType = existedRechargePlanType;
-
 				existedE.Description = entity.Description;
 				existedE.Price = entity.Price;
 				existedE.TalkTime = entity.TalkTime;
@@ -131,7 +124,6 @@ namespace Online_Mobile_Recharge.Repository
 				existedE.TextMessageNumber = entity.TextMessageNumber;
 				existedE.Validity = entity.Validity;
 				existedE.Transactions = entity.Transactions;
-
 				existedE.ModifiedAt = DateTime.Now;
 				_context.RechargePlans.Update(existedE);
 				return Save();

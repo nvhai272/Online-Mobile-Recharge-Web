@@ -37,7 +37,6 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				var userItem = _crud.GetItemById(id);
-				//var userRes = _mapper.Map<UserResponse>(userItem);
 				return Ok(userItem);
 			}
 			catch (CustomStatusException ex)
@@ -59,14 +58,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				return BadRequest(ex.Message);
 			}
-			catch (InvalidOperationException ex)
-			{
-				return Conflict(ex.Message);
-			}
-			catch (Exception ex)
-			{
-				return StatusCode(500, $"Internal Server Error: {ex.Message}");
-			}
+
 		}
 
 		[HttpPut]
@@ -90,19 +82,19 @@ namespace Online_Mobile_Recharge.Controllers
 
 		}
 
-		[HttpPut]
+		[HttpGet]
 		[Route("delete/{id}")]
-		public IActionResult DeleteUserById(int id, UserRequest entity)
+		public IActionResult DeleteUserById(int id, UserRequestDel entity)
 		{
 			try
 			{
-				var change = _mapper.Map<User>(entity);
-				_crud.Delete(id, change);
+				var u = _mapper.Map<User>(entity);
+				bool dele = _crud.Delete(id, u);
 				return Ok("Thanh cong");
 			}
-			catch (Exception ex)
+			catch (CustomStatusException ex)
 			{
-				return BadRequest(ex.Message);
+				return BadRequest($"{ex.Message}");
 			}
 		}
 

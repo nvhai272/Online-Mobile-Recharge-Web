@@ -22,7 +22,6 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			var getUser = _dataContext.Users.Find(e.UserId).Name;
 			var getPaymentMethod = _dataContext.PaymentMethods.Find(e.PaymentMethodId).Name;
-
 			var res = new UserPaymentInfoResponse()
 			{
 				Id = e.Id,
@@ -37,19 +36,14 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			var findUser = _dataContext.Users.Find(entity.UserId);
 			var findPaymentMethod = _dataContext.PaymentMethods.Find(entity.PaymentMethodId);
-
-
 			UserPaymentInfo userPaymentInfo = new UserPaymentInfo()
 			{
 				UserId = entity.UserId,
 				PaymentMethodId = entity.PaymentMethodId,
-
 				CardNumber = entity.CardNumber,
 				User = findUser,
 				PaymentMethod = findPaymentMethod
-
 			};
-
 			_dataContext.UserPaymentInfos.Add(userPaymentInfo);
 			return Save();
 		}
@@ -86,7 +80,6 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			var listUserPaymentInfo = _dataContext.UserPaymentInfos.Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
 			var listRes = new List<UserPaymentInfoResponse>();
-
 			foreach (var item in listUserPaymentInfo)
 			{
 				listRes.Add(Convert(item));
@@ -116,19 +109,14 @@ namespace Online_Mobile_Recharge.Repository
 				var existed = GetItem(id);
 				var findUser = _dataContext.Users.Find(entity.UserId);
 				var findPaymentMethod = _dataContext.PaymentMethods.Find(entity.PaymentMethodId);
-
 				existed.PaymentMethodId = entity.PaymentMethodId;
 				existed.PaymentMethod = findPaymentMethod;
-
 				existed.UserId = entity.UserId;
 				existed.User = findUser;
-
 				existed.CardNumber = entity.CardNumber;
-
 				existed.ModifiedAt = DateTime.Now;
 				_dataContext.UserPaymentInfos.Update(existed);
 				return Save();
-
 			}
 		}
 	}

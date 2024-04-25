@@ -13,9 +13,13 @@
 			Message = message;
 		}
 
+		public CustomStatusException(string message, Exception inner) : base(message, inner)
+		{
+			//Message = message;
+		}
 		public CustomStatusException(string message) : base(message)
 		{
-			Message = message;
+			//Message = message;
 		}
 	}
 }

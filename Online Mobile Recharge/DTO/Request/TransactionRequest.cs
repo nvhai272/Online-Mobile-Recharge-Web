@@ -15,6 +15,10 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public int RechargePlanId { get; set; }
 		public int PaymentMethodId { get; set; }
 		public bool IsDeleted { get; set; }
+	}
 
+	public class TransactionRequestDel
+	{
+		public bool IsDeleted { get; set; }
 	}
 }

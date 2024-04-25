@@ -28,7 +28,6 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				var feedbackList = _crud.GetListItems();
-				//var feedbackList = _mapper.Map<List<FeedbackResponse>>(_crud.GetListItems());
 				return Ok(feedbackList);
 			}
 			catch (Exception ex)
@@ -67,25 +66,25 @@ namespace Online_Mobile_Recharge.Controllers
 			}
 		}
 
-		[HttpPut]
-		[Route("edit/{id}")]
-		public IActionResult UpdateFeedback(int id, FeedbackRequest e)
-		{
-			try
-			{
-				var ex = _mapper.Map<Feedback>(e);
-				_crud.Update(id, ex);
-				return Ok("Thanh cong");
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
-		}
+		//[HttpPut]
+		//[Route("edit/{id}")]
+		//public IActionResult UpdateFeedback(int id, FeedbackRequest e)
+		//{
+		//	try
+		//	{
+		//		var ex = _mapper.Map<Feedback>(e);
+		//		_crud.Update(id, ex);
+		//		return Ok("Thanh cong");
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return BadRequest(ex.Message);
+		//	}
+		//}
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteFeedback(int id,FeedbackRequest entity)
+		public IActionResult DeleteFeedback(int id, FeedbackRequest entity)
 		{
 			try
 			{

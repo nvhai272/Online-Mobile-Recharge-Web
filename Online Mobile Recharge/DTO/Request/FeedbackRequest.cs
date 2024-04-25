@@ -9,6 +9,10 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public string Phone { get; set; }
 		public string Content { get; set; }
 		public bool IsDeleted { get; set; }
+	}
 
+	public class FeedbackRequestDel
+	{
+		public bool IsDeleted { get; set; }
 	}
 }

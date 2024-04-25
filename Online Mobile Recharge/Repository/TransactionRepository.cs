@@ -22,9 +22,10 @@ namespace Online_Mobile_Recharge.Repository
 			var nameUser = _context.Users.Find(transaction.UserId).Name;
 			var nameMethod = _context.PaymentMethods.Find(transaction.PaymentMethodId).Name;
 			var nameRecharge = _context.RechargePlans.Find(transaction.RechargePlanId).Name;
-
 			var getAmount = _context.RechargePlans.Find(transaction.RechargePlanId).Price;
 			string formattedPrice = getAmount.ToString("N0") + " VND";
+
+			var getCreateAt = transaction.CreatedAt.Date.ToString("yyyy-MM-dd");
 
 			var res = new TransactionResponse()
 			{
@@ -35,7 +36,8 @@ namespace Online_Mobile_Recharge.Repository
 				PaymentMethodName = nameMethod,
 				Phone = transaction.Phone,
 				TransactionAmount = formattedPrice,
-				IsSucceeded = transaction.IsSucceeded
+				IsSucceeded = transaction.IsSucceeded,
+				CreatedAt = getCreateAt
 			};
 			return res;
 		}
@@ -50,26 +52,20 @@ namespace Online_Mobile_Recharge.Repository
 			Transaction newTransaction = new Transaction()
 			{
 				Phone = entity.Phone,
-
 				User = findUser,
 				UserId = entity.UserId,
-
 				Service = findService,
 				ServiceId = entity.ServiceId,
-
 				RechargePlan = findRechargePlan,
 				RechargePlanId = entity.RechargePlanId,
-
 				PaymentMethod = findPaymentMethod,
 				PaymentMethodId = entity.PaymentMethodId,
-
 				IsSucceeded = entity.IsSucceeded,
 				TransactionAmount = price
 			};
 			_context.Transactions.Add(newTransaction);
 			return Save();
 		}
-
 
 		public Transaction GetItem(int id)
 		{
@@ -123,28 +119,17 @@ namespace Online_Mobile_Recharge.Repository
 				var findPaymentMethod = _context.PaymentMethods.Find(entity.PaymentMethodId);
 				var findRechargePlan = _context.RechargePlans.Find(entity.RechargePlanId);
 				var findPrice = _context.RechargePlans.Find(entity.RechargePlanId).Price;
-
 				existedE.UserId = entity.UserId;
-
 				existedE.ServiceId = entity.ServiceId;
-
 				existedE.PaymentMethodId = entity.PaymentMethodId;
-
 				existedE.RechargePlanId = entity.RechargePlanId;
-
 				existedE.User = findUSer;
-
 				existedE.Service = findService;
-
 				existedE.RechargePlan = findRechargePlan;
-
 				existedE.PaymentMethod = findPaymentMethod;
-
 				existedE.Phone = entity.Phone;
 				existedE.IsSucceeded = entity.IsSucceeded;
-
 				existedE.TransactionAmount = findPrice;
-
 				existedE.ModifiedAt = DateTime.Now;
 				_context.Transactions.Update(existedE);
 				return Save();
@@ -155,14 +140,16 @@ namespace Online_Mobile_Recharge.Repository
 			}
 		}
 
-		public string AmountOfTheDay()
+		public int AmountOfTheDay()
 		{
-			decimal totalAmount = _context.Transactions
+			int totalAmount = ((int)_context.Transactions
 		   .Where(t => t.CreatedAt.Date == DateTime.Today)
-		   .Sum(t => t.TransactionAmount);
-			string formattedtotalAmount = totalAmount.ToString("N0") + " VND";
+		   .Sum(t => t.TransactionAmount));
+
+			//string formattedtotalAmount = totalAmount.ToString("N0") + " VND";
+
 			// LINQ that la nhanh kakakakaka :)))
-			return formattedtotalAmount;
+			return totalAmount;
 		}
 
 		// đấm số user thực hiện giao dịch
@@ -180,14 +167,13 @@ namespace Online_Mobile_Recharge.Repository
 		}
 
 		// cái này tính tổng tiên giao dịch
-		public string TotalAmount()
+		public int TotalAmount()
 		{
-			decimal totalAmount = _context.Transactions.Sum(t => t.TransactionAmount);
-			string formattedtotalAmount = totalAmount.ToString("N0") + " VND";
-			return formattedtotalAmount;
+			int totalAmount = ((int)_context.Transactions.Sum(t => t.TransactionAmount));
+			return totalAmount;
 		}
 
-
+		// lấy danh sách thanh tóan của một User theo userId
 		public List<TransactionResponse> GetTransactionByUserId(int userId)
 		{
 			var transactionList = _context.Transactions.Where(t => t.UserId == userId).ToList();
@@ -199,6 +185,7 @@ namespace Online_Mobile_Recharge.Repository
 			return transactionListResponse;
 		}
 
+		// hàm xóa theo yêu cầu của chị Thủy
 		public bool Delete(int id, Transaction entity)
 		{
 			var updateDelete = _context.Transactions.Find(id);

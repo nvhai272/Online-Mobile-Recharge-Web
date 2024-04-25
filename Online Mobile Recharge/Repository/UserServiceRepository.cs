@@ -21,7 +21,6 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			var getUser = _dataContext.Users.Find(e.UserId).Name;
 			var getService = _dataContext.Services.Find(e.ServiceId).Name;
-
 			var res = new UserServiceResponse()
 			{
 				Id = e.Id,
@@ -39,12 +38,10 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				UserId = entity.UserId,
 				ServiceId = entity.ServiceId,
-
 				Service = findService,
 				User = findUser,
 				Status = entity.Status
 			};
-
 			_dataContext.User_Service.Add(userService);
 			return Save();
 		}
@@ -55,7 +52,6 @@ namespace Online_Mobile_Recharge.Repository
 			updateDelete.IsDeleted = entity.IsDeleted;
 			_dataContext.User_Service.Update(updateDelete);
 			return Save();
-
 		}
 
 		public UserService GetItem(int id)
@@ -78,9 +74,7 @@ namespace Online_Mobile_Recharge.Repository
 
 		public ICollection<UserServiceResponse> GetListItems()
 		{
-			return _mapper.Map<List<UserServiceResponse>>(_dataContext.Set<UserService>().OrderBy(p => p.Id).ToList());
-			//return _context.Set<UserService>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
-
+			return _mapper.Map<List<UserServiceResponse>>(_dataContext.Set<UserService>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList());
 		}
 
 		public bool IsExisted(int id)
@@ -101,16 +95,11 @@ namespace Online_Mobile_Recharge.Repository
 				var existingUserService = GetItem(id);
 				var findUser = _dataContext.Users.Find(entity.UserId);
 				var findServicee = _dataContext.Services.Find(entity.ServiceId);
-
-
 				existingUserService.Service = findServicee;
 				existingUserService.ServiceId = entity.ServiceId;
-
 				existingUserService.User = findUser;
 				existingUserService.UserId = entity.UserId;
-
 				existingUserService.Status = entity.Status;
-
 				existingUserService.ModifiedAt = DateTime.Now;
 				_dataContext.User_Service.Update(existingUserService);
 				return Save();

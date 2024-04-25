@@ -23,7 +23,6 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				Name = entity.Name,
 				Description = entity.Description
-
 			};
 			_context.Services.Add(newService);
 			return Save();
@@ -78,7 +77,6 @@ namespace Online_Mobile_Recharge.Repository
 				var existedE = GetItem(id);
 				existedE.Name = entity.Name;
 				existedE.Description = entity.Description;
-
 				existedE.ModifiedAt = DateTime.Now;
 				_context.Services.Update(existedE);
 				return Save();

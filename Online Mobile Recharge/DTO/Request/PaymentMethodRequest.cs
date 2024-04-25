@@ -6,16 +6,18 @@ namespace Online_Mobile_Recharge.DTO.Request
 {
     public class PaymentMethodRequest
 	{
-		
 		public string Name { get; set; }
 
 		public string? Description { get; set; }
 		public bool IsDeleted { get; set; }
 
-
 		//public ICollection<Transaction> Transactions { get; set; }
 
 		//public ICollection<UserPaymentInfo> User_Payment_Infos { get; set; }
+	}
 
+	public class PaymentMethodRequestDel
+	{
+		public bool IsDeleted { get; set; }
 	}
 }

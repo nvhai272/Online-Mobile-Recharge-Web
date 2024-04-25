@@ -39,6 +39,7 @@ builder.Services.AddScoped<ICrud<Service,ServiceResponse>, ServiceRepository>();
 
 builder.Services.AddScoped<ICrud<UserService,UserServiceResponse>, UserServiceRepository>();
 
+
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(Program));
 

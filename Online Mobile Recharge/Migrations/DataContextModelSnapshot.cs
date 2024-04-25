@@ -74,6 +74,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -104,6 +105,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -134,15 +136,16 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DataNumberPerDay")
+                    b.Property<int>("DataNumberPerDay")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int?>("DataNumberTotal")
+                    b.Property<int>("DataNumberTotal")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -170,7 +173,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int?>("TextMessageNumber")
+                    b.Property<int>("TextMessageNumber")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
@@ -199,6 +202,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -230,6 +234,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -338,10 +343,10 @@ namespace Online_Mobile_Recharge.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

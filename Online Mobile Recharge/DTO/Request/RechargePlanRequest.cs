@@ -28,9 +28,11 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public string? Description { get; set; }
 		public bool IsDeleted { get; set; }
 
-
 		//public ICollection<Transaction> Transactions { get; set; }
+	}
 
-
+	public class RechargePlanTypeRequestDel
+	{
+		public bool IsDeleted { get; set; }
 	}
 }
