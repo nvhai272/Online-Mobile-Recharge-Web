@@ -83,7 +83,7 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeletePaymentMethod(int id, PaymentMethodRequest entity)
+		public IActionResult DeletePaymentMethod(int id, PaymentMethodRequestDel entity)
 		{
 			try
 			{

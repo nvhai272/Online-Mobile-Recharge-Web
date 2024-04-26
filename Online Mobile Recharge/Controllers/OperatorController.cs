@@ -25,16 +25,8 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("list")]
 		public IActionResult GetAllOperator()
 		{
-			try
-			{
-				//var OperatorList = _crud.GetListItems();
-				var OperatorList = _mapper.Map<List<OperatorResponse>>(_crud.GetListItems());
-				return Ok(OperatorList);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			var OperatorList = _crud.GetListItems();
+			return Ok(OperatorList);
 		}
 
 		[HttpGet]
@@ -46,7 +38,7 @@ namespace Online_Mobile_Recharge.Controllers
 				var Operator = _crud.GetItemById(id);
 				return Ok(Operator);
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -59,9 +51,13 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				_crud.Create(_mapper.Map<Operator>(newOperator));
-				return Ok("Thanh cong");
+				return Ok("Created successfully");
 			}
-			catch (Exception ex)
+			catch (ArgumentException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -75,9 +71,13 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var ex = _mapper.Map<Operator>(e);
 				_crud.Update(id, ex);
-				return Ok("Thanh cong");
+				return Ok("Updated operator successfully");
 			}
-			catch (Exception ex)
+			catch (ArgumentException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -85,15 +85,15 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteOperator(int id, OperatorRequest entity)
+		public IActionResult DeleteOperator(int id, OperatorRequestDel entity)
 		{
 			try
 			{
 				var change = _mapper.Map<Operator>(entity);
 				bool dele = _crud.Delete(id, change);
-				return Ok("Thanh cong");
+				return Ok("The operator has been successfully deleted");
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}

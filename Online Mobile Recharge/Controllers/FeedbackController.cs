@@ -25,15 +25,8 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("list")]
 		public IActionResult GetAllFeedback()
 		{
-			try
-			{
-				var feedbackList = _crud.GetListItems();
-				return Ok(feedbackList);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			var feedbackList = _crud.GetListItems();
+			return Ok(feedbackList);
 		}
 
 		[HttpGet]
@@ -45,7 +38,7 @@ namespace Online_Mobile_Recharge.Controllers
 				var feedback = _crud.GetItemById(id);
 				return Ok(feedback);
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -58,14 +51,19 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				_crud.Create(_mapper.Map<Feedback>(newFeedback));
-				return Ok("Thanh cong");
+				return Ok("Successful review");
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+			catch (ArgumentException ex)
 			{
 				return BadRequest(ex.Message);
 			}
 		}
 
+		// khả năng là bỏ
 		//[HttpPut]
 		//[Route("edit/{id}")]
 		//public IActionResult UpdateFeedback(int id, FeedbackRequest e)
@@ -74,9 +72,13 @@ namespace Online_Mobile_Recharge.Controllers
 		//	{
 		//		var ex = _mapper.Map<Feedback>(e);
 		//		_crud.Update(id, ex);
-		//		return Ok("Thanh cong");
+		//		return Ok("Feedback has been successfully changed");
 		//	}
-		//	catch (Exception ex)
+		//	catch (InvalidOperationException ex)
+		//	{
+		//		return BadRequest(ex.Message);
+		//	}
+		//	catch (ArgumentException ex)
 		//	{
 		//		return BadRequest(ex.Message);
 		//	}
@@ -84,13 +86,13 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteFeedback(int id, FeedbackRequest entity)
+		public IActionResult DeleteFeedback(int id, FeedbackRequestDel entity)
 		{
 			try
 			{
 				var change = _mapper.Map<Feedback>(entity);
 				_crud.Delete(id, change);
-				return Ok("Thanh cong");
+				return Ok("Feedback successfully deleted");
 			}
 			catch (Exception ex)
 			{
@@ -99,3 +101,4 @@ namespace Online_Mobile_Recharge.Controllers
 		}
 	}
 }
+

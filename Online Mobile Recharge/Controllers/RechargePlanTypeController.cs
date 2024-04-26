@@ -84,7 +84,7 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteRechargePlanType(int id,RechargePlanTypeRequest entity)
+		public IActionResult DeleteRechargePlanType(int id,RechargePlanTypeRequestDel entity)
 		{
 			try
 			{

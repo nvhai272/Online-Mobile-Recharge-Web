@@ -26,7 +26,7 @@ namespace Online_Mobile_Recharge.DTO.Request
 		public decimal Price { get; set; }
 
 		public string? Description { get; set; }
-		public bool IsDeleted { get; set; }
+		
 
 		//public ICollection<Transaction> Transactions { get; set; }
 	}

@@ -30,6 +30,16 @@ namespace Online_Mobile_Recharge.MappingProfiles
 			CreateMap<RechargePlanType, RechargePlanTypeResponse>().ReverseMap();
 			CreateMap<UserService, UserServiceResponse>().ReverseMap();
 
+			CreateMap<User, UserRequestDel>().ReverseMap();
+			CreateMap<PaymentMethod, PaymentMethodRequestDel>().ReverseMap();
+			CreateMap<Transaction, TransactionRequestDel>().ReverseMap();
+			CreateMap<UserPaymentInfo, UserPaymentInfoRequestDel>().ReverseMap();
+			CreateMap<Feedback, FeedbackRequestDel>().ReverseMap();
+			CreateMap<Operator, OperatorRequestDel>().ReverseMap();
+			CreateMap<Service, ServiceRequestDel>().ReverseMap();
+			CreateMap<RechargePlan, RechargePlanRequestDel>().ReverseMap();
+			CreateMap<RechargePlanType, RechargePlanTypeRequestDel>().ReverseMap();
+			CreateMap<UserService, UserServiceRequestDel>().ReverseMap();
 		}
 	}
 }

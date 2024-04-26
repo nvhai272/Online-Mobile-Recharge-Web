@@ -39,7 +39,7 @@ namespace Online_Mobile_Recharge.Controllers
 				var userItem = _crud.GetItemById(id);
 				return Ok(userItem);
 			}
-			catch (CustomStatusException ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -58,6 +58,10 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				return BadRequest(ex.Message);
 			}
+			catch (InvalidOperationException ex)
+			{
+				return BadRequest(ex.Message);
+			}
 
 		}
 
@@ -71,13 +75,13 @@ namespace Online_Mobile_Recharge.Controllers
 				bool updatedUser = _crud.Update(id, u);
 				return Ok("Updated successfully");
 			}
-			catch (CustomStatusException ex)
+			catch (ArgumentException ex)
 			{
 				return BadRequest($"{ex.Message}");
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
-				return StatusCode(500, $"Internal Server Error: {ex.Message}");
+				return BadRequest(ex.Message);
 			}
 
 		}
@@ -92,7 +96,7 @@ namespace Online_Mobile_Recharge.Controllers
 				bool dele = _crud.Delete(id, u);
 				return Ok("Thanh cong");
 			}
-			catch (CustomStatusException ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest($"{ex.Message}");
 			}
@@ -124,11 +128,14 @@ namespace Online_Mobile_Recharge.Controllers
 				return Ok("Thanh cong");
 			}
 
-			catch (CustomStatusException ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
-
+			catch (ArgumentException ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 	}
 }

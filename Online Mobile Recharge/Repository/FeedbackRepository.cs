@@ -35,7 +35,7 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (!string.IsNullOrEmpty(entity.Content) && RegexManagement.IsValidPhoneNumber(entity.Phone))
 			{
-				var existedService = _dataContext.Services.Find(entity.ServiceId);
+				var existedService = _dataContext.Services.FirstOrDefault(s => s.Id == entity.ServiceId && s.IsDeleted == false);
 				if (existedService != null)
 				{
 					Feedback feedback = new()
@@ -51,12 +51,12 @@ namespace Online_Mobile_Recharge.Repository
 				}
 				else
 				{
-					throw new CustomStatusException("Không tìm thấy dịch vụ");
+					throw new InvalidOperationException("Service is not found");
 				}
 			}
 			else
 			{
-				throw new CustomStatusException("Vui lòng điền đầy đủ thông tin và kiểm tra số điện thoại của bạn");
+				throw new ArgumentException("Please fill in all information and enter the correct 10-digit phone number");
 			}
 		}
 
@@ -73,25 +73,21 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (IsExisted(id))
 			{
-				var res = Convert(_dataContext.Find<Feedback>(id));
-				return res;
+				var entityResponse = Convert(_dataContext.Find<Feedback>(id));
+				return entityResponse;
 			}
 			throw new InvalidOperationException("Feedback does not existed");
 		}
 
 		public ICollection<FeedbackResponse> GetListItems()
 		{
-			//return _dataContext.Set<Feedback>().OrderBy(p => p.Id).ToList();
-			//return _context.Set<Feedback>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
-
-			var feedbacks = _dataContext.Set<Feedback>().ToList();
-			var responses = new List<FeedbackResponse>();
-
+			var feedbacks = _dataContext.Set<Feedback>().Where(p => p.IsDeleted == false).OrderBy(p => p.Id).ToList();
+			var responseList = new List<FeedbackResponse>();
 			foreach (var feedback in feedbacks)
 			{
-				responses.Add(Convert(feedback));
+				responseList.Add(Convert(feedback));
 			}
-			return responses;
+			return responseList;
 		}
 
 		public bool IsExisted(int id)
@@ -105,41 +101,52 @@ namespace Online_Mobile_Recharge.Repository
 			return save > 0 ? true : false;
 		}
 
+		// hàm này chắc bỏ
 		public bool Update(int id, Feedback entity)
 		{
-			try
-			{
-				var existingFeedback = GetItem(id);
-				var existedService = _dataContext.Find<Service>(entity.ServiceId);
+			//var existFeedback = GetItem(id);
+			//var existService = _dataContext.Find<Service>(entity.ServiceId);
+			//if (existFeedback == null)
+			//{
+			//	throw new InvalidOperationException("Feedback is not found");
+			//}
 
-				if (RegexManagement.IsValidEmail(entity.Phone) && !string.IsNullOrEmpty(entity.Content) && existedService != null)
-				{
-					existingFeedback.Service = existedService;
-					existingFeedback.Content = entity.Content;
-					existingFeedback.Phone = entity.Phone;
-					existingFeedback.ServiceId = entity.ServiceId;
-					existingFeedback.ModifiedAt = DateTime.Now;
+			//if (existService == null)
+			//{
+			//	throw new InvalidOperationException("Service does not exist");
+			//}
 
-					_dataContext.Feedbacks.Update(existingFeedback);
-					return Save();
-				}
-				else
-				{
-					return false;
-				}
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw ex;
-			}
+			//if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
+			//{
+			//	throw new ArgumentException("Invalid phone number");
+			//}
+
+			//if (string.IsNullOrEmpty(entity.Content))
+			//{
+			//	throw new ArgumentException("Feedback content cannot be empty");
+			//}
+
+			//existFeedback.Service = existService;
+			//existFeedback.Content = entity.Content;
+			//existFeedback.Phone = entity.Phone;
+			//existFeedback.ServiceId = entity.ServiceId;
+			//existFeedback.ModifiedAt = DateTime.Now;
+
+			//_dataContext.Feedbacks.Update(existFeedback);
+			//return Save();
+			throw new NotImplementedException();
 		}
 
+		// update cột IsDeleted chứ không xóa đối tượng khỏi DB
 		public bool Delete(int id, Feedback entity)
 		{
-			var updateDelete = _dataContext.Feedbacks.Find(id);
-			updateDelete.IsDeleted = entity.IsDeleted;
-			_dataContext.Feedbacks.Update(updateDelete);
-			return Save();
+			var updateDelete = GetItem(id);
+			// ở đây thằng GetItem có exception rồi có thể dùng lại hoặc ghi đè => chuyển code qua try/catch để bắt exception của nó 
+			
+				updateDelete.IsDeleted = entity.IsDeleted;
+				_dataContext.Feedbacks.Update(updateDelete);
+				return Save();
+			
 		}
 	}
 }

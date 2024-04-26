@@ -20,16 +20,25 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] Operator entity)
 		{
-			var check = _dataContext.Operators.FirstOrDefault(e => e.Name == entity.Name);
-			if (check == null)
+			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Description))
 			{
-				Operator hehe = new Operator() { Name = entity.Name, Description = entity.Description };
+				throw new ArgumentException("Please enter complete information");
+			}
+
+			var checkExistedOperator = _dataContext.Operators.FirstOrDefault(e => e.Name == entity.Name && e.IsDeleted == false);
+			if (checkExistedOperator == null)
+			{
+				Operator hehe = new Operator()
+				{
+					Name = entity.Name,
+					Description = entity.Description
+				};
 				_dataContext.Operators.Add(hehe);
 				return Save();
 			}
 			else
 			{
-				throw new CustomStatusException("Da ton tai");
+				throw new InvalidOperationException("Operator already exists ");
 			}
 		}
 
@@ -39,7 +48,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _mapper.Map<OperatorResponse>(_dataContext.Operators.FirstOrDefault(e => e.Id == id));
 			}
-			throw new InvalidOperationException("Operator does not existed");
+			throw new InvalidOperationException("Operator does not existed or is hidden");
 		}
 
 		public Operator GetItem(int id)
@@ -48,7 +57,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _dataContext.Operators.FirstOrDefault(e => e.Id == id);
 			}
-			throw new InvalidOperationException("Operator does not existed");
+			throw new InvalidOperationException("Operator does not existed or is hidden");
 		}
 
 		public ICollection<OperatorResponse> GetListItems()
@@ -59,7 +68,6 @@ namespace Online_Mobile_Recharge.Repository
 					.OrderBy(p => p.Id)
 					.ToList()
 			);
-
 		}
 
 		public bool IsExisted(int id)
@@ -75,28 +83,52 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Update(int id, Operator entity)
 		{
-			try
+			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Description))
 			{
-				var existedOperator = GetItem(id);
-				existedOperator.Name = entity.Name;
-				existedOperator.Description = entity.Description;
+				// update mấy thằng đã ẩn rồi làm gì?
+				// có được trùng tên với chúng nó không?
+				var existingOperator = _dataContext.Operators.FirstOrDefault(s => s.Name == entity.Name && s.Id != id && s.IsDeleted == false);
+				if (existingOperator == null)
+				{
+					// chỗ này bỏ try/catch đi thì ổn đấy vì có exception của hàm GetItem rồi
+					// dùng try/catch khi muốn ghi đè hoặc bắt exception nhưng nó khiến code phức tạp hơn
+					// nên dùng try/catch cho những đoạn code ngắn gọn
+					try
+					{
+						var existedOperator = GetItem(id);
+						existedOperator.Name = entity.Name;
+						existedOperator.Description = entity.Description;
+						existedOperator.ModifiedAt = DateTime.Now;
+						_dataContext.Operators.Update(existedOperator);
+						return Save();
+					}
+					catch (InvalidOperationException ex)
+					{
+						// ghi đè
+						throw new InvalidOperationException("No object found to update");
 
-				existedOperator.ModifiedAt = DateTime.Now;
-				_dataContext.Operators.Update(existedOperator);
-				return Save();
+						//hoặc dùng lại của thằng gốc
+						//throw new InvalidOperationException(ex.Message,ex);
+					}
+				}
+				else
+				{
+					throw new InvalidOperationException("The operator name already exists in the system");
+				}
 			}
-			catch (InvalidOperationException ex)
+			else
 			{
-				throw ex;
+				throw new InvalidOperationException("Enter complete information for the service that needs to be updated");
 			}
 		}
 
 		public bool Delete(int id, Operator entity)
 		{
-			var updateDelete = _dataContext.Operators.Find(id);
+			var updateDelete = GetItem(id);
 			updateDelete.IsDeleted = entity.IsDeleted;
 			_dataContext.Operators.Update(updateDelete);
 			return Save();
+			// ở đây k ném ra ngoại lệ nhưng có ngoại lệ của thằng GetItem nên là vẫn oke k cần try catch cũng đc mà?
 		}
 	}
 }

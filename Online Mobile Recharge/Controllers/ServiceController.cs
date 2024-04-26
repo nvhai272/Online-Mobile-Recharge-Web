@@ -25,15 +25,8 @@ namespace Online_Mobile_Recharge.Controllers
 		[Route("list")]
 		public IActionResult GetAllService()
 		{
-			try
-			{
-				var ServiceList = _crud.GetListItems();
-				return Ok(ServiceList);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			var ServiceList = _crud.GetListItems();
+			return Ok(ServiceList);
 		}
 
 		[HttpGet]
@@ -45,7 +38,7 @@ namespace Online_Mobile_Recharge.Controllers
 				var Service = _crud.GetItemById(id);
 				return Ok(Service);
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -58,9 +51,13 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				_crud.Create(_mapper.Map<Service>(newService));
-				return Ok("Thanh cong");
+				return Ok("Service created successfully");
 			}
-			catch (Exception ex)
+			catch (ArgumentException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -74,9 +71,13 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var ex = _mapper.Map<Service>(e);
 				_crud.Update(id, ex);
-				return Ok("Thanh cong");
+				return Ok("Service updated successfully");
 			}
-			catch (Exception ex)
+			catch (ArgumentNullException ex)
+			{
+				return BadRequest(ex.Message);
+			}
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}
@@ -84,15 +85,15 @@ namespace Online_Mobile_Recharge.Controllers
 
 		[HttpPut]
 		[Route("delete/{id}")]
-		public IActionResult DeleteService(int id, ServiceRequest entity)
+		public IActionResult DeleteService(int id, ServiceRequestDel entity)
 		{
 			try
 			{
 				var change = _mapper.Map<Service>(entity);
 				bool dele = _crud.Delete(id, change);
-				return Ok("Thanh cong");
+				return Ok("Service hidden successfully");
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				return BadRequest(ex.Message);
 			}

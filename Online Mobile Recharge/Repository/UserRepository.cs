@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Exceptions;
@@ -56,7 +57,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _context.Users.FirstOrDefault(e => e.Id == id);
 			}
-			throw new CustomStatusException("User does not existed.");
+			throw new InvalidOperationException("User does not existed");
 		}
 
 
@@ -67,69 +68,128 @@ namespace Online_Mobile_Recharge.Repository
 				var getUser = Convert(_context.Users.FirstOrDefault(e => e.Id == id));
 				return getUser;
 			}
-			throw new CustomStatusException("Người dùng không tồn tại");
+			throw new InvalidOperationException("User does not existed");
 		}
 
 		public bool Create([FromBody] User entity)
 		{
-			var user = new User
+			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Address) && entity.Dob != null &&
+				RegexManagement.IsValidEmail(entity.Email) && RegexManagement.IsValidPhoneNumber(entity.Phone) && RegexManagement.IsValidPassword(entity.Password))
 			{
-				Name = entity.Name,
-				Email = entity.Email,
-				Password = entity.Password,
-				Address = entity.Address,
-				Dob = entity.Dob,
-				Phone = entity.Phone,
-			};
-			_context.Users.Add(user);
-			return Save();
+				var checkPhone = _context.Users.FirstOrDefault(u => u.Phone == entity.Phone);
+				if (checkPhone == null)
+				{
+					var user = new User
+					{
+						Name = entity.Name,
+						Email = entity.Email,
+						Password = BCrypt.Net.BCrypt.HashPassword(entity.Password),
+						Address = entity.Address,
+						Dob = entity.Dob,
+						Phone = entity.Phone
+					};
+					_context.Users.Add(user);
+					return Save();
+				}
+				else
+				{
+					throw new InvalidOperationException("Phone number has been registered");
+				}
+			}
+			else
+			{
+				if (string.IsNullOrEmpty(entity.Name))
+				{
+					throw new ArgumentException("Name cannot be left blank");
+				}
+
+				if (string.IsNullOrEmpty(entity.Address))
+				{
+					throw new ArgumentException("Address cannot be empty");
+				}
+
+				if (entity.Dob == null)
+				{
+					throw new ArgumentException("Dob cannot be left blank");
+				}
+
+				if (!RegexManagement.IsValidEmail(entity.Email))
+				{
+					throw new ArgumentException("Please enter a valid email. For example: abc@gmail.com");
+				}
+
+				if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
+				{
+					throw new ArgumentException("Please enter a valid 10-digit phone number");
+				}
+
+				if (!RegexManagement.IsValidPassword(entity.Password))
+				{
+					throw new ArgumentException("A valid password has at least 8 characters, including 1 uppercase letter, 1 number, and 1 special character");
+				}
+				return false;
+			}
 		}
 
 		public bool Update(int id, User entity)
 		{
-			try
-			{
-				var existedUser = GetItem(id);
 
-				if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Email) || string.IsNullOrEmpty(entity.Address) || entity.Dob == null)
+			var existedUser = GetItem(id);
+
+			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Address) && entity.Dob != null &&
+				RegexManagement.IsValidEmail(entity.Email) && RegexManagement.IsValidPhoneNumber(entity.Phone) && RegexManagement.IsValidPassword(entity.Password))
+			{
+				if (!IsPhoneNumberExistExceptCurrent(id, entity.Phone))
 				{
-					throw new CustomStatusException("Không để trống thông tin!");
-				}
-				else if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
-				{
-					throw new CustomStatusException("Số điện thoại không hợp lệ!");
+					existedUser.Name = entity.Name;
+					existedUser.Email = entity.Email;
+					existedUser.Phone = entity.Phone;
+					existedUser.Address = entity.Address;
+					existedUser.Dob = entity.Dob;
+					existedUser.ModifiedAt = DateTime.Now;
+					_context.Users.Update(existedUser);
+					return Save();
 				}
 				else
 				{
-					if (!IsPhoneNumberExistExceptCurrent(id, entity.Phone))
-					{
-						existedUser.Name = entity.Name;
-						existedUser.Email = entity.Email;
-						existedUser.Phone = entity.Phone;
-						existedUser.Address = entity.Address;
-						existedUser.Dob = entity.Dob;
-						existedUser.ModifiedAt = DateTime.Now;
-						_context.Users.Update(existedUser);
-						return Save();
-					}
-					else
-					{
-						throw new CustomStatusException("Số điện thoại đã tồn tại trong cơ sở dữ liệu");
-					}
+					throw new InvalidOperationException("Phone number has been registered");
 				}
 			}
-			catch (CustomStatusException)
+			else
 			{
-				throw;
-				// Ném lại ngoại lệ để xử lý ở lớp gọi
-			}
-			catch (Exception)
-			{
-				throw new CustomStatusException("Có lỗi xảy ra trong quá trình cập nhật");
+				if (string.IsNullOrEmpty(entity.Name))
+				{
+					throw new ArgumentException("Name cannot be left blank");
+				}
+
+				if (string.IsNullOrEmpty(entity.Address))
+				{
+					throw new ArgumentException("Address cannot be empty");
+				}
+
+				if (entity.Dob == null)
+				{
+					throw new ArgumentException("Dob cannot be left blank");
+				}
+
+				if (!RegexManagement.IsValidEmail(entity.Email))
+				{
+					throw new ArgumentException("Please enter a valid email. For example: abc@gmail.com");
+				}
+
+				if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
+				{
+					throw new ArgumentException("Please enter a valid 10-digit phone number");
+				}
+
+				if (!RegexManagement.IsValidPassword(entity.Password))
+				{
+					throw new ArgumentException("A valid password has at least 8 characters, including 1 uppercase letter, 1 number, and 1 special character");
+				}
+				return false;
 			}
 		}
 
-		//check tồn tại với cột IsDeleted == false
 		public bool IsExisted(int id)
 		{
 			return _context.Users.Any(e => e.Id == id && e.IsDeleted == false);
@@ -154,22 +214,32 @@ namespace Online_Mobile_Recharge.Repository
 			return countUser;
 		}
 
-		// chỗ này chưa có mã hóa phải sửa
+		// đổi mật khẩu 
 		public bool ChangePassword(int userId, string newPassword)
 		{
-			if (IsExisted(userId))
+			if (!RegexManagement.IsValidPassword(newPassword))
+			{
+				throw new ArgumentException("A valid password has at least 8 characters, including 1 uppercase letter, 1 number, and 1 special character");
+			}
+			else
 			{
 				var findUserChangePassword = _context.Users.Find(userId);
-				findUserChangePassword.Password = newPassword;
-				_context.Users.Update(findUserChangePassword);
-				return Save();
+				if (findUserChangePassword != null)
+				{
+					findUserChangePassword.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+					_context.Users.Update(findUserChangePassword);
+					return Save();
+				}
+				else
+				{
+					throw new InvalidOperationException("Password update failed");
+				}
 			}
-			throw new CustomStatusException("Mat khau cap nhat ko thanh cong");
 		}
 
 		public bool Delete(int id, User entity)
 		{
-			var updateDelete = _context.Users.Find(id);
+			var updateDelete = GetItem(id);
 			updateDelete.IsDeleted = entity.IsDeleted;
 			_context.Users.Update(updateDelete);
 			return Save();

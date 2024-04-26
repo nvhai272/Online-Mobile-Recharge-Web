@@ -30,7 +30,7 @@
       },
       {
         "Name": "entity",
-        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequest",
+        "Type": "Online_Mobile_Recharge.DTO.Request.FeedbackRequestDel",
         "IsRequired": true
       }
     ],
@@ -93,7 +93,7 @@
       },
       {
         "Name": "entity",
-        "Type": "Online_Mobile_Recharge.DTO.Request.OperatorRequest",
+        "Type": "Online_Mobile_Recharge.DTO.Request.OperatorRequestDel",
         "IsRequired": true
       }
     ],
@@ -429,7 +429,7 @@
       },
       {
         "Name": "entity",
-        "Type": "Online_Mobile_Recharge.DTO.Request.ServiceRequest",
+        "Type": "Online_Mobile_Recharge.DTO.Request.ServiceRequestDel",
         "IsRequired": true
       }
     ],
@@ -609,13 +609,13 @@
   {
     "ContainingType": "Online_Mobile_Recharge.Controllers.TransactionController",
     "Method": "listTransactionOfUser",
-    "RelativePath": "api/Transaction/transactionOfUser/{userId}",
+    "RelativePath": "api/Transaction/transactionOfUser/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -680,6 +680,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entity",
+        "Type": "Online_Mobile_Recharge.DTO.Request.UserRequestDel",
         "IsRequired": true
       }
     ],

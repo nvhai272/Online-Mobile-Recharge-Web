@@ -19,18 +19,37 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] Service entity)
 		{
-			Service newService = new Service()
+			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Description))
 			{
-				Name = entity.Name,
-				Description = entity.Description
-			};
-			_context.Services.Add(newService);
-			return Save();
+				//chỗ này là Exception chung chung, có thể tách ra từng trường hợp if/else rõ ràng hơn
+				throw new ArgumentException("Please enter complete information");
+			}
+
+			var checkService = _context.Services.FirstOrDefault(s => s.Name == entity.Name);
+
+			//chỗ này nếu đã tồn tại mà xóa rồi thì k cho tạo nữa => cách giải quyết khôi phục đối tượng đã xóa vì nó vẫn còn trong DB 
+			//var checkService = _context.Services.FirstOrDefault(s => s.Name == entity.Name && s.IsDeleted==false);
+
+			if (checkService == null)
+			{
+				Service newService = new()
+				{
+					Name = entity.Name,
+					Description = entity.Description
+				};
+				_context.Services.Add(newService);
+				return Save();
+			}
+			else
+			{
+				throw new InvalidOperationException("Service already exists");
+			}
 		}
 
 		public bool Delete(int id, Service entity)
 		{
-			var updateDelete = _context.Services.Find(id);
+
+			var updateDelete = GetItem(id);
 			updateDelete.IsDeleted = entity.IsDeleted;
 			_context.Services.Update(updateDelete);
 			return Save();
@@ -42,7 +61,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _context.Set<Service>().FirstOrDefault(e => e.Id == id);
 			}
-			throw new InvalidOperationException("Service does not existed.");
+			throw new InvalidOperationException("Service does not existed or is hidden");
 		}
 
 		public ServiceResponse GetItemById(int id)
@@ -51,7 +70,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _mapper.Map<ServiceResponse>(_context.Set<Service>().FirstOrDefault(e => e.Id == id));
 			}
-			throw new InvalidOperationException("Service does not existed.");
+			throw new InvalidOperationException("Service does not existed or is hidden");
 		}
 
 		public ICollection<ServiceResponse> GetListItems()
@@ -72,18 +91,35 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Update(int id, Service entity)
 		{
-			try
+			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Description))
 			{
-				var existedE = GetItem(id);
-				existedE.Name = entity.Name;
-				existedE.Description = entity.Description;
-				existedE.ModifiedAt = DateTime.Now;
-				_context.Services.Update(existedE);
-				return Save();
+				// update mấy thằng đã ẩn rồi làm gì?
+				// có được trùng tên với chúng nó không?
+				var existingService = _context.Services.FirstOrDefault(s => s.Name == entity.Name && s.Id != id && s.IsDeleted == false);
+				if (existingService == null)
+				{
+					try
+					{
+						var existedE = GetItem(id);
+						existedE.Name = entity.Name;
+						existedE.Description = entity.Description;
+						existedE.ModifiedAt = DateTime.Now;
+						_context.Services.Update(existedE);
+						return Save();
+					}
+					catch (InvalidOperationException ex)
+					{
+						// chỗ này giải thích như nào nhỉ? Ném ngoại lệ ra nhưng k xử lí lại
+						// Tức là dùng lại của thằng gốc
+						throw ex;
+					}
+				}
+					throw new InvalidOperationException("The service name already exists in the system");
 			}
-			catch (InvalidOperationException ex)
+			else
 			{
-				throw ex;
+				// nên đưa ra thông báo từng thông tin nhập vào thì rõ ràng hơn nhỉ?
+				throw new InvalidOperationException("Enter complete information for the service that needs to be updated");
 			}
 		}
 
