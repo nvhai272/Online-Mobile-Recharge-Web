@@ -1,0 +1,10 @@
+<app-header></app-header>
+
+<li class="nav-item" *ngFor="let item of sidebarItems" [class.selected]="item.selected">
+    <a class= "{{item.active}}" routerLink="{{item.link}}" (click)="onItemClick(item)">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">{{ item.icon }}</i>
+        </div>
+        <span class="nav-link-text ms-1">{{ item.text }}</span>
+    </a>
+</li>
