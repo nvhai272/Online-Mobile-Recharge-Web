@@ -1,0 +1,11 @@
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="plan">
+    <h3>Plan Details:</h3>
+    <p><label>Name:</label> {{ plan.name }}</p>
+    <p><label>Price:</label> {{ plan.price }}</p>
+    <p><label>Talk Time:</label> {{ plan.talkTime }}</p>
+    <p><label>Description:</label> {{ plan.description }}</p>
+    <p><label>Validity:</label> {{ plan.validity }}</p>
+  </div>
+  <button type="submit">Submit</button>
+</form>
