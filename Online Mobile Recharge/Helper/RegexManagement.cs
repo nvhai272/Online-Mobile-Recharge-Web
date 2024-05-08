@@ -27,16 +27,16 @@ namespace Online_Mobile_Recharge.Helper
 				return false;
 
 			// Kiểm tra mật khẩu có ít nhất 1 chữ viết hoa
-			if (!Regex.IsMatch(password, "[A-Z]"))
-				return false;
+			//if (!Regex.IsMatch(password, "[A-Z]"))
+			//	return false;
 
 			// Kiểm tra mật khẩu có ít nhất 1 số
 			if (!Regex.IsMatch(password, "[0-9]"))
 				return false;
 
 			// Kiểm tra mật khẩu có ít nhất 1 kí tự đặc biệt
-			if (!Regex.IsMatch(password, "[^a-zA-Z0-9]"))
-				return false;
+			//if (!Regex.IsMatch(password, "[^a-zA-Z0-9]"))
+			//	return false;
 
 			return true;
 		}

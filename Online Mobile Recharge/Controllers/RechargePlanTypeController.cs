@@ -58,7 +58,7 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				_crud.Create(_mapper.Map<RechargePlanType>(newRechargePlanType));
-				return Ok("Thanh cong");
+				return Ok("successfully created");
 			}
 			catch (Exception ex)
 			{
@@ -74,7 +74,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var ex = _mapper.Map<RechargePlanType>(e);
 				_crud.Update(id, ex);
-				return Ok("Thanh cong");
+				return Ok("Successfully fixed");
 			}
 			catch (Exception ex)
 			{
@@ -90,7 +90,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var change = _mapper.Map<RechargePlanType>(entity);
 				bool dele = _crud.Delete(id, change);
-				return Ok("Thanh cong");
+				return Ok("Successfully removed");
 			}
 			catch (Exception ex)
 			{

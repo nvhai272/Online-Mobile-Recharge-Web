@@ -38,31 +38,62 @@ namespace Online_Mobile_Recharge.Repository
 			return res;
 		}
 
-		public bool Create([FromBody] RechargePlan entity)
-		{
-			var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
-			var existedOperator = _context.Operators.Find(entity.OperatorId);
-			RechargePlan newRechargePlan = new RechargePlan()
-			{
-				Name = entity.Name,
-				OperatorId = entity.OperatorId,
-				Operator = existedOperator,
-				Description = entity.Description,
-				Price = entity.Price,
-				RechargePlanTypeId = entity.RechargePlanTypeId,
-				RechargePlanType = existedRechargePlanType,
-				TalkTime = entity.TalkTime,
-				DataNumberPerDay = entity.DataNumberPerDay,
-				DataNumberTotal = entity.DataNumberTotal,
-				TextMessageNumber = entity.TextMessageNumber,
-				Validity = entity.Validity,
-				Transactions = entity.Transactions
-			};
-			_context.RechargePlans.Add(newRechargePlan);
-			return Save();
-		}
+        public bool Create([FromBody] RechargePlan entity)
+        {
+            if (string.IsNullOrWhiteSpace(entity.Name))
+            {
+                throw new ArgumentException("Name are required fields");
+            }
 
-		public bool Delete(int id, RechargePlan entity)
+            if (entity.Price < 0 || entity.Validity <= 0)
+            {
+                throw new ArgumentException("Price and validity must be greater than zero");
+            }
+
+            if (entity.DataNumberPerDay < 0 || entity.DataNumberTotal < 0 || entity.TextMessageNumber < 0 || entity.TalkTime < 0)
+            {
+                throw new ArgumentException("Data, text message, and talk time numbers must not be negative");
+            }
+
+            var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
+            if (existedRechargePlanType == null)
+            {
+                throw new ArgumentException("Invalid recharge plan type");
+            }
+
+            var existedOperator = _context.Operators.Find(entity.OperatorId);
+            if (existedOperator == null)
+            {
+                throw new ArgumentException("Invalid operator");
+            }
+
+            if (_context.RechargePlans.Any(p => p.Name == entity.Name && p.OperatorId == entity.OperatorId && !p.IsDeleted))
+            {
+                throw new InvalidOperationException("A recharge plan with the same name and operator already exists");
+            }
+
+            RechargePlan newRechargePlan = new RechargePlan()
+            {
+                Name = entity.Name,
+                OperatorId = entity.OperatorId,
+                Operator = existedOperator,
+                Description = entity.Description,
+                Price = entity.Price,
+                RechargePlanTypeId = entity.RechargePlanTypeId,
+                RechargePlanType = existedRechargePlanType,
+                TalkTime = entity.TalkTime,
+                DataNumberPerDay = entity.DataNumberPerDay,
+                DataNumberTotal = entity.DataNumberTotal,
+                TextMessageNumber = entity.TextMessageNumber,
+                Validity = entity.Validity
+            };
+
+            _context.RechargePlans.Add(newRechargePlan);
+            return Save();
+        }
+
+
+        public bool Delete(int id, RechargePlan entity)
 		{
 			var updateDelete = _context.RechargePlans.Find(id);
 			updateDelete.IsDeleted = entity.IsDeleted;
@@ -104,36 +135,71 @@ namespace Online_Mobile_Recharge.Repository
 			return saved > 0 ? true : false;
 		}
 
-		public bool Update(int id, RechargePlan entity)
-		{
-			try
-			{
-				var existedE = _context.RechargePlans.Find(id);
-				var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
-				var existedOperator = _context.Operators.Find(entity.OperatorId);
-				existedE.Name = entity.Name;
-				existedE.OperatorId = entity.OperatorId;
-				existedE.Operator = existedOperator;
-				existedE.RechargePlanTypeId = entity.RechargePlanTypeId;
-				existedE.RechargePlanType = existedRechargePlanType;
-				existedE.Description = entity.Description;
-				existedE.Price = entity.Price;
-				existedE.TalkTime = entity.TalkTime;
-				existedE.DataNumberPerDay = entity.DataNumberPerDay;
-				existedE.DataNumberTotal = entity.DataNumberTotal;
-				existedE.TextMessageNumber = entity.TextMessageNumber;
-				existedE.Validity = entity.Validity;
-				existedE.Transactions = entity.Transactions;
-				existedE.ModifiedAt = DateTime.Now;
-				_context.RechargePlans.Update(existedE);
-				return Save();
-			}
-			catch (InvalidOperationException ex)
-			{
-				//  không tìm thấy mục cần cập nhật, ngoại lệ sẽ được ném ra từ hàm GetItemById
-				//  có thể xử lý ngoại lệ ở đây hoặc để cho nó được truyền xuống lớp gọi
-				throw ex;
-			}
-		}
-	}
+        public bool Update(int id, RechargePlan entity)
+        {
+            try
+            {
+                var existedE = _context.RechargePlans.Find(id);
+                if (existedE == null)
+                {
+                    return false; 
+                }
+
+                if (_context.RechargePlans.Any(p => p.Name == entity.Name && p.OperatorId == entity.OperatorId && p.Id != id && !p.IsDeleted))
+                {
+                    throw new InvalidOperationException("A recharge plan with the same name and operator already exists.");
+                }
+
+                if (string.IsNullOrWhiteSpace(entity.Name))
+                {
+                    throw new ArgumentException("Name required fields");
+                }
+
+                if (entity.Price < 0 || entity.Validity <= 0)
+                {
+                    throw new ArgumentException("Price and validity must be greater than zero.");
+                }
+
+                if (entity.DataNumberPerDay < 0 || entity.DataNumberTotal < 0 || entity.TextMessageNumber < 0 || entity.TalkTime < 0)
+                {
+                    throw new ArgumentException("Data, text message, and talk time numbers must not be negative.");
+                }
+
+                var existedRechargePlanType = _context.RechargePlanTypes.Find(entity.RechargePlanTypeId);
+                if (existedRechargePlanType == null)
+                {
+                    throw new ArgumentException("Invalid recharge plan type.");
+                }
+
+                var existedOperator = _context.Operators.Find(entity.OperatorId);
+                if (existedOperator == null)
+                {
+                    throw new ArgumentException("Invalid operator.");
+                }
+
+                existedE.Name = entity.Name;
+                existedE.OperatorId = entity.OperatorId;
+                existedE.Operator = existedOperator;
+                existedE.RechargePlanTypeId = entity.RechargePlanTypeId;
+                existedE.RechargePlanType = existedRechargePlanType;
+                existedE.Description = entity.Description;
+                existedE.Price = entity.Price;
+                existedE.TalkTime = entity.TalkTime;
+                existedE.DataNumberPerDay = entity.DataNumberPerDay;
+                existedE.DataNumberTotal = entity.DataNumberTotal;
+                existedE.TextMessageNumber = entity.TextMessageNumber;
+                existedE.Validity = entity.Validity;
+                existedE.Transactions = entity.Transactions;
+                existedE.ModifiedAt = DateTime.Now;
+
+                _context.RechargePlans.Update(existedE);
+                return Save();
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
+        }
+
+    }
 }

@@ -13,26 +13,29 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(100)]
 		public string Name { get; set; }
 
-		[MaxLength(11)]
+        [Required]
+        [MaxLength(11)]
 		public int TalkTime { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int TextMessageNumber { get; set; } = 0;
+		public int? TextMessageNumber { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int DataNumberTotal { get; set; } = 0;
+		public int? DataNumberTotal { get; set; } = 0;
 
 		[MaxLength(11)]
-		public int DataNumberPerDay { get; set; } = 0;
+		public int? DataNumberPerDay { get; set; } = 0;
 
+		[Required]
 		[MaxLength(3)]
 		public int Validity { get; set; }
 
+		[Required]
 		[Column(TypeName = "decimal(9,2)")]
 		public decimal Price { get; set; }= 0;
 
 		[MaxLength(255)]
-		public string Description { get; set; }
+		public string? Description { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 

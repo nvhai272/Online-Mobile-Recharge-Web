@@ -1,4 +1,5 @@
-﻿using Online_Mobile_Recharge.DTO.Request;
+﻿using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Models;
 
@@ -8,7 +9,8 @@ namespace Online_Mobile_Recharge.Interfaces
 	{
 		int CountNewUsersOfTheDay();
 
-		bool ChangePassword(int userId, string newPassword);
+		bool ChangePassword(int id, User user );
 
-	}
+		public bool CreateUser([FromBody] User user);
+    }
 }

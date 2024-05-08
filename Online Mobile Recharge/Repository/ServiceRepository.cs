@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
@@ -19,16 +18,12 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] Service entity)
 		{
-			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Description))
+			if (string.IsNullOrEmpty(entity.Name))
 			{
-				//chỗ này là Exception chung chung, có thể tách ra từng trường hợp if/else rõ ràng hơn
 				throw new ArgumentException("Please enter complete information");
 			}
 
-			var checkService = _context.Services.FirstOrDefault(s => s.Name == entity.Name);
-
-			//chỗ này nếu đã tồn tại mà xóa rồi thì k cho tạo nữa => cách giải quyết khôi phục đối tượng đã xóa vì nó vẫn còn trong DB 
-			//var checkService = _context.Services.FirstOrDefault(s => s.Name == entity.Name && s.IsDeleted==false);
+			var checkService = _context.Services.FirstOrDefault(s => s.Name == entity.Name && !s.IsDeleted);
 
 			if (checkService == null)
 			{
@@ -61,7 +56,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _context.Set<Service>().FirstOrDefault(e => e.Id == id);
 			}
-			throw new InvalidOperationException("Service does not existed or is hidden");
+			throw new InvalidOperationException("Service does not existed ");
 		}
 
 		public ServiceResponse GetItemById(int id)
@@ -70,7 +65,7 @@ namespace Online_Mobile_Recharge.Repository
 			{
 				return _mapper.Map<ServiceResponse>(_context.Set<Service>().FirstOrDefault(e => e.Id == id));
 			}
-			throw new InvalidOperationException("Service does not existed or is hidden");
+			throw new InvalidOperationException("Service does not existed ");
 		}
 
 		public ICollection<ServiceResponse> GetListItems()
@@ -91,10 +86,8 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Update(int id, Service entity)
 		{
-			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Description))
+			if (!string.IsNullOrEmpty(entity.Name))
 			{
-				// update mấy thằng đã ẩn rồi làm gì?
-				// có được trùng tên với chúng nó không?
 				var existingService = _context.Services.FirstOrDefault(s => s.Name == entity.Name && s.Id != id && s.IsDeleted == false);
 				if (existingService == null)
 				{

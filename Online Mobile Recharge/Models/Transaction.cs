@@ -11,16 +11,20 @@ namespace Online_Mobile_Recharge.Models
 		public int Id { get; set; }
 
 		[Required]
-		[StringLength(10)]
+		[MaxLength(10)]
 		public string Phone { get; set; }
 
 		[Column(TypeName = "decimal(9, 2)")]
-		public decimal TransactionAmount { get; set; }
+		public decimal TransactionAmount { get; set; } = 0;
 
-		[Required]
-		public bool IsSucceeded { get; set; } = false;
+		[Column(TypeName = "decimal(9, 2)")]
+		public decimal RechargePlanPrice { get; set; } = 0;
+		
+        [Column(TypeName = "decimal(9, 2)")]
+        public decimal DiscountAmount { get; set; } = 0;
 
-		[Required]
+        public bool IsSucceeded { get; set; } = false;
+
 		public bool IsDeleted { get; set; } = false;
 
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -28,7 +32,7 @@ namespace Online_Mobile_Recharge.Models
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
 
 		//khoa ngoai
-		public int UserId { get; set; }
+		public int? UserId { get; set; } 
 		public virtual User User { get; set; }
 
 		//khoa ngoai
@@ -36,12 +40,12 @@ namespace Online_Mobile_Recharge.Models
 		public virtual Service Service { get; set; }
 
 		//khoa ngoai
-		public int RechargePlanId { get; set; }
+		public int? RechargePlanId { get; set; }
 		public virtual RechargePlan RechargePlan { get; set; }
 
 		//khoa ngoai
-		public int PaymentMethodId { get; set; }
-		public virtual PaymentMethod? PaymentMethod { get; set; }
+		public int PaymentMethodId { get; set; } 
+		public virtual PaymentMethod PaymentMethod { get; set; }
 
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;

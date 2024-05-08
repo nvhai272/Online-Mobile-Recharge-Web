@@ -19,7 +19,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -35,7 +35,7 @@ namespace Online_Mobile_Recharge.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
@@ -52,7 +52,7 @@ namespace Online_Mobile_Recharge.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
@@ -69,7 +69,7 @@ namespace Online_Mobile_Recharge.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -93,11 +93,18 @@ namespace Online_Mobile_Recharge.Migrations
                     Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_users_payment_methods_PaymentMethodId",
+                        column: x => x.PaymentMethodId,
+                        principalTable: "payment_methods",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -108,12 +115,12 @@ namespace Online_Mobile_Recharge.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TalkTime = table.Column<int>(type: "int", maxLength: 11, nullable: false),
-                    TextMessageNumber = table.Column<int>(type: "int", maxLength: 11, nullable: false),
-                    DataNumberTotal = table.Column<int>(type: "int", maxLength: 11, nullable: false),
-                    DataNumberPerDay = table.Column<int>(type: "int", maxLength: 11, nullable: false),
+                    TextMessageNumber = table.Column<int>(type: "int", maxLength: 11, nullable: true),
+                    DataNumberTotal = table.Column<int>(type: "int", maxLength: 11, nullable: true),
+                    DataNumberPerDay = table.Column<int>(type: "int", maxLength: 11, nullable: true),
                     Validity = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -192,36 +199,6 @@ namespace Online_Mobile_Recharge.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "users_payment_info",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CardNumber = table.Column<int>(type: "int", maxLength: 16, nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_users_payment_info", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_users_payment_info_payment_methods_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "payment_methods",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_users_payment_info_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "transactions",
                 columns: table => new
                 {
@@ -229,13 +206,15 @@ namespace Online_Mobile_Recharge.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TransactionAmount = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    RechargePlanPrice = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     IsSucceeded = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    RechargePlanId = table.Column<int>(type: "int", nullable: false),
+                    RechargePlanId = table.Column<int>(type: "int", nullable: true),
                     PaymentMethodId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -251,8 +230,7 @@ namespace Online_Mobile_Recharge.Migrations
                         name: "FK_transactions_recharge_plans_RechargePlanId",
                         column: x => x.RechargePlanId,
                         principalTable: "recharge_plans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_transactions_services_ServiceId",
                         column: x => x.ServiceId,
@@ -263,8 +241,7 @@ namespace Online_Mobile_Recharge.Migrations
                         name: "FK_transactions_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -313,14 +290,9 @@ namespace Online_Mobile_Recharge.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_users_payment_info_PaymentMethodId",
-                table: "users_payment_info",
+                name: "IX_users_PaymentMethodId",
+                table: "users",
                 column: "PaymentMethodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_users_payment_info_UserId",
-                table: "users_payment_info",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -336,16 +308,10 @@ namespace Online_Mobile_Recharge.Migrations
                 name: "user_service");
 
             migrationBuilder.DropTable(
-                name: "users_payment_info");
-
-            migrationBuilder.DropTable(
                 name: "recharge_plans");
 
             migrationBuilder.DropTable(
                 name: "services");
-
-            migrationBuilder.DropTable(
-                name: "payment_methods");
 
             migrationBuilder.DropTable(
                 name: "users");
@@ -355,6 +321,9 @@ namespace Online_Mobile_Recharge.Migrations
 
             migrationBuilder.DropTable(
                 name: "recharge_plan_types");
+
+            migrationBuilder.DropTable(
+                name: "payment_methods");
         }
     }
 }

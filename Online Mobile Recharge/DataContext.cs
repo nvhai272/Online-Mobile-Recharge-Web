@@ -12,7 +12,6 @@ namespace Online_Mobile_Recharge
 		public DbSet<UserService> User_Service { get; set; }
 		public DbSet<Feedback> Feedbacks { get; set; }
 		public DbSet<Operator> Operators { get; set; }
-		public DbSet<UserPaymentInfo> UserPaymentInfos { get; set; }
 		public DbSet<RechargePlan> RechargePlans { get; set; }
 		public DbSet<Service> Services { get; set; }
 		public DbSet<PaymentMethod> PaymentMethods { get; set; }

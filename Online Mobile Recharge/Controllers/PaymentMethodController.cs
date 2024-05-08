@@ -57,7 +57,7 @@ namespace Online_Mobile_Recharge.Controllers
 			try
 			{
 				_crud.Create(_mapper.Map<PaymentMethod>(newPaymentMethod));
-				return Ok("Thanh cong");
+				return Ok("New method successfully created");
 			}
 			catch (Exception ex)
 			{
@@ -73,7 +73,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var ex = _mapper.Map<PaymentMethod>(e);
 				_crud.Update(id, ex);
-				return Ok("Thanh cong");
+				return Ok("Update the success method");
 			}
 			catch (Exception ex)
 			{
@@ -89,7 +89,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var change = _mapper.Map<PaymentMethod>(entity);
 				bool dele = _crud.Delete(id, change);
-				return Ok("Thanh cong");
+				return Ok("Successful deletion");
 			}
 			catch (Exception ex)
 			{

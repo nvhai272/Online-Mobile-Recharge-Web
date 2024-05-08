@@ -22,10 +22,10 @@ namespace Online_Mobile_Recharge.Models
 		[MaxLength(10)]
 		public string Phone { get; set; }
 
-		[Required]
 		[MaxLength(100)]
 		public string Email { get; set; }
 
+		[Required]
 		public DateTime Dob { get; set; }
 
 		[MaxLength(150)]
@@ -37,9 +37,13 @@ namespace Online_Mobile_Recharge.Models
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
 
-		public virtual ICollection<Transaction> Transactions { get; set; }
+		public string? PaymentInfo {  get; set; }
+
+		public int? PaymentMethodId { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
 		public virtual ICollection<UserService> User_Service { get; set; }
-		public virtual ICollection<UserPaymentInfo> User_Payment_Infos { get; set; }
 
 	}
 }

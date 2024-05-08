@@ -20,7 +20,7 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Create([FromBody] Operator entity)
 		{
-			if (string.IsNullOrEmpty(entity.Name) || string.IsNullOrEmpty(entity.Description))
+			if (string.IsNullOrEmpty(entity.Name))
 			{
 				throw new ArgumentException("Please enter complete information");
 			}
@@ -83,7 +83,7 @@ namespace Online_Mobile_Recharge.Repository
 
 		public bool Update(int id, Operator entity)
 		{
-			if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Description))
+			if (!string.IsNullOrEmpty(entity.Name))
 			{
 				// update mấy thằng đã ẩn rồi làm gì?
 				// có được trùng tên với chúng nó không?

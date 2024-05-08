@@ -5,5 +5,7 @@
 		public string Token { get; set; } = "";
 
 		public bool isLogin { get; set; } = false;
+
+		public int UserId { get; set; }
 	}
 }

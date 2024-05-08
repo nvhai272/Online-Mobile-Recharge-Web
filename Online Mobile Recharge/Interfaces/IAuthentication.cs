@@ -1,17 +1,15 @@
-﻿using Online_Mobile_Recharge.DTO.Request;
+﻿using Microsoft.AspNetCore.Mvc;
+using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Interfaces
 {
-	public interface IAuthentication
-	{
-		bool Register(UserRegisterDto request);
-		LoginResponse Login(UserLoginDto request);
-		//UserModifyResponse CreateUser(UserRequest request);
+    public interface IAuthentication
+    {
+        LoginResponse Login(UserLoginDto request);
+        string CreateToken(User user);
+       
 
-		//List<UserResponse> GetAllUsersAndAdmins();
-		//UserResponse GetUserByEmail(string email);
-		string CreateToken(User user);
-	}
+    }
 }

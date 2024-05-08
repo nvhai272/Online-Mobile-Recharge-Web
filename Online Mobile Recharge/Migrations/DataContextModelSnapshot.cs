@@ -74,7 +74,6 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -105,7 +104,6 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -136,16 +134,15 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DataNumberPerDay")
+                    b.Property<int?>("DataNumberPerDay")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int>("DataNumberTotal")
+                    b.Property<int?>("DataNumberTotal")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -173,7 +170,7 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int>("TextMessageNumber")
+                    b.Property<int?>("TextMessageNumber")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
@@ -202,7 +199,6 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -234,7 +230,6 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -265,6 +260,9 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(9, 2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -282,8 +280,11 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("RechargePlanId")
+                    b.Property<int?>("RechargePlanId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("RechargePlanPrice")
+                        .HasColumnType("decimal(9, 2)");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
@@ -291,7 +292,7 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<decimal>("TransactionAmount")
                         .HasColumnType("decimal(9, 2)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -346,6 +347,12 @@ namespace Online_Mobile_Recharge.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("PaymentInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PaymentMethodId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -353,43 +360,9 @@ namespace Online_Mobile_Recharge.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
-                });
-
-            modelBuilder.Entity("Online_Mobile_Recharge.Models.UserPaymentInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CardNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PaymentMethodId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
                     b.HasIndex("PaymentMethodId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("users_payment_info");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("Online_Mobile_Recharge.Models.UserService", b =>
@@ -467,9 +440,7 @@ namespace Online_Mobile_Recharge.Migrations
 
                     b.HasOne("Online_Mobile_Recharge.Models.RechargePlan", "RechargePlan")
                         .WithMany("Transactions")
-                        .HasForeignKey("RechargePlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RechargePlanId");
 
                     b.HasOne("Online_Mobile_Recharge.Models.Service", "Service")
                         .WithMany("Transactions")
@@ -479,9 +450,7 @@ namespace Online_Mobile_Recharge.Migrations
 
                     b.HasOne("Online_Mobile_Recharge.Models.User", "User")
                         .WithMany("Transactions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("PaymentMethod");
 
@@ -492,23 +461,13 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Online_Mobile_Recharge.Models.UserPaymentInfo", b =>
+            modelBuilder.Entity("Online_Mobile_Recharge.Models.User", b =>
                 {
                     b.HasOne("Online_Mobile_Recharge.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany("User_Payment_Infos")
-                        .HasForeignKey("PaymentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Online_Mobile_Recharge.Models.User", "User")
-                        .WithMany("User_Payment_Infos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Uses")
+                        .HasForeignKey("PaymentMethodId");
 
                     b.Navigation("PaymentMethod");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Online_Mobile_Recharge.Models.UserService", b =>
@@ -539,7 +498,7 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     b.Navigation("Transactions");
 
-                    b.Navigation("User_Payment_Infos");
+                    b.Navigation("Uses");
                 });
 
             modelBuilder.Entity("Online_Mobile_Recharge.Models.RechargePlan", b =>
@@ -564,8 +523,6 @@ namespace Online_Mobile_Recharge.Migrations
             modelBuilder.Entity("Online_Mobile_Recharge.Models.User", b =>
                 {
                     b.Navigation("Transactions");
-
-                    b.Navigation("User_Payment_Infos");
 
                     b.Navigation("User_Service");
                 });

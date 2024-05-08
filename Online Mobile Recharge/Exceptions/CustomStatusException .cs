@@ -1,5 +1,7 @@
 ﻿namespace Online_Mobile_Recharge.Exceptions
 {
+
+	// Tự tạo Exception nhưng có vẻ không cần thiết cho lắm? Có thể xóa được 
 	public class CustomStatusException : Exception
 	{
 		public int StatusCode { get; }
