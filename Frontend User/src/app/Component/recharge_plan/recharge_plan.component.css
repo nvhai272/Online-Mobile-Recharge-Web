@@ -1,0 +1,20 @@
+.mat-tab{
+    width: 18%;
+    margin-top: 50px;
+	padding:0;
+}
+.mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+    --mdc-tab-indicator-active-indicator-color: #20d7b7;
+    --mat-tab-header-disabled-ripple-color: rgba(255, 255, 255, 0.5);
+    --mat-tab-header-pagination-icon-color: #b70f0f;
+    --mat-tab-header-inactive-label-text-color: rgb(0 0 0 / 60%);
+    --mat-tab-header-active-label-text-color: #097379;
+    --mat-tab-header-active-ripple-color: #333;
+    --mat-tab-header-inactive-ripple-color: #7b1fa2;
+    --mat-tab-header-inactive-focus-label-text-color: rgba(255, 255, 255, 0.6);
+    --mat-tab-header-inactive-hover-label-text-color: rgba(8, 6, 6, 0.6);
+    --mat-tab-header-active-focus-label-text-color: #1789b5;
+    --mat-tab-header-active-hover-label-text-color: #010614;
+    --mat-tab-header-active-focus-indicator-color: #0db6d1;
+    --mat-tab-header-active-hover-indicator-color: #09d7a8;
+}

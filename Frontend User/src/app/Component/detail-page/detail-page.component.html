@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Easy Recharge a Business Corporate Category Flat Bootstrap Responsive Website Template | Single :: w3layouts
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Easy Recharge Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script
+        type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+    <link
+        href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+        rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <!-- innerbanner -->
+    <div class="agileits-inner-banner"></div>
+    <!-- </div> -->
+    <div class="banner-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="view_plans">
+                    <div class="col-md-6">
+                        <div class="recharge-plan-details">
+                            <h4 class="section-title"> Payment Details</h4>
+                            <br>
+                            <p><label>Plan Name:</label> {{ recharge_plan?.name }}</p>
+                            <!-- <p><label>Name Operator:</label> {{ recharge_plan?.operatorName }}</p> -->
+                            <p><label>Price:</label> {{getFormattedCurrency(this.Price)}}</p>
+                            <p><label>Discount amount:</label> {{getFormattedCurrency(this.Price*0.05)}}</p>
+                            <!-- <p><label>Description:</label> {{ recharge_plan?.description }}</p> -->
+                            <p><label>Total amount:</label> {{getFormattedCurrency(this.Price*0.95)}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="user-info-payment">
+                            <h4 class="section-title">User Information and Payment</h4>
+                            <form>
+                                <div class="form-group">
+                                    <label for="phonenumber">Phone Number:</label>
+                                    <input type="text" [(ngModel)]="currentUser.phone" name="phonenumber"
+                                        class="form-control" required>
+                                </div>
+                                <div>
+                                    <label class="dis fw-bold mb-2">Payment Method:</label>
+                                    <div
+                                        class="d-flex align-items-center justify-content-between card-atm border rounded">
+                                        <div>
+                                            <i class="payment-icon payment-icon-style-card payment-icon-applepay">Apple
+                                                Pay</i>
+                                            <i
+                                                class="payment-icon payment-icon-style-card payment-icon-mastercard">Mastercard</i>
+                                            <i
+                                                class="payment-icon payment-icon-style-card payment-icon-paypal">Paypal</i>
+                                            <i class="payment-icon payment-icon-style-card payment-icon-visa">Visa</i>
+                                            <i class="payment-icon payment-icon-style-card payment-icon-momo">MoMo</i>
+                                        </div>
+
+                                        <select id="paymentMethod" name="paymentMethod" [(ngModel)]="PaymentMethodId">
+                                            <ng-container *ngFor="let method of paymentMethods">
+                                                <!-- <option *ngIf="method.id === currentUser.paymentMethodId" [value]="currentUser.paymentMethodId" selected>
+                                                    {{currentUser.namePaymentMethod}}</option> -->
+                                                <option [value]="method.id">{{ method.name }}</option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="phonenumber">Card Number:</label>
+                                    <input type="text" [(ngModel)]="currentUser.paymentInfo" name="paymentInfo"
+                                        class="form-control" required>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary" (click)="create()">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <h2><a href="index.html">Easy Recharge</a></h2>
+            <p>© 2016 Easy Recharge. All Rights Reserved | Design by <a href="https://w3layouts.com/"
+                    target="_blank">w3layouts</a></p>
+            <ul>
+                <li><a class="face1" href="#"></a></li>
+                <li><a class="face2" href="#"></a></li>
+                <li><a class="face3" href="#"></a></li>
+                <li><a class="face4" href="#"></a></li>
+            </ul>
+        </div>
+    </div>
+</body>

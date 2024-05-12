@@ -1,0 +1,101 @@
+.view_plans {
+    margin-top: 20px; /* Add some top margin */
+  }
+  
+  .view_title {
+    font-size: 24px; /* Set the font size */
+    color: #333; /* Set the color to a darker shade */
+    font-weight: bold; /* Set the font weight to bold */
+    margin-bottom: 15px; /* Add some bottom margin */
+  }
+  
+  .view_plans h3 {
+    font-size: 20px; /* Set the font size for the headings */
+    color: #666; /* Set the color to a slightly darker shade */
+    margin-bottom: 10px; /* Add some bottom margin */
+  }
+  
+  .view_plans p {
+    font-size: 19px; /* Set the font size for the paragraphs */
+    color: #888; /* Set the color to a light shade */
+    margin-bottom: 20px; /* Add some bottom margin */
+  }
+  
+  .view_plans label {
+    font-weight: bold; /* Set the font weight to bold for labels */
+    color: #333333c2; /* Set the color to a darker shade */
+  }
+  
+  /* Optionally, you can add additional styling for specific labels if needed */
+  .view_plans label.name_operator {
+    color: #007bff; /* Change color for operator name label */
+  }
+  .section-title {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #00a59c; /* Change the color to your preferred color */
+    margin-bottom: 20px; /* Add some space below the title */
+    margin-top: -8px;
+}
+.box-2 .card-atm .form-control {
+  border: none;
+  box-shadow: none;
+}
+.icon {
+  width: 30px;
+  height: 30px;
+  background-color: #f8f9fa;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transform-origin: center;
+  opacity: 1;
+}
+
+.btn {
+  margin-top: 20px;
+}
+.view_plans[_ngcontent-ng-c3698169570] label[_ngcontent-ng-c3698169570] {
+  font-size: larger;
+}
+.fa, .fab, .fal, .far, .fas {
+  font-size: 30px;
+}
+.payment-icon {
+	display: inline-block;
+	width: 1.6em;
+	height: 1em;
+
+	overflow: hidden;
+	text-indent: -1000px;
+
+	font-size: 2em;
+	line-height: 1em;
+
+	margin: 0.1em 0.2em;
+
+	background-size: contain;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	background-clip: border-box;
+
+}
+.payment-icon.payment-icon-applepay {
+  background-image: url(/assets/acceptance/applepay.svg);
+}
+.payment-icon.payment-icon-mastercard {
+  background-image: url(/assets/acceptance/mastercard.svg);
+}
+.payment-icon.payment-icon-paypal {
+  background-image: url(/assets/acceptance/paypal.svg);
+}
+.payment-icon.payment-icon-visa {
+  background-image: url(/assets/acceptance/visa.svg);
+}
+.payment-icon.payment-icon-momo{
+  background-image: url(/assets/acceptance/momo.svg);
+  background-color: #fff;
+}
+  

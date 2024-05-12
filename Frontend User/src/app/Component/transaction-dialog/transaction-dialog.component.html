@@ -1,0 +1,24 @@
+<body>
+	<div style="padding: 1rem 3rem;
+background: white;
+max-width: 400px;
+padding-top: 2rem;
+border-radius: 20px;
+border: 0;
+box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+animation: fadeIn 1s ease both;">
+		<div mat-dialog-header>
+			<h2>Thanks for using our service.</h2>
+		</div>
+
+		<div mat-dialog-content>
+			<p>
+				Please access <a routerLink="profile/1" (click)="closeDialog()">Profile</a> page to check your transaction details.
+			</p>
+		</div>
+
+		<div mat-dialog-actions>
+			<button mat-button class="button" (click)="closeDialog()">❌ Close</button>
+		</div>
+	</div>
+</body>

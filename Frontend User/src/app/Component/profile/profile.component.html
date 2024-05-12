@@ -1,0 +1,263 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Easy Recharge a Business Corporate Category Flat Bootstrap Responsive Website Template | Settings ::
+		w3layouts</title>
+
+	<!-- <link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" /> -->
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Easy Recharge Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!--fonts-->
+	<link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<link
+		href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+		rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<header>
+		<!-- <div class="bannerr"> -->
+		<div class="header">
+			<div class="logo">
+				<h1><a href="index.html"><i><img src="/assets/images/cell.png" alt=" " /></i>Easy Recharge</a></h1>
+			</div>
+			<div class="top-nav">
+				<span class="menu"><img src="/assets/images/menu.png" alt=" " /></span>
+				<ul class="nav1">
+					<li><a class="active">Mobile</a>
+					</li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal1">PostPaid</a></li>
+					<li><a routerLink="/feedback">FeedBack</a></li>
+					<li><a routerLink="/support">Support</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal3">Site Map</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal4">Login</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal5">Signup</a></li>
+				</ul>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</header>
+
+	<!-- innerbanner -->
+	<div class="agileits-inner-banner"></div>
+
+	<!-- </div> -->
+	<div class="set-content">
+		<div class="container">
+			<h4 class="view_title">PROFILE</h4>
+			<div id="myTabContent" class="tab-content">
+				<div role="tabpanel" class="tabs-para tab-pane fade in active" id="home" aria-labelledby="home-tab">
+					<mat-tab-group [selectedIndex]="hideTab ? -1 : selectedTabIndex">
+						<mat-tab label="PERSONAL INFO" class="custom-tab-label">
+							<div class="profile-gd">
+								<br />
+								<ul class="pro-left">
+									<li>Name</li>
+									<li>Email</li>
+									<li>Mobile number</li>
+									<li>Date Of Birth</li>
+									<li>Address</li>
+									<li>Payment Method</li>
+									<li>Payment Info</li>
+								</ul>
+								<ul class="pro-right">
+									<li>: {{user.name}}</li>
+									<li>: {{user.email}}</li>
+									<li>: {{user.phone}}</li>
+									<li>: {{user.dob}}</li>
+									<li>: {{user.address}}</li>
+									<li>: {{user.namePaymentMethod}}</li>
+									<li>: {{user.paymentInfo}}</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<button (click)="openEditModal()">Update</button>
+						</mat-tab>
+						<mat-tab label="TRANSACTION LIST">
+							<section class="h-100">
+								<div class="container py-5 h-100">
+									<div class="row d-flex justify-content-center align-items-center h-120">
+										<div class="col-lg-12 col-xl-12">
+											<div class="card" style="border-radius: 10px;">
+												<br>
+												<div class="card-header px-4 py-5">
+													<h4 class="text-muted mb-0">Thanks for using us, <span
+															style="color: #00a59c;">{{user.name}}</span></h4>
+												</div>
+												<br>
+												<div *ngFor="let tran of transaction" class="card-body p-4"
+													style="margin-left:50px;">
+													<div class="d-flex justify-content-between align-items-center mb-4">
+														<p class="lead fw-normal mb-0" style="color: #00a59c;">
+															{{tran.serviceName}}
+														</p>
+														<p class="medium text-muted mb-0">Transaction ID : {{tran.id}}
+														</p>
+													</div>
+													<div class="card shadow-0 border">
+														<div class="card-body">
+															<div class="row">
+																<div
+																	class="col-md-2 text-center d-flex justify-content-center align-items-center">
+																	<p class="text-muted mb-0">Plan name:
+																		{{tran.rechargePlanName}}</p>
+																</div>
+																<div
+																	class="col-md-2 text-center d-flex justify-content-center align-items-center">
+																	<p class="text-muted">Price: {{tran.RechargePlanPrice}}</p>
+																</div>
+																<div
+																	class="col-md-2 text-center d-flex justify-content-center align-items-center">
+																	<p class="text-muted">Discount: {{tran.DiscountAmount}}</p>
+																</div>
+																<div
+																	class="col-md-2 text-center d-flex justify-content-center align-items-center">
+																	<p class="text-muted">Total paid:
+																		{{tran.TransactionAmount}}</p>
+																</div>
+																<div
+																	class="col-md-3 text-center d-flex justify-content-center align-items-center">
+																	<p class="text-muted">Date: {{tran.createdAt}}</p>
+																</div>
+																<div class="text-muted">
+																	<span *ngIf="tran.IsSucceeded"
+																		class="badge badge-sm btn-success"
+																		style="color: white; background-color: green; padding: 10px;">Succeeded</span>
+																	<span *ngIf="!tran.IsSucceeded"
+																		class="badge badge-sm btn-danger"
+																		style="color: white; background-color: red;  padding: 10px;">Failed</span>
+																	<!-- <span class="badge badge-sm bg-gradient-success"
+																		style="color: white;">Succeeded</span> -->
+																</div>
+															</div>
+															<hr class="mb-4"
+																style="background-color: #e0e0e0; opacity: 1;">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</mat-tab>
+						<!-- Change passsword -->
+						<mat-tab label="CHANGE PASSWORD">
+							<div class="profile-gd">
+								<form>
+									<div class="tab-for-sett">
+										<br />
+										<br />
+										<h5>new password</h5>
+										<input [(ngModel)]="newPassword" name="passsword" type="password">
+										<h5>confirm password</h5>
+										<input [(ngModel)]="confirmPassword" name="confirmPassword" type="password">
+									</div>
+									<div class="clearfix"></div>
+									<button type="submit" (click)="changePassword()">Save</button>
+								</form>
+							</div>
+						</mat-tab>
+						<mat-tab label="SERVICE LIST">
+							<div class="profile-gd">
+								<br />
+								<br />
+								<ul class="pro-left">
+									<li>Do not disturb</li>
+									<li>Caller tuner</li>
+								</ul>
+								<ul class="pro-right">
+									<li><input type="checkbox" id="service1"></li>
+									<li><input type="checkbox" id="service2"></li>
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+							<div>
+								<button type="submit">Save</button>
+							</div>
+						</mat-tab>
+					</mat-tab-group>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-top">
+		<div class="container">
+			<div class="foo-grids">
+				<div class="col-md-3 foo-grid">
+					<h3>MOBILE RECHARGES</h3>
+					<ul>
+						<li><a href="#">Airtel</a></li>
+						<li><a href="#">Aircel</a></li>
+						<li><a href="#">BSNL</a></li>
+						<li><a href="#">Idea</a></li>
+						<li><a href="#">MTNL</a></li>
+						<li><a href="#">MTS</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 foo-grid">
+					<h3>DTH RECHARGES</h3>
+					<ul>
+						<li><a href="#">Airtel Digital TV Recharges</a></li>
+						<li><a href="#">Dish TV Recharges</a></li>
+						<li><a href="#">Tata Sky Recharges</a></li>
+						<li><a href="#">Reliance Digital TV Recharges</a></li>
+						<li><a href="#">Sun Direct Recharges</a></li>
+						<li><a href="#">Videocon D2H Recharges</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 foo-grid">
+					<h3>DATACARD RECHARGES</h3>
+					<ul>
+						<li><a href="#">Airtel 2G Service</a></li>
+						<li><a href="#">Aircel 2G Service</a></li>
+						<li><a href="#">BSNL 2G Service</a></li>
+						<li><a href="#">MTS MBlaze Recharges</a></li>
+						<li><a href="#">Tata Photon Plus Recharges</a></li>
+						<li><a href="#">Reliance NetConnect Recharges</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 foo-grid">
+					<h3>PAYMENT OPTIONS</h3>
+					<ul>
+						<li>Credit Cards</li>
+						<li>Debit Cards</li>
+						<li>Any Visa Debit Card (VBV)</li>
+						<li>Direct Bank Debits</li>
+						<li>Cash Cards</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<h2><a href="index.html">Easy Recharge</a></h2>
+			<p>© 2016 Easy Recharge. All Rights Reserved | Design by <a href="https://w3layouts.com/"
+					target="_blank">w3layouts</a></p>
+			<ul>
+				<li><a class="face1" href="#"></a></li>
+				<li><a class="face2" href="#"></a></li>
+				<li><a class="face3" href="#"></a></li>
+				<li><a class="face4" href="#"></a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>
