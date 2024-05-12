@@ -1,0 +1,5 @@
+.active {
+    background-color: #f0f0f0; /* Set background color to indicate active link */
+    color: rgb(251, 251, 251); /* Set text color to indicate active link */
+    font-weight: bold; /* Optionally, make the text bold for active link */
+  }

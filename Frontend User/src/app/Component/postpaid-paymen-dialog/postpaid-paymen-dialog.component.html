@@ -1,0 +1,60 @@
+<body>
+    <!-- <div class="modal-body"> -->
+    <!-- <h1 mat-dialog-title style="color: #48cfc1;">Post Paid Bill Payment</h1> -->
+    <h1 mat-dialog-title style="font-size: 24px !important;font-weight: bold; font-family: sans-serif; color: #00a59c ;text-align: center; margin-top: 25px;">Post Paid
+        Bill Payment</h1>
+    <div mat-dialog-content>
+        <div class="modal-body">
+            <div class="edit-pro">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="edit-for-sett">
+                        <h5>Phone</h5>
+                        <input type="text" id="phonenumber" name="phone" class="form-control" required
+                            [(ngModel)]="phone">
+                        <h5>Amount</h5>
+                        <mat-form-field style="width: 100%!important;" appearance="fill">
+                            <mat-label>Choose an amount</mat-label>
+                            <mat-select #amount name="amount" [(ngModel)]="amount" required>
+                                <mat-option [value]="250000">
+                                    250.000 (your monthly bill)
+                                </mat-option>
+                                <mat-option [value]="100000">
+                                    100.000
+                                </mat-option>
+                                <mat-option [value]="200000">
+                                    200.000
+                                </mat-option>
+                                <mat-option [value]="300000">
+                                    300.000
+                                </mat-option>
+                                <mat-option [value]="400000">
+                                    400.000
+                                </mat-option>
+                                <mat-option [value]="500000">
+                                    500.000
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <h5>Payment Method</h5>
+                        <mat-form-field style="width: 100%!important;" appearance="fill">
+                            <mat-label>Choose a payment method</mat-label>
+                            <mat-select name="paymentMethodId" [(ngModel)]="paymentMethodId" required>
+                                <mat-option *ngFor="let method of paymentMethods" [value]="method.id">
+                                    {{ method.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <h5>Payment Info</h5>
+                        <input type="text" id="paymentDetail" [(ngModel)]="paymentDetail" placeholder="1111 1111 1111 1111"
+                            class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <mat-dialog-actions>
+                <button mat-button style="margin-left: 40px !important;" class="btn btn-primary" type="submit" (click)="onSubmit()">Confirm</button>
+                <button mat-button class="btn btn-primary" type="button" (click)="dialogRef.close()">Cancel</button>
+            </mat-dialog-actions>
+            <!-- </div> -->
+        </div>
+    </div>
+</body>

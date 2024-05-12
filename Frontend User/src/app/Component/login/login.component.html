@@ -1,0 +1,72 @@
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+  <link
+    href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" id="container">
+
+    <div class="form-container sign-in-container">
+      <ng-container *ngIf="!isLoggedIn" class="container">
+        <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+          <h1 style="font-weight: bold;">Sign in</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span style="font-size: 16px;">or use your account</span>
+          <div class="form-group">
+
+            <input type="text" placeholder="PhoneNumber" name="phoneNumber"
+              [(ngModel)]="form.phoneNumber" required #phoneNumber="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && phoneNumber.errors }" />
+            <div class="invalid-feedback" *ngIf="phoneNumber.errors && f.submitted">PhoneNumber is required!</div>
+          </div>
+          <div class="form-group">
+
+            <input type="password"  placeholder="Password"  name="password" [(ngModel)]="form.password" required
+              minlength="6" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+            <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+              <div *ngIf="password.errors['required']">Password is required</div>
+              <div *ngIf="password.errors['minlength']">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit">Login</button>
+          </div>
+
+
+          <div class="form-group">
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
+        </form>
+
+      </ng-container>
+
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+
+        <div class="overlay-panel overlay-right">
+          <h1 style="color: #fff;">Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <p>
+    Created with <i class="fa fa-heart"></i> by
+    <a target="_blank" href="">3CE</a>
+    - Read how I created this 
+    <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
+  </p>
+</footer>

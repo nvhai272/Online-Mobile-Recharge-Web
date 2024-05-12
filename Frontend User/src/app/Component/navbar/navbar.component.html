@@ -1,0 +1,24 @@
+<div class="header" *ngIf="showNavbar">
+    <div class="logo">
+        <h1><a href="index.html"><i><img src="/assets/images/cell.png" alt=" " /></i>Easy Recharge</a></h1>
+    </div>
+    <div class="top-nav">
+        <span class="menu"><img src="/assets/images/menu.png" alt=" " /></span>
+        <ul class="nav1">
+            <li><a href="/recharge-plans" [class.active]="isActiveRoute('/list')">Mobile</a></li>
+            <li><a (click)="openPostpaidPaymentDialog()">PrePaid</a></li>
+            <li><a href="/feedback" [class.active]="isActiveRoute('/feedback')">FeedBack</a></li>
+            <li><a href="/support" [class.active]="isActiveRoute('/support')">Support</a></li>
+            
+            <!-- Use ngIf to conditionally show login/logout links -->
+            <ng-container *ngIf="isLoggedIn; else loggedOutLinks">
+                <li><a href="/profile" [class.active]="isActiveRoute('/profile')">{{ name }}</a></li>
+                <li><a href="#" (click)="logout()">Logout</a></li>
+            </ng-container>
+            <ng-template #loggedOutLinks>
+                <li><a href="/login" [class.active]="isActiveRoute('/login')">Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal5" [class.active]="isActiveRoute('/signup')">Signup</a></li>
+            </ng-template>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<body>
+    <h1 mat-dialog-title style="font-size: 30px !important;font-weight: bold; font-family: sans-serif; color: #00a59c;text-align: center; margin-top: 25px;">Update Profile</h1><div mat-dialog-content >
+    <div class="modal-body">
+        <div class="edit-pro">
+            <form (ngSubmit)="edit()">
+                <div class="edit-for-sett">
+                    <h5>Name</h5>
+                    <input type="text" [(ngModel)]="user.name" name="name" placeholder="Enter your name" required>
+                    <h5>Email address</h5>
+                    <input type="text" [(ngModel)]="user.email" name="email" placeholder="Enter your email">
+                    <h5>Phone</h5>
+                    <input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Enter your mobile number" required>
+                    <h5>Date of Birth</h5>
+                    <input type="date" [(ngModel)]="user.dob" name="dob" placeholder="Enter your birth of date" required>
+                    <h5>Payment Method</h5>
+                    <mat-form-field style="width: 100%!important;" appearance="fill">
+                        <mat-label>Choose a payment method</mat-label>
+                        <mat-select name="paymentMethodId" [(ngModel)]="paymentMethodId" required>
+                            <mat-option [value]="user.paymentMethodId">
+                                {{ user.namePaymentMethod }}
+                            </mat-option>
+                            <mat-option *ngFor="let method of paymentMethods" [value]="method.id">
+                                {{ method.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <h5>Payment Info</h5>
+                    <input type="text" [(ngModel)]="user.paymentInfo" name="paymentInfo" placeholder="Enter your payment info" required>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-primary" (click)="edit()">Update</button>
+    <!-- <button mat-button class="btn btn-primary" (click)="closeDialog()" color="warn">Cancel</button> -->
+</div>
+</body>
