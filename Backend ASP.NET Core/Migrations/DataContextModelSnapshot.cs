@@ -464,7 +464,7 @@ namespace Online_Mobile_Recharge.Migrations
             modelBuilder.Entity("Online_Mobile_Recharge.Models.User", b =>
                 {
                     b.HasOne("Online_Mobile_Recharge.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany("Uses")
+                        .WithMany("Users")
                         .HasForeignKey("PaymentMethodId");
 
                     b.Navigation("PaymentMethod");
@@ -498,7 +498,7 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     b.Navigation("Transactions");
 
-                    b.Navigation("Uses");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Online_Mobile_Recharge.Models.RechargePlan", b =>

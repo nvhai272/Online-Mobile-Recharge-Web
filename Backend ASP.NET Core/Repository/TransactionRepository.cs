@@ -56,65 +56,83 @@ namespace Online_Mobile_Recharge.Repository
 
         public bool Create([FromBody] Transaction entity)
         {
-            if (!RegexManagement.IsValidPhoneNumber(entity.Phone) || entity.ServiceId == null || entity.PaymentMethodId == null)
+            // Check for required fields
+            if (!IsValidTransaction(entity))
             {
-                if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
-                {
-                    throw new ArgumentException("Phone number is not correct");
-                }
-                if (entity.ServiceId == null)
-                {
-                    throw new ArgumentException("Service ID is required");
-                }
-                if (entity.PaymentMethodId == null)
-                {
-                    throw new ArgumentException("Payment method ID is required");
-                }
                 return false;
             }
-            else
+
+            var findService = _context.Services.Find(entity.ServiceId);
+            var findPaymentMethod = _context.PaymentMethods.Find(entity.PaymentMethodId);
+            var findRechargePlan = _context.RechargePlans.Find(entity.RechargePlanId);
+            var findUser = _context.Users.Find(entity.UserId);
+            if (findUser == null)
             {
-                var price = entity.RechargePlanId != null ? _context.RechargePlans.Find(entity.RechargePlanId)?.Price ?? 0 : entity.RechargePlanPrice;
-
-                var findService = _context.Services.Find(entity.ServiceId);
-                var findPaymentMethod = _context.PaymentMethods.Find(entity.PaymentMethodId);
-                var findRechargePlan = _context.RechargePlans.Find(entity.RechargePlanId);
-
-                if (findService == null || findPaymentMethod == null)
-                {
-                    throw new InvalidOperationException("Service or payment method does not exist");
-                }
-                else
-                {
-                    var discount = entity.DiscountAmount != null ? entity.DiscountAmount : 0;
-                    var amount = entity.TransactionAmount != null ? entity.TransactionAmount : 0;
-
-                    Transaction newTransaction = new Transaction()
-                    {
-                        Phone = entity.Phone,
-                        User = _context.Users.Find(entity.UserId),
-                        UserId = entity.UserId,
-
-                        Service = findService,
-                        ServiceId = entity.ServiceId,
-
-                        RechargePlan = _context.RechargePlans.Find(entity.RechargePlanId),
-                        RechargePlanId = entity.RechargePlanId,
-
-                        PaymentMethod = findPaymentMethod,
-                        PaymentMethodId = entity.PaymentMethodId,
-
-                        IsSucceeded = entity.IsSucceeded,
-                        RechargePlanPrice = price,
-                        TransactionAmount = amount,
-                        DiscountAmount = discount
-
-                    };
-                    _context.Transactions.Add(newTransaction);
-                    return Save();
-                }
+                entity.UserId = null;
             }
+
+            if (findService == null)
+            {
+                throw new InvalidOperationException("Service does not exist");
+            }
+
+            if (findPaymentMethod == null)
+            {
+                throw new InvalidOperationException("Payment method does not exist");
+            }
+
+            if (findRechargePlan == null)
+            {
+                throw new InvalidOperationException("Recharge Plan does not exist");
+            }
+
+            // Calculate price
+            var price = entity.RechargePlanId != null ?
+                _context.RechargePlans.Find(entity.RechargePlanId)?.Price ?? 0 :
+                entity.RechargePlanPrice;
+
+            // Create new transaction
+            var newTransaction = new Transaction
+            {
+                Phone = entity.Phone,
+                User = findUser,
+                UserId = entity.UserId,
+                Service = findService,
+                ServiceId = entity.ServiceId,
+                RechargePlan = findRechargePlan,
+                RechargePlanId = entity.RechargePlanId,
+                PaymentMethod = findPaymentMethod,
+                PaymentMethodId = entity.PaymentMethodId,
+                IsSucceeded = entity.IsSucceeded,
+                RechargePlanPrice = price,
+                TransactionAmount = entity?.TransactionAmount ?? 0,
+                DiscountAmount = entity?.DiscountAmount ?? 0
+            };
+
+            _context.Transactions.Add(newTransaction);
+            return Save();
         }
+
+        private bool IsValidTransaction(Transaction entity)
+        {
+            if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
+            {
+                throw new ArgumentException("Phone number is not correct");
+            }
+
+            if (entity.ServiceId == null)
+            {
+                throw new ArgumentException("Service ID is required");
+            }
+
+            if (entity.PaymentMethodId == null)
+            {
+                throw new ArgumentException("Payment method ID is required");
+            }
+
+            return true;
+        }
+
 
         public Transaction GetItem(int id)
         {
@@ -157,6 +175,7 @@ namespace Online_Mobile_Recharge.Repository
             return saved > 0 ? true : false;
         }
 
+        // vi k cho update nen ham nay k can sua??
         public bool Update(int id, Transaction entity)
         {
 

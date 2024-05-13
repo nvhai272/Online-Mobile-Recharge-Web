@@ -23,7 +23,7 @@ namespace Online_Mobile_Recharge.Models
         [Column(TypeName = "decimal(9, 2)")]
         public decimal DiscountAmount { get; set; } = 0;
 
-        public bool IsSucceeded { get; set; } = false;
+        public bool IsSucceeded { get; set; }
 
 		public bool IsDeleted { get; set; } = false;
 

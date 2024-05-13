@@ -14,7 +14,7 @@ namespace Online_Mobile_Recharge.Models
 		public int UserId { get; set; }
 		public virtual User User { get; set; }
 
-		//khoa ngoaiq
+		//khoa ngoai
 		public int ServiceId { get; set; }
 		public virtual Service Service { get; set; }
 

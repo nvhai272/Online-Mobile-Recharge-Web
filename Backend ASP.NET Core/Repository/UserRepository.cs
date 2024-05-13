@@ -121,7 +121,7 @@ namespace Online_Mobile_Recharge.Repository
 
                 if (!RegexManagement.IsValidPassword(entity.Password))
                 {
-                    throw new ArgumentException("A valid password has at least 8 characters, including 1 uppercase letter, 1 number, and 1 special character");
+                    throw new ArgumentException("A valid password has at least 8 characters, including 1 number");
                 }
                 return false;
             }
@@ -172,7 +172,7 @@ namespace Online_Mobile_Recharge.Repository
 
             Regex regex = new Regex(@"^\d{16}$");
             if (!regex.IsMatch(entity.PaymentInfo))
-                throw new ArgumentException("Invalid Payment Info");
+                throw new ArgumentException("Invalid Payment Info. Input 16 code numbers");
 
             return true;
         }
@@ -288,7 +288,7 @@ namespace Online_Mobile_Recharge.Repository
 
             Regex regex = new Regex(@"^\d{16}$");
             if (!regex.IsMatch(user.PaymentInfo))
-                throw new ArgumentException("Invalid Payment Info");
+                throw new ArgumentException("Invalid Payment Info. Input 16 numbers code");
 
             return true;
         }
