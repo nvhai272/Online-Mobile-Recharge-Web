@@ -376,17 +376,11 @@ namespace Online_Mobile_Recharge.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -464,7 +458,7 @@ namespace Online_Mobile_Recharge.Migrations
             modelBuilder.Entity("Online_Mobile_Recharge.Models.User", b =>
                 {
                     b.HasOne("Online_Mobile_Recharge.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany("Users")
+                        .WithMany("Uses")
                         .HasForeignKey("PaymentMethodId");
 
                     b.Navigation("PaymentMethod");
@@ -498,7 +492,7 @@ namespace Online_Mobile_Recharge.Migrations
                 {
                     b.Navigation("Transactions");
 
-                    b.Navigation("Users");
+                    b.Navigation("Uses");
                 });
 
             modelBuilder.Entity("Online_Mobile_Recharge.Models.RechargePlan", b =>

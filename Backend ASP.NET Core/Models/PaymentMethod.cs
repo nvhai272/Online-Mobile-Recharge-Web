@@ -22,7 +22,7 @@ namespace Online_Mobile_Recharge.Models
 
         public bool IsDeleted { get; set; } = false;
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Uses { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
 

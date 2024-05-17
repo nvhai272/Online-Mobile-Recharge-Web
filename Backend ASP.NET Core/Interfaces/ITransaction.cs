@@ -9,11 +9,9 @@ namespace Online_Mobile_Recharge.Interfaces
         int CountUniqueTransactionUsersOfTheDay();
         int CountTransactionsOfTheDay();
         int TotalAmount();
-
         // lấy danh sách giao dịch của 1 user
         List<TransactionResponse> GetTransactionByUserId(int userId);
-
-        // sử dụng hàm bất đồng bộ nha 
+        //phân trang bất đồng bộ
         Task<int> CountRecordsAsync();
         Task<IEnumerable<TransactionResponse>> GetTransactionsPagedAsync(int page, int perPage);
     }

@@ -86,7 +86,7 @@ namespace Online_Mobile_Recharge.Repository
             var updateE = GetItem(id);
             if (updateE == null)
             {
-                return false; 
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(entity.Name))
@@ -102,7 +102,6 @@ namespace Online_Mobile_Recharge.Repository
             updateE.Name = entity.Name;
             updateE.Description = entity.Description;
             updateE.ModifiedAt = DateTime.UtcNow;
-
             _context.PaymentMethods.Update(updateE);
             return Save();
         }

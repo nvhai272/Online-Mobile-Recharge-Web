@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.Models;
 using Online_Mobile_Recharge.Interfaces;
-using Online_Mobile_Recharge.Exceptions;
-using Online_Mobile_Recharge.DTO.Response;
 
 namespace Online_Mobile_Recharge.Controllers
 {
@@ -13,9 +11,7 @@ namespace Online_Mobile_Recharge.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUser _crud;
-
         private readonly IMapper _mapper;
-
 
         public UserController(IUser crud, IMapper mapper)
         {
@@ -45,26 +41,6 @@ namespace Online_Mobile_Recharge.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        //[HttpPost]
-        //[Route("create")]
-        //public IActionResult CreateUser(UserRequest user)
-        //{
-        //    try
-        //    {
-        //        bool result = _crud.Create(_mapper.Map<User>(user));
-        //        return Ok("User created successfully");
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //    catch (InvalidOperationException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-
-        //}
 
         [HttpPut]
         [Route("edit/{id}")]
@@ -138,7 +114,7 @@ namespace Online_Mobile_Recharge.Controllers
             try
             {
                 User newUser = _mapper.Map<User>(user);
-               
+
                 bool result = _crud.CreateUser(newUser);
                 return Ok("Sign Up Success");
             }

@@ -9,6 +9,5 @@ namespace Online_Mobile_Recharge.DTO.Response
 		public string Name { get; set; }
 		public string? Description { get; set; }
 
-		//public ICollection<RechargePlan> RechargePlans { get; set; }
 	}
 }

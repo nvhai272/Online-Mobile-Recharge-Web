@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge;
 using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.DTO.Response;
@@ -16,9 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(op => op.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
-// cấu hình DbContext của mình để sử dụng các proxy tải lười biếng và SQL Server làm nhà cung cấp cơ sở dữ liệu cơ bản
 
-// đăng kí các dịch vụ dependency injection (DI) container
 builder.Services.AddScoped<IUser, UserRepository>();
 
 builder.Services.AddScoped<ICrud<PaymentMethod, PaymentMethodResponse>, PaymentMethodRepository>();
@@ -35,16 +33,12 @@ builder.Services.AddScoped<ICrud<Feedback, FeedbackResponse>, FeedbackRepository
 
 builder.Services.AddScoped<ICrud<Service, ServiceResponse>, ServiceRepository>();
 
-builder.Services.AddScoped<ICrud<UserService, UserServiceResponse>, UserServiceRepository>();
+builder.Services.AddScoped<IUserService, UserServiceRepository>();
 
 builder.Services.AddScoped<IAuthentication, AuthenticationRepository>();
 
-// tích hợp AutoMapper vào ứng dụng của bạn, cho phép bạn sử dụng các tính năng của nó như ánh xạ tự động, tùy chỉnh ánh xạ và nhiều hơn nữa
 builder.Services.AddAutoMapper(typeof(Program));
 
-// cấu hình CORS (Cross-Origin Resource Sharing)
-// CORS là một cơ chế trong trình duyệt web cho phép một trang web ở một nguồn gốc (origin)
-// cụ thể yêu cầu tài nguyên từ một nguồn khác mà không bị chặn bởi Same-Origin Policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowAll",
@@ -69,8 +63,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
-//app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapControllers();
 

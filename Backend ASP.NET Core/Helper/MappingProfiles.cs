@@ -6,7 +6,6 @@ namespace Online_Mobile_Recharge.MappingProfiles
 {
     public class MappingProfiles : Profile
     {
-        // Sử dụng dịch vụ Mapping đã đăng kí từ lớp Program, hỗ trợ chuyển đổi và ánh xạ giữa các model
         public MappingProfiles()
         {
             CreateMap<User, UserRequest>().ReverseMap();
@@ -42,7 +41,7 @@ namespace Online_Mobile_Recharge.MappingProfiles
             CreateMap<Service, ServiceRequestDel>().ReverseMap();
             CreateMap<RechargePlan, RechargePlanRequestDel>().ReverseMap();
             CreateMap<RechargePlanType, RechargePlanTypeRequestDel>().ReverseMap();
-            CreateMap<UserService, UserServiceRequestDel>().ReverseMap();
+            
 
         }
     }

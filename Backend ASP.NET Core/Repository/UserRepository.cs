@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using Online_Mobile_Recharge.DTO.Request;
+﻿using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Response;
-using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Helper;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
@@ -34,7 +30,8 @@ namespace Online_Mobile_Recharge.Repository
                 Dob = dateString,
                 Phone = e.Phone,
                 PaymentInfo = e.PaymentInfo,
-                NamePaymentMethod = e.PaymentMethod.Name
+                NamePaymentMethod = e.PaymentMethod.Name,
+                paymentMethodId = e.PaymentMethodId
             };
             return res;
         }
@@ -74,57 +71,7 @@ namespace Online_Mobile_Recharge.Repository
 
         public bool Create([FromBody] User entity)
         {
-            if (!string.IsNullOrEmpty(entity.Name) && entity.Dob != null &&
-                RegexManagement.IsValidEmail(entity.Email) && RegexManagement.IsValidPhoneNumber(entity.Phone) && RegexManagement.IsValidPassword(entity.Password))
-            {
-                var checkPhone = _context.Users.FirstOrDefault(u => u.Phone == entity.Phone);
-                if (checkPhone == null)
-                {
-                    var user = new User
-                    {
-                        Name = entity.Name,
-                        Email = entity.Email,
-                        Password = BCrypt.Net.BCrypt.HashPassword(entity.Password),
-                        Address = entity.Address,
-                        Dob = entity.Dob,
-                        Phone = entity.Phone
-                    };
-                    _context.Users.Add(user);
-                    return Save();
-                }
-                else
-                {
-                    throw new InvalidOperationException("Phone number has been registered");
-                }
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(entity.Name))
-                {
-                    throw new ArgumentException("Name cannot be left blank");
-                }
-
-                if (entity.Dob == null)
-                {
-                    throw new ArgumentException("Dob cannot be left blank");
-                }
-
-                if (!RegexManagement.IsValidEmail(entity.Email))
-                {
-                    throw new ArgumentException("Please enter a valid email. For example: abc@gmail.com");
-                }
-
-                if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
-                {
-                    throw new ArgumentException("Please enter a valid 10-digit phone number");
-                }
-
-                if (!RegexManagement.IsValidPassword(entity.Password))
-                {
-                    throw new ArgumentException("A valid password has at least 8 characters, including 1 number");
-                }
-                return false;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Update(int id, User entity)
@@ -172,7 +119,7 @@ namespace Online_Mobile_Recharge.Repository
 
             Regex regex = new Regex(@"^\d{16}$");
             if (!regex.IsMatch(entity.PaymentInfo))
-                throw new ArgumentException("Invalid Payment Info. Input 16 code numbers");
+                throw new ArgumentException("Invalid Payment Info");
 
             return true;
         }
@@ -288,12 +235,9 @@ namespace Online_Mobile_Recharge.Repository
 
             Regex regex = new Regex(@"^\d{16}$");
             if (!regex.IsMatch(user.PaymentInfo))
-                throw new ArgumentException("Invalid Payment Info. Input 16 numbers code");
+                throw new ArgumentException("Invalid Payment Info");
 
             return true;
         }
-
-
-
     }
 }

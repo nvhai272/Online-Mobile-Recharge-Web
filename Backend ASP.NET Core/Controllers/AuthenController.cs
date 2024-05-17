@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.Interfaces;
-using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenController : ControllerBase
@@ -18,6 +16,7 @@ namespace Online_Mobile_Recharge.Controllers
             _authentication = authentication;
         }
 
+        // đăng nhập và tạo token check tài khoản
         [HttpPost("login")]
         public IActionResult Login(UserLoginDto request)
         {
@@ -31,7 +30,5 @@ namespace Online_Mobile_Recharge.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
     }
 }

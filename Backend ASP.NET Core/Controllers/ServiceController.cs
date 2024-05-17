@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.DTO.Response;
@@ -91,7 +90,7 @@ namespace Online_Mobile_Recharge.Controllers
 			{
 				var change = _mapper.Map<Service>(entity);
 				bool dele = _crud.Delete(id, change);
-				return Ok("Service hidden successfully");
+				return Ok("Service delete successfully");
 			}
 			catch (InvalidOperationException ex)
 			{
