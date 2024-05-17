@@ -9,7 +9,5 @@ namespace Online_Mobile_Recharge.Interfaces
     {
         LoginResponse Login(UserLoginDto request);
         string CreateToken(User user);
-       
-
     }
 }

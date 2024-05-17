@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Online_Mobile_Recharge.DTO.Response;
-using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 
@@ -85,14 +83,9 @@ namespace Online_Mobile_Recharge.Repository
 		{
 			if (!string.IsNullOrEmpty(entity.Name))
 			{
-				// update mấy thằng đã ẩn rồi làm gì?
-				// có được trùng tên với chúng nó không?
 				var existingOperator = _dataContext.Operators.FirstOrDefault(s => s.Name == entity.Name && s.Id != id && s.IsDeleted == false);
 				if (existingOperator == null)
 				{
-					// chỗ này bỏ try/catch đi thì ổn đấy vì có exception của hàm GetItem rồi
-					// dùng try/catch khi muốn ghi đè hoặc bắt exception nhưng nó khiến code phức tạp hơn
-					// nên dùng try/catch cho những đoạn code ngắn gọn
 					try
 					{
 						var existedOperator = GetItem(id);

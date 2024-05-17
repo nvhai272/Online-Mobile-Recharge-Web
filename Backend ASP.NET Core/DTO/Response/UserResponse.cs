@@ -23,5 +23,8 @@ namespace Online_Mobile_Recharge.DTO.Response
 		public string? PaymentInfo { get; set; }
 
 		public string? NamePaymentMethod { get; set; }
-	}
+
+		public int? paymentMethodId { get; set; }
+
+    }
 }

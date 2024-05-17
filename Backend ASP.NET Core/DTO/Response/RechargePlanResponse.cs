@@ -30,8 +30,5 @@ namespace Online_Mobile_Recharge.DTO.Response
 
 		public string? Description { get; set; }
 
-		//public ICollection<Transaction> Transactions { get; set; }
-
-
 	}
 }

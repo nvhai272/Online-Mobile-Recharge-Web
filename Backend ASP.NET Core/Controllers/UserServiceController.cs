@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Request;
-using Online_Mobile_Recharge.DTO.Response;
 using Online_Mobile_Recharge.Interfaces;
-using Online_Mobile_Recharge.Models;
 
 namespace Online_Mobile_Recharge.Controllers
 {
@@ -12,90 +8,43 @@ namespace Online_Mobile_Recharge.Controllers
     [ApiController]
     public class UserServiceController : ControllerBase
     {
-        private readonly ICrud<UserService, UserServiceResponse> _crud;
-        private readonly IMapper _mapper;
+        private readonly IUserService _crud;
 
-        public UserServiceController(ICrud<UserService, UserServiceResponse> crud, IMapper mapper)
+        public UserServiceController(IUserService crud)
         {
             _crud = crud;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("list")]
-        public IActionResult GetAllUserService()
+        [Route("listServiceOfUser")]
+        public IActionResult ServicesOfUser(int userId)
         {
-            try
-            {
-                var UserServiceList = _crud.GetListItems();
-                return Ok(UserServiceList);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("detail/{id}")]
-        public IActionResult GetUserService(int id)
-        {
-            try
-            {
-                var UserService = _crud.GetItemById(id);
-                return Ok(UserService);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var list = _crud.ListServicesofUser(userId);
+            return Ok(list);
         }
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateUserService([FromBody] UserServiceRequest newUserService)
+        public IActionResult Create(UserServiceRequest request)
         {
-            try
-            {
-                _crud.Create(_mapper.Map<UserService>(newUserService));
-                return Ok("Thanh cong");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var create = _crud.Create(request);
+            return Ok(create);
         }
 
         [HttpPut]
-        [Route("edit/{id}")]
-        public IActionResult UpdateUserService(int id, UserServiceRequest e)
+        [Route("delete")]
+        public IActionResult DeleteUserById(UserServiceRequest request)
         {
-            try
-            {
-                var ex = _mapper.Map<UserService>(e);
-                _crud.Update(id, ex);
-                return Ok("Thanh cong");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var delete = _crud.Delete(request);
+            return Ok(delete);
         }
 
-        [HttpPut]
-        [Route("delete/{id}")]
-        public IActionResult DeleteUserService(int id, UserServiceRequestDel entity)
+        [HttpPost("check-existed")]
+        public ActionResult<bool> CheckExisted([FromBody] UserServiceRequest request)
         {
-            try
-            {
-                var change = _mapper.Map<UserService>(entity);
-                bool del = _crud.Delete(id, change);
-                return Ok("Thanh cong");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = _crud.checkExisted(request);
+            return Ok(result);
         }
+
     }
 }

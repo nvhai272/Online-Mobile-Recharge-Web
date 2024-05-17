@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Online_Mobile_Recharge.DTO.Response;
-using Online_Mobile_Recharge.Exceptions;
 using Online_Mobile_Recharge.Helper;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
-using System.Text.RegularExpressions;
 
 namespace Online_Mobile_Recharge.Repository
 {
@@ -104,45 +102,13 @@ namespace Online_Mobile_Recharge.Repository
 		// hàm này chắc bỏ
 		public bool Update(int id, Feedback entity)
 		{
-			//var existFeedback = GetItem(id);
-			//var existService = _dataContext.Find<Service>(entity.ServiceId);
-			//if (existFeedback == null)
-			//{
-			//	throw new InvalidOperationException("Feedback is not found");
-			//}
-
-			//if (existService == null)
-			//{
-			//	throw new InvalidOperationException("Service does not exist");
-			//}
-
-			//if (!RegexManagement.IsValidPhoneNumber(entity.Phone))
-			//{
-			//	throw new ArgumentException("Invalid phone number");
-			//}
-
-			//if (string.IsNullOrEmpty(entity.Content))
-			//{
-			//	throw new ArgumentException("Feedback content cannot be empty");
-			//}
-
-			//existFeedback.Service = existService;
-			//existFeedback.Content = entity.Content;
-			//existFeedback.Phone = entity.Phone;
-			//existFeedback.ServiceId = entity.ServiceId;
-			//existFeedback.ModifiedAt = DateTime.Now;
-
-			//_dataContext.Feedbacks.Update(existFeedback);
-			//return Save();
 			throw new NotImplementedException();
 		}
 
-		// update cột IsDeleted chứ không xóa đối tượng khỏi DB
 		public bool Delete(int id, Feedback entity)
 		{
 			var updateDelete = GetItem(id);
 			// ở đây thằng GetItem có exception rồi có thể dùng lại hoặc ghi đè => chuyển code qua try/catch để bắt exception của nó 
-			
 				updateDelete.IsDeleted = entity.IsDeleted;
 				_dataContext.Feedbacks.Update(updateDelete);
 				return Save();

@@ -22,9 +22,5 @@ namespace Online_Mobile_Recharge.Models
 
 		public DateTime ModifiedAt { get; set; } = DateTime.Now;
 
-		public bool IsDeleted { get; set; } = false;
-
-		[Required]
-		public bool Status { get; set; } = false;
 	}
 }

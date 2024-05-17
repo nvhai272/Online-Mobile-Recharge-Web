@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using Online_Mobile_Recharge.DTO.Request;
 using Online_Mobile_Recharge.DTO.Response;
-using Online_Mobile_Recharge.Helper;
 using Online_Mobile_Recharge.Interfaces;
 using Online_Mobile_Recharge.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,7 +18,6 @@ namespace Online_Mobile_Recharge.Repository
         {
             _dataContext = dataContext;
             _configuration = configuration;
-
         }
 
         public User Convert(UserLoginDto user)
@@ -31,7 +27,6 @@ namespace Online_Mobile_Recharge.Repository
             user1.Password = user.Password;
             return user1;
         }
-
 
         public LoginResponse Login(UserLoginDto request)
         {
@@ -44,13 +39,12 @@ namespace Online_Mobile_Recharge.Repository
 
             var res = Convert(request);
             var foundUser = _dataContext.Set<User>().SingleOrDefault(u => u.Phone == res.Phone);
-            
 
             if (foundUser == null || !BCrypt.Net.BCrypt.Verify(res.Password, foundUser.Password))
             {
                 throw new InvalidOperationException("Invalid phone number or password");
             }
-            
+
             // Tạo token và đánh dấu đăng nhập thành công trong loginResponse
             loginResponse.Token = CreateToken(foundUser);
             loginResponse.isLogin = true;
