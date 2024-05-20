@@ -99,7 +99,7 @@ namespace Online_Mobile_Recharge.Repository
 			return save > 0 ? true : false;
 		}
 
-		// hàm này chắc bỏ
+		
 		public bool Update(int id, Feedback entity)
 		{
 			throw new NotImplementedException();

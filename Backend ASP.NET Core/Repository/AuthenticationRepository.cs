@@ -65,8 +65,8 @@ namespace Online_Mobile_Recharge.Repository
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.MobilePhone, user.Phone),
-                new Claim(ClaimTypes.Email, user.Email), // Thêm thông tin email người dùng
-                new Claim(ClaimTypes.DateOfBirth, user.Dob.ToString()) // Thêm thông tin ngày sinh người dùng
+                new Claim(ClaimTypes.Email, user.Email), 
+                new Claim(ClaimTypes.DateOfBirth, user.Dob.ToString()) 
             };
 
             // Tạo khóa từ chuỗi cấu hình
@@ -78,7 +78,7 @@ namespace Online_Mobile_Recharge.Repository
             // Tạo mã JWT với các thông tin: danh sách các Claim, thời gian hết hạn và thông tin chứng thực
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1), // Token sẽ hết hạn sau 1 ngày
+                expires: DateTime.Now.AddDays(1), 
                 signingCredentials: cred
             );
 

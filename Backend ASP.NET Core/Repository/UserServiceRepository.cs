@@ -35,12 +35,13 @@ namespace Online_Mobile_Recharge.Repository
         {
             if (!checkExisted(request))
             {
-                new UserService()
+              var hehe =  new UserService()
                 {
                     UserId = request.UserId,
                     ServiceId = request.ServiceId
                 };
-                return true;
+                _dataContext.User_Service.Add(hehe);
+                return Save();
             }
 
             return false;
@@ -52,7 +53,7 @@ namespace Online_Mobile_Recharge.Repository
             if (checkUserService != null)
             {
                 _dataContext.User_Service.Remove(checkUserService);
-                return true;
+                return Save();
             }
             return false;
         }

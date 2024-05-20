@@ -31,7 +31,7 @@ namespace Online_Mobile_Recharge.Controllers
             return Ok(create);
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteUserById(UserServiceRequest request)
         {

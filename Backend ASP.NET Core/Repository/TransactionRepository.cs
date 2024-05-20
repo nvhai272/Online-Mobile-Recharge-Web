@@ -213,7 +213,7 @@ namespace Online_Mobile_Recharge.Repository
         // cái này tính tổng tiên giao dịch
         public int TotalAmount()
         {
-            int totalAmount = ((int)_context.Transactions.Where(t => t.IsDeleted == true).Sum(t => t.TransactionAmount));
+            int totalAmount = ((int)_context.Transactions.Where(t => t.IsSucceeded == true).Sum(t => t.TransactionAmount));
             return totalAmount;
         }
 
