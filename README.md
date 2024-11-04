@@ -1,7 +1,7 @@
 # The project is implemented according to the model Client - Server
 ![image](https://github.com/nvhai272/Online-Mobile-Recharge-Web/assets/136921099/9dda9bbc-a322-4bcd-b898-ca963c925fad)
 
-1. Backend side: API code using ASP.NET CoreFramework
+1. Backend side: API code using ASP.NET Core Framework
 2. Frontend side: There are 2 sides Admin and User code using Angular 17 Framework
 3. Database using RDBMS is SQL Server
 
